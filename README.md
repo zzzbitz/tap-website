@@ -10,6 +10,12 @@ A three-page research website for **TAP — Trust AI to Prepare Your Data**, imp
 
 Use the existing npm dependencies and lockfile. `npm run dev` starts the local server; reuse an existing server when one is running. `npm run build` creates the production build. The existing `next.config.ts` enables static export. The parent workflow owns final build verification, source registration, and hosting.
 
+## Visual system
+
+[`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) defines the shared palette, typography,
+shape scale and interaction states for every authored component. Use the tokens
+in `app/globals.css`; imported chart geometry adopts this system.
+
 ## Content and presentation
 
 The parent workspace’s `SPEC.md` is the product contract. Verified titles, authors, venue labels, and URLs are centralized in `lib/tap-content.ts`. Route files contain the concise explanations. Shared components and responsive semantic diagrams live in `components/tap/`; global presentation lives in `app/globals.css`.

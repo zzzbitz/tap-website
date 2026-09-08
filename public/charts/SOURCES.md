@@ -31,11 +31,11 @@ License: [PolyForm Noncommercial 1.0.0](/licenses/lieflat-charts.txt).
 This noncommercial research website adapts the following original card markup
 and matching SVG render blocks into React. No upstream runtime is executed.
 
-| Result | System / ID | Gallery | Original card | Adaptation |
-| --- | --- | --- | --- | --- |
-| PrepBench accuracy | Lupi Basics / F5 Tick Rows | templates/basics-gallery.html | Six teams, shipped and counted | Horizontal unit ticks, fine row baseline, every-fifth bead, exact row-end value and staggered reveal. Five rows per paper-defined model group; output selector; scale fixed at 0–100. |
-| PrepBench cost and accuracy | Lupi Basics / F8 Plumb Scatter | templates/basics-gallery.html | Price against satisfaction, twelve products | Point positions and vertical plumb lines, barcode floor and selected-point emphasis. Numeric axes, responsive geometry, numbered model key, keyboard/touch selection and exact-value readout. |
-| CleanAgent matching rate | Lupi Editorial / L15 Ballot Tally | templates/lupi-gallery.html | What they fear, tick by tick | Independent 100-tick rows with long inked and short quiet ticks; aggregate percentage-point units explicitly labelled. Original independent-percentage encoding, without respondent language. Latency is separately tabulated. |
+| Result                      | System / ID                       | Gallery                       | Original card                               | Adaptation                                                                                                                                                                                                                     |
+| --------------------------- | --------------------------------- | ----------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PrepBench accuracy          | Lupi Basics / F5 Tick Rows        | templates/basics-gallery.html | Six teams, shipped and counted              | Horizontal unit ticks, fine row baseline, every-fifth bead, exact row-end value and staggered reveal. Five rows per paper-defined model group; output selector; scale fixed at 0–100.                                          |
+| PrepBench cost and accuracy | Lupi Basics / F8 Plumb Scatter    | templates/basics-gallery.html | Price against satisfaction, twelve products | Point positions and vertical plumb lines, barcode floor and selected-point emphasis. Numeric axes, responsive geometry, numbered model key, keyboard/touch selection and exact-value readout.                                  |
+| CleanAgent matching rate    | Lupi Editorial / L15 Ballot Tally | templates/lupi-gallery.html   | What they fear, tick by tick                | Independent 100-tick rows with long inked and short quiet ticks; aggregate percentage-point units explicitly labelled. Original independent-percentage encoding, without respondent language. Latency is separately tabulated. |
 
 Geometry uses the original deterministic noise function. Unit ticks denote one
 percentage point; a fractional last tick has proportional height and an exact
@@ -43,9 +43,11 @@ endpoint marker. Ticks never claim to be individual observations. Scatter axes
 start at zero; accuracy is 0–60%, cost is 0–150 or 0–300 millidollars depending on
 the output setting. Both axis units are visible.
 
-The shared palette is built-in Porcelain: #F7F2EB paper, #081F5C ink,
-#334EAC data, #7096D1 plumb lines. Models are identified by labels/numbers, not
-ten categorical colors. TAP's existing Geist typography is retained. All chart
+The template palette is replaced by TAP's shared design tokens in
+`app/globals.css`: white and cool-gray surfaces, charcoal text, blue PrepBench
+data and green CleanAgent data. See `DESIGN_SYSTEM.md` for the site-wide contract.
+Models are identified by labels/numbers, not ten categorical colors. TAP's
+existing Geist typography is retained. All chart
 labels stay as HTML or use measured SVG dimensions to avoid tiny mobile text.
 Viewport-triggered reveal follows `MONO.obsReveal`, with observer cleanup;
 explicit Replay is keyboard operable, animations have no accumulating timers,

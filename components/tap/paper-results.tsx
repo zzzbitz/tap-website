@@ -34,12 +34,14 @@ function ChartCard({
   subtitle,
   source,
   sourceLabel,
+  tone = 'blue',
   children,
 }: {
   title: string;
   subtitle: string;
   source: string;
   sourceLabel: string;
+  tone?: 'blue' | 'green';
   children: ReactNode;
 }) {
   const ref = useRef<HTMLElement>(null);
@@ -64,7 +66,11 @@ function ChartCard({
     return () => io.disconnect();
   }, []);
   return (
-    <figure ref={ref} className="paper-chart" aria-labelledby={titleId}>
+    <figure
+      ref={ref}
+      className={`paper-chart tone-${tone}`}
+      aria-labelledby={titleId}
+    >
       <figcaption className="paper-chart-head">
         <div>
           <h3 id={titleId}>{title}</h3>
@@ -427,6 +433,7 @@ export function PrepBenchResults() {
 export function CleanAgentResults() {
   return (
     <ChartCard
+      tone="green"
       title="CleanAgent reaches a 42.5% matching rate."
       subtitle="Flights dataset · datetime standardization across four columns · higher is better."
       source={cleanResultsSource}
