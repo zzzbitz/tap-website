@@ -35,6 +35,9 @@ export const projects = {
     paper: 'https://arxiv.org/abs/2403.08291',
     code: 'https://github.com/sfu-db/CleanAgent',
     demonstration: 'https://github.com/sfu-db/CleanAgent#demonstration',
+    video: 'https://www.youtube.com/watch?v=fSYXVM6qeqM',
+    videoEmbed:
+      'https://www.youtube-nocookie.com/embed/fSYXVM6qeqM?playsinline=1&rel=0',
   },
 } as const;
 

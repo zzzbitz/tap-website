@@ -41,6 +41,11 @@ export function ProjectHero({
         <a href={`#${project.name.toLowerCase()}-results`}>
           Explore the results <span aria-hidden="true">↓</span>
         </a>
+        {'video' in project && (
+          <a href="#cleanagent-demonstration">
+            Watch the demo <span aria-hidden="true">↓</span>
+          </a>
+        )}
       </nav>
     </header>
   );

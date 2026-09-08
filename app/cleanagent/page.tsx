@@ -79,8 +79,34 @@ export default function CleanAgentPage() {
         id="cleanagent-demonstration"
         label="The demonstration"
         title="See the interaction behind the output."
-        description="The original system interface records the agents’ work as it unfolds, including generated code and execution feedback."
+        description="Watch the original CleanAgent demo, then take a closer look at the interface from the paper."
       >
+        <figure
+          className="project-video"
+          aria-labelledby="cleanagent-video-caption"
+        >
+          <iframe
+            src={project.videoEmbed}
+            title="CleanAgent: Automating Data Standardization with LLM-based Agents — demonstration video"
+            width={960}
+            height={540}
+            loading="lazy"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+          <figcaption id="cleanagent-video-caption">
+            <div>
+              <strong>CleanAgent in action</strong>
+              <span>
+                The original demonstration linked from the project repository.
+              </span>
+            </div>
+            <a href={project.video} target="_blank" rel="noopener noreferrer">
+              Watch on YouTube <span aria-hidden="true">↗</span>
+            </a>
+          </figcaption>
+        </figure>
         <PaperFigure
           src="/figures/cleanagent-interface.png"
           width={1624}

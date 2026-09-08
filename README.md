@@ -60,3 +60,21 @@ Charts have exact-value tables, keyboard controls, viewport reveal/replay and
 reduced-motion support. See `RESULTS_VALIDATION.md` for the results-chart checks.
 
 Browser QA covers desktop and mobile layouts, all five figure dialogs, keyboard opening, Escape and button dismissal, focus restoration, modal focus containment, table scrolling, main navigation, skip navigation, full-size image access, and 404 recovery. See the parent workspace’s VALIDATION.md for the tested revision, exact coverage, and remaining limits.
+
+## CleanAgent video
+
+The demonstration section embeds the original video linked by the upstream
+[CleanAgent README](https://github.com/sfu-db/CleanAgent#demonstration):
+[CleanAgent demonstration](https://www.youtube.com/watch?v=fSYXVM6qeqM).
+The YouTube privacy-enhanced iframe is lazy-loaded, does not autoplay, retains
+native playback/seek/fullscreen controls, and has a descriptive title and a
+separate watch-on-YouTube link. A hero jump link leads to this section. The
+paper's original interface figure remains below it. Playback requires YouTube
+connectivity; the media is not downloaded or rehosted.
+
+Validation (2026-09-08): production export, TypeScript, targeted app/component/lib
+lint and diff checks passed. In the local final-static preview, the original
+video loaded and played to 33 seconds of its 4:32 duration; pause was confirmed.
+At 375px viewport width the player measured 333×200px with no document overflow;
+the demo jump link worked and the viewport override was restored. Publication
+is verified through Sites deployment status separately from local playback.
