@@ -60,11 +60,11 @@ section headings are left aligned, while the paper identity remains centered.
 
 Each homepage research entry pairs a short introduction with its central paper
 figure: PrepBench's evaluation framework and CleanAgent's workflow. Place the
-figure as a compact centered preview below the introduction, capped at 680px
-for PrepBench and 560px for CleanAgent so both have similar visual height.
+figure within the introduction: float PrepBench to the right and CleanAgent to
+the left so the heading and description can wrap beside and below it. Cap the
+previews at 560px and 460px respectively; below 700px, stack them in reading order.
 Include a caption, source, and enlargement control. Preserve the paper's colors
-and aspect ratio. Stack
-the introduction on narrow screens; keep figure details accessible in the dialog.
+and aspect ratio. Keep figure details accessible in the dialog.
 
 ## Copy and line breaks
 

@@ -47,6 +47,18 @@ export default function Home() {
               <div className="feature-heading">
                 <p className="project-name">PrepBench</p>
                 <p className="feature-meta">Benchmark · {prepbench.venue}</p>
+                <div className="feature-visual" data-reveal>
+                  <PaperFigure
+                    src={sitePath('/figures/prepbench-evaluation.png')}
+                    width={1928}
+                    height={1028}
+                    title="PrepBench evaluation framework"
+                    alt="PrepBench Figure 4: benchmark assets, interactive disambiguation, prep-code generation, code-to-workflow translation, and the metrics used to evaluate each capability."
+                    caption="Benchmark assets, three evaluation modes, and their metrics."
+                    source={prepbench.paper}
+                    figureNumber={4}
+                  />
+                </div>
                 <h3 id="prepbench-title">{prepbench.question}</h3>
               </div>
               <div className="feature-description">
@@ -72,18 +84,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="feature-visual" data-reveal>
-              <PaperFigure
-                src={sitePath('/figures/prepbench-evaluation.png')}
-                width={1928}
-                height={1028}
-                title="PrepBench evaluation framework"
-                alt="PrepBench Figure 4: benchmark assets, interactive disambiguation, prep-code generation, code-to-workflow translation, and the metrics used to evaluate each capability."
-                caption="Benchmark assets, three evaluation modes, and their metrics."
-                source={prepbench.paper}
-                figureNumber={4}
-              />
-            </div>
           </article>
           <article
             className="research-feature illustrated-feature cleanagent-feature"
@@ -95,6 +95,18 @@ export default function Home() {
                 <p className="feature-meta">
                   Agent framework · {cleanagent.venue}
                 </p>
+                <div className="feature-visual" data-reveal>
+                  <PaperFigure
+                    src={sitePath('/figures/cleanagent-workflow.png')}
+                    width={968}
+                    height={624}
+                    title="CleanAgent workflow"
+                    alt="CleanAgent Figure 2: a Chat Manager coordinates the Column-type Annotator, Python Programmer using Dataprep.Clean, and Code Executor. Success or error feedback returns to the manager."
+                    caption="A Chat Manager coordinates type annotation, Python generation, and execution with success or error feedback."
+                    source={cleanagent.paper}
+                    figureNumber={2}
+                  />
+                </div>
                 <h3 id="cleanagent-title">{cleanagent.question}</h3>
               </div>
               <div className="feature-description">
@@ -111,18 +123,6 @@ export default function Home() {
                   </TextLink>
                 </div>
               </div>
-            </div>
-            <div className="feature-visual" data-reveal>
-              <PaperFigure
-                src={sitePath('/figures/cleanagent-workflow.png')}
-                width={968}
-                height={624}
-                title="CleanAgent workflow"
-                alt="CleanAgent Figure 2: a Chat Manager coordinates the Column-type Annotator, Python Programmer using Dataprep.Clean, and Code Executor. Success or error feedback returns to the manager."
-                caption="A Chat Manager coordinates type annotation, Python generation, and execution with success or error feedback."
-                source={cleanagent.paper}
-                figureNumber={2}
-              />
             </div>
           </article>
         </div>
