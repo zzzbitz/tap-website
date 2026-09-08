@@ -83,8 +83,9 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
               : 'How should the dates look?'}
           </h3>
           <p>
-            Choose an answer to update the sample table. This is a scripted
-            demo.
+            {project === 'prepbench'
+              ? 'Act as the simulated user: answer the question, then inspect the output and reference check.'
+              : 'Choose an answer to update the sample table. This is a scripted demo.'}
           </p>
         </div>
         <Button
@@ -116,7 +117,9 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
               {project === 'prepbench' ? '?' : '{ }'}
             </span>
             <div>
-              <strong>Example agent</strong>
+              <strong>
+                {project === 'prepbench' ? 'Agent under test' : 'Example agent'}
+              </strong>
               <span>
                 {project === 'prepbench'
                   ? 'Resolve the refund rule'
@@ -144,7 +147,13 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
                 >
                   <MessageContent>
                     <MessageHeader>
-                      {turn.role === 'user' ? 'You' : 'Example agent'}
+                      {turn.role === 'user'
+                        ? project === 'prepbench'
+                          ? 'Simulated user'
+                          : 'You'
+                        : project === 'prepbench'
+                          ? 'Agent under test'
+                          : 'Example agent'}
                     </MessageHeader>
                     <p className="demo-bubble">{turn.text}</p>
                   </MessageContent>
@@ -339,6 +348,16 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
               </div>
             )}
           </div>
+          {project === 'prepbench' && ready && (
+            <div className="demo-evaluation-check" aria-live="polite">
+              <span className="demo-panel-heading">03 / PrepBench check</span>
+              <strong>Output matches the reference</strong>
+              <p>
+                Expected January: {january}. Expected February: 150. The sample
+                output matches both totals.
+              </p>
+            </div>
+          )}
           <p className="demo-scope">
             {project === 'prepbench'
               ? 'An original illustration of clarification, not a PrepBench test case or benchmark run. PrepBench evaluates the agent you supply.'

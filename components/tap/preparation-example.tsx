@@ -15,7 +15,7 @@ export function PreparationExample() {
         <figcaption className="scene-label">Illustrative example</figcaption>
         <div className="goal-statement">
           <span>Your goal</span>
-          <p>Show monthly sales.</p>
+          <p>Prepare a monthly sales table from these orders.</p>
         </div>
         <div className="vision-flow">
           <div className="vision-stage source-stage">

@@ -2,9 +2,9 @@ import { siteOrigin } from '@/lib/site-path';
 import type { Metadata } from 'next';
 import { PreparationExample } from '@/components/tap/preparation-example';
 import {
-  BenchmarkDiagram,
-  StandardizationDiagram,
-} from '@/components/tap/research-diagrams';
+  PrepCapabilities,
+  CleanMethodOverview,
+} from '@/components/tap/research-overview';
 import { ResourceLink, TextLink } from '@/components/tap/primitives';
 import { projects } from '@/lib/tap-content';
 
@@ -23,16 +23,34 @@ export default function Home() {
         </h1>
         <p className="hero-summary">
           <strong>
-            We’re working toward AI that prepares data you can trust.
-          </strong>{' '}
-          Describe what you need, clarify the choices that matter, and get data
-          ready for analysis.
+            Describe the data you need—not every step to prepare it.
+          </strong>
+        </p>
+        <p className="hero-research-context">
+          TAP is a research initiative toward AI that turns raw tables into
+          analysis-ready data, clarifies ambiguous requirements, and makes
+          transformations easier to check. We develop methods and benchmarks
+          toward this goal.
         </p>
         <a href="#research" className="button-link">
           Explore the research <span aria-hidden="true">↓</span>
         </a>
       </section>
 
+      <div className="research-goals shell" aria-label="TAP research goals">
+        <div>
+          <span>01 / Clarify intent</span>
+          <p>Ask about important requirements before choosing a rule.</p>
+        </div>
+        <div>
+          <span>02 / Inspect the process</span>
+          <p>Make the transformations easier for people to check.</p>
+        </div>
+        <div>
+          <span>03 / Evaluate the result</span>
+          <p>Test whether the prepared tables match the intended output.</p>
+        </div>
+      </div>
       <PreparationExample />
 
       <section
@@ -79,7 +97,7 @@ export default function Home() {
               </div>
             </div>
             <div className="feature-visual">
-              <BenchmarkDiagram />
+              <PrepCapabilities compact />
             </div>
           </article>
           <article
@@ -106,7 +124,7 @@ export default function Home() {
               </div>
             </div>
             <div className="feature-visual">
-              <StandardizationDiagram />
+              <CleanMethodOverview />
             </div>
           </article>
         </div>

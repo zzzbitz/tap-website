@@ -3062,3 +3062,457 @@
     animation: none !important;
   }
 }
+
+/* Research identity: keep methods and evidence ahead of illustrations. */
+.hero-research-context {
+  max-width: 780px;
+  margin: 0 auto 26px;
+  color: var(--muted-foreground);
+  font-size: 18px;
+  line-height: 1.65;
+}
+.research-goals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-bottom: 50px;
+}
+.research-goals > div {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.research-goals span {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+.research-goals p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--muted-foreground);
+}
+.research-map {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 32px;
+}
+.research-map > h3 {
+  margin: 26px 0;
+  font-size: 28px;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+.research-map ol,
+.capability-grid ol,
+.evaluation-roles,
+.method-step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.research-map ol {
+  display: grid;
+  gap: 24px;
+  margin-top: 28px;
+}
+.research-map li,
+.capability-grid li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.research-step-number {
+  flex: 0 0 32px;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-control);
+  background: var(--component-tint);
+  color: var(--component-accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+.research-map li h3,
+.capability-grid h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 2px 0 8px;
+}
+.research-map li p,
+.capability-grid p {
+  font-size: 14px;
+  color: var(--muted-foreground);
+  line-height: 1.65;
+}
+.api-example {
+  background: var(--component-tint);
+  border-radius: var(--radius-panel);
+  padding: 20px;
+}
+.api-example span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin-bottom: 12px;
+}
+.api-example code {
+  font-size: 14px;
+  color: var(--component-accent);
+  overflow-wrap: anywhere;
+}
+.capability-grid {
+  padding: 0 0 44px;
+}
+.capability-grid ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+.capability-grid li {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.evaluation-roles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+}
+.evaluation-roles li {
+  border-left: 2px solid var(--component-border);
+  padding: 4px 20px;
+}
+.evaluation-roles span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.evaluation-roles strong {
+  display: block;
+  font-size: 18px;
+  margin: 8px 0;
+}
+.evaluation-roles p {
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.research-findings {
+  margin: 36px 0 32px;
+  padding: 28px 32px;
+  border-radius: var(--radius-panel);
+  background: var(--muted);
+}
+.research-findings > p:not(.eyebrow) {
+  margin-top: 12px;
+  max-width: 960px;
+  font-size: 16px;
+  color: var(--muted-foreground);
+}
+.research-findings strong {
+  color: var(--foreground);
+}
+.finding-source {
+  display: block;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-subtle);
+}
+.output-mode-explanation {
+  color: var(--muted-foreground);
+  font-size: 14px;
+  margin: 14px 0 24px;
+}
+.demo-evaluation-check {
+  border-top: 1px solid var(--border);
+  padding: 24px 0 0;
+}
+.demo-evaluation-check strong {
+  display: block;
+  margin: 10px 0;
+  font-size: 17px;
+}
+.demo-evaluation-check p {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.paper-authors a {
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+}
+.paper-authors a:hover {
+  color: var(--primary);
+  text-decoration-color: currentColor;
+}
+.paper-affiliation {
+  margin: 12px auto 0;
+  max-width: 680px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.paper-affiliation > span {
+  display: block;
+  font-size: 11px;
+  color: var(--text-subtle);
+  margin-bottom: 2px;
+}
+.citation-jump {
+  display: block;
+  width: fit-content;
+  margin: 16px auto 0;
+  font-size: 14px;
+  color: var(--primary);
+}
+.paper-citation {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 32px;
+}
+.paper-citation summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 600;
+}
+.citation-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 24px 0 16px;
+  font-size: 14px;
+}
+.citation-actions a {
+  color: var(--primary);
+}
+.citation-actions output {
+  color: var(--muted-foreground);
+}
+.paper-citation pre {
+  border-radius: var(--radius-panel);
+  padding: 24px;
+  background: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+.method-explorer {
+  margin-top: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.method-explorer .demo-label {
+  color: var(--component-accent);
+  background: var(--component-tint);
+}
+.method-explorer-head {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+.method-explorer-head p {
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.method-explorer-body {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+}
+.method-step-list {
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+.method-step-list button {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  padding: 14px;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+.method-step-list button:hover {
+  background: var(--muted);
+}
+.method-step-list button[aria-pressed='true'] {
+  background: var(--component-tint);
+}
+.method-step-list button[aria-pressed='true'] .research-step-number {
+  background: var(--component-accent);
+  color: white;
+}
+.method-step-list strong {
+  display: block;
+  font-size: 15px;
+}
+.method-step-list small {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+.method-panel {
+  min-width: 0;
+  padding: 32px 40px;
+  background: var(--muted);
+}
+.method-panel h3 {
+  font-size: 28px;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  margin: 12px 0 20px;
+}
+.method-panel > p:not(.eyebrow) {
+  font-size: 15px;
+}
+.method-panel .eyebrow {
+  color: var(--component-accent);
+}
+.method-code {
+  margin: 24px 0;
+  padding: 24px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-panel);
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-x: auto;
+  color: var(--component-accent);
+}
+.method-panel-note {
+  margin-top: 20px;
+  color: var(--muted-foreground);
+}
+.method-panel .data-table {
+  margin-top: 24px;
+  background: var(--background);
+}
+.type-detection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 24px;
+  border-radius: var(--radius-panel);
+  background: var(--background);
+  font-size: 15px;
+}
+.type-detection span {
+  color: var(--muted-foreground);
+}
+.type-detection code {
+  color: var(--component-accent);
+}
+.feedback-path {
+  display: grid;
+  gap: 12px;
+}
+.feedback-path > div {
+  background: var(--background);
+  padding: 20px;
+  border-radius: var(--radius-panel);
+}
+.feedback-path p {
+  color: var(--muted-foreground);
+  font-size: 14px;
+  margin-top: 8px;
+}
+.feedback-path > span {
+  color: var(--component-accent);
+  text-align: center;
+}
+.method-panel .example-segments {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.method-scope {
+  border-top: 1px solid var(--border);
+  padding: 20px 28px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+@media (max-width: 760px) {
+  .hero-research-context {
+    font-size: 16px;
+  }
+  .research-goals,
+  .capability-grid ol,
+  .evaluation-roles {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .research-goals {
+    margin-bottom: 32px;
+  }
+  .research-map {
+    padding: 24px;
+  }
+  .capability-grid {
+    padding-bottom: 12px;
+  }
+  .research-findings {
+    padding: 24px;
+  }
+  .method-explorer-body {
+    grid-template-columns: 1fr;
+  }
+  .method-step-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 14px;
+    gap: 4px;
+  }
+  .method-step-list button {
+    padding: 10px;
+    gap: 8px;
+    align-items: center;
+    min-height: 60px;
+  }
+  .method-step-list small {
+    display: none;
+  }
+  .method-step-list strong {
+    font-size: 13px;
+  }
+  .method-explorer-head,
+  .method-panel {
+    padding: 24px 20px;
+  }
+  .method-panel h3 {
+    font-size: 26px;
+  }
+  .method-code {
+    padding: 16px;
+    font-size: 12px;
+  }
+  .method-scope {
+    padding: 20px;
+  }
+  .paper-citation pre {
+    padding: 16px;
+  }
+}
+
+.citation-actions button,
+.citation-actions a {
+  min-height: 44px;
+}
+.citation-actions a {
+  display: inline-flex;
+  align-items: center;
+}
+.paper-citation pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

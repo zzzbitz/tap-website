@@ -8,8 +8,8 @@ new experiments, live model rankings, or reconstructed per-cell observations.
 - PrepBench: https://arxiv.org/html/2605.08687v1#S5.T6, Table 6,
   end-to-end Prep-Code and GUI Workflow columns, all ten models. Accuracy is in
   percent. Costs are average USD × 10^-3 per task, including all model calls and
-  retries on the corresponding execution path. The dollar readout divides these
-  costs by 1,000. Grouping follows the paper, and both groups remain accessible.
+  retries on the corresponding execution path. All displayed costs (axis, readout, accessible labels and table) divide
+  these source values by 1,000 to show USD per task. Grouping follows the paper, and both groups remain accessible.
 - CleanAgent: https://arxiv.org/html/2403.08291v4#S4.T1, Table 1, all three systems.
   Matching rate is the reported cell-level rate in percent, latency in seconds.
   Flights has four evaluated datetime columns. All methods use
@@ -40,7 +40,7 @@ and matching SVG render blocks into React. No upstream runtime is executed.
 Geometry uses the original deterministic noise function. Unit ticks denote one
 percentage point; a fractional last tick has proportional height and an exact
 endpoint marker. Ticks never claim to be individual observations. Scatter axes
-start at zero; accuracy is 0–60%, cost is 0–150 or 0–300 millidollars depending on
+start at zero; accuracy is 0–60%, cost is displayed as USD 0–0.15 or USD 0–0.30 depending on
 the output setting. Both axis units are visible.
 
 The cost–accuracy frontier is computed from the displayed Table 6 values: a

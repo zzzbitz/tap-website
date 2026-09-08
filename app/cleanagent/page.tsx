@@ -7,7 +7,8 @@ import {
 } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
 import { CleanAgentResults } from '@/components/tap/paper-results';
-import { GuidedConversation } from '@/components/tap/guided-conversation';
+import { CleanAgentMethod } from '@/components/tap/cleanagent-method';
+import { PaperCitation } from '@/components/tap/paper-citation';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
 
@@ -32,16 +33,16 @@ export default function CleanAgentPage() {
     <main id="main-content" className="detail-page shell" tabIndex={-1}>
       <ProjectHero
         project={project}
-        context="CleanAgent uses AI agents and Dataprep.Clean to turn inconsistent values into a common format."
+        context="CleanAgent turns standardization requests into short Dataprep.Clean calls. Agents identify column types, generate the code, and use execution feedback to revise it."
       />
 
       <DetailSection
         id="cleanagent-conversation"
-        label="Try a conversation"
-        title="Choose a date format."
-        description="Choose a format and see the dates update. Try another choice to compare."
+        label="The method in action"
+        title="From column types to tool calls."
+        description="Unified APIs handle the details of each data type, reducing the custom code an agent needs to write. Explore the steps, then choose an output format."
       >
-        <GuidedConversation project="cleanagent" />
+        <CleanAgentMethod />
       </DetailSection>
 
       <DetailSection
@@ -146,6 +147,8 @@ export default function CleanAgentPage() {
           />
         </div>
       </DetailSection>
+
+      <PaperCitation project="cleanagent" />
 
       <ComplementaryProject
         project={projects.prepbench}

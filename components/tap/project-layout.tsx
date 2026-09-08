@@ -20,7 +20,18 @@ export function ProjectHero({
         <p className="eyebrow">{project.type}</p>
         <h1>{project.name}</h1>
         <p className="paper-title">{project.title}</p>
-        <p className="paper-authors">{project.authors.join(' · ')}</p>
+        <p className="paper-authors">
+          {project.authors.map((author, i) => (
+            <span key={author}>
+              {i > 0 && <span aria-hidden="true"> · </span>}
+              <a href={project.authorLinks[author]}>{author}</a>
+            </span>
+          ))}
+        </p>
+        <p className="paper-affiliation">
+          <span>Paper affiliation</span>
+          {project.affiliation}
+        </p>
         <p className="detail-venue">{project.venue}</p>
       </div>
       <div className="detail-actions">
@@ -31,13 +42,22 @@ export function ProjectHero({
           View repository <Arrow external />
         </a>
       </div>
+      <a
+        className="citation-jump"
+        href={`#${project.name.toLowerCase()}-citation`}
+      >
+        Cite this work
+      </a>
       <p className="project-context">{context}</p>
       <nav
         className="project-jump-links"
         aria-label={`${project.name} page sections`}
       >
         <a href={`#${project.name.toLowerCase()}-conversation`}>
-          Try the conversation <span aria-hidden="true">↓</span>
+          {project.name === 'PrepBench'
+            ? 'Explore an evaluation example'
+            : 'Explore the method'}{' '}
+          <span aria-hidden="true">↓</span>
         </a>
         <a href={`#${project.name.toLowerCase()}-results`}>
           Explore the results <span aria-hidden="true">↓</span>

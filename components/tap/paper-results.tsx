@@ -181,7 +181,7 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
     return () => observer.disconnect();
   }, []);
   const left = 36,
-    right = width - 18,
+    right = width - 24,
     base = 280,
     top = 30;
   const maxCost = mode === 'code' ? 150 : 300;
@@ -249,7 +249,7 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
           ))}
           {[0, maxCost / 3, (maxCost * 2) / 3, maxCost].map((v) => (
             <text key={v} x={x(v)} y={base + 25} textAnchor="middle">
-              {v}
+              {(v / 1000).toFixed(2)}
             </text>
           ))}
           <polyline
@@ -286,7 +286,7 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
                     role="button"
                     tabIndex={0}
                     aria-pressed={i === selected}
-                    aria-label={`${model.name}: ${accuracy.toFixed(1)} percent accuracy, ${cost.toFixed(2)} millidollars per task${frontierSet.has(i) ? ', on Pareto frontier' : ''}`}
+                    aria-label={`${model.name}: ${accuracy.toFixed(1)} percent accuracy, ${(cost / 1000).toFixed(5)} US dollars per task${frontierSet.has(i) ? ', on Pareto frontier' : ''}`}
                     onClick={() => setSelected(i)}
                     onKeyDown={(event) => {
                       if (event.key === 'Enter' || event.key === ' ') {
@@ -321,11 +321,12 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
             })}
         </svg>
         <p className="chart-axis-caption scatter-x-label">
-          Cost per task (USD × 10⁻³) · lower is better
+          Cost per task (USD) · lower is better
         </p>
         <p className="frontier-note">
-          On the blue line, higher accuracy comes at a higher cost. It connects
-          the paper’s reported results.
+          On the frontier, no other model is cheaper with equal or better
+          accuracy, or more accurate at the same cost. The line connects
+          reported results.
         </p>
       </div>
       <fieldset className="scatter-model-list" aria-label="Select a model">
@@ -391,6 +392,11 @@ export function PrepBenchResults() {
           <ToggleGroupItem value="workflow">GUI workflow</ToggleGroupItem>
         </ToggleGroup>
       </div>
+      <p className="output-mode-explanation">
+        {mode === 'code'
+          ? 'Prep code: execute the code generated from the request and input tables.'
+          : 'GUI workflow: translate the generated code into a workflow, then execute that workflow.'}
+      </p>
       <ChartCard
         title={`${models[0][mode][0].toFixed(1)}% is the highest accuracy in this group.`}
         subtitle="306 preparation tasks · accuracy measures correct final outputs."
@@ -443,11 +449,11 @@ export function PrepBenchResults() {
           <summary>View all reported values</summary>
           <DataTable
             label={`PrepBench end-to-end ${mode} results`}
-            headers={['Model', 'Accuracy (%)', 'Cost (USD × 10⁻³ / task)']}
+            headers={['Model', 'Accuracy (%)', 'Cost (USD / task)']}
             rows={prepResults.map((model) => [
               model.name,
               model[mode][0].toFixed(1),
-              model[mode][1].toFixed(2),
+              (model[mode][1] / 1000).toFixed(5),
             ])}
             numericColumns={[1, 2]}
           />

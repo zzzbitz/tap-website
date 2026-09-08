@@ -40,7 +40,7 @@ export const demoDateFormats = {
 // Branch IDs are the only accepted actions; no text interpretation or model calls.
 export const demoTrees: Record<DemoProject, DemoTree> = {
   prepbench: {
-    request: 'Show monthly sales from these orders.',
+    request: 'Prepare a monthly sales table from these orders.',
     context:
       'January includes a refunded order for 80. I need one rule before preparing the table.',
     question: 'Should refunded orders count toward sales?',

@@ -9,10 +9,20 @@ export const projects = {
     title:
       'PrepBench: How Far Are We from Natural-Language-Driven Data Preparation?',
     authors: ['Jingzhe Xu', 'Rui Wang', 'Jiannan Wang', 'Guoliang Li'],
+    affiliation:
+      'Department of Computer Science and Technology, BNRist, Tsinghua University',
+    authorLinks: {
+      'Jingzhe Xu':
+        'https://scholar.google.com/citations?user=RFNP0boAAAAJ&hl=zh-CN',
+      'Rui Wang':
+        'https://scholar.google.com/citations?user=VNxw8OUAAAAJ&hl=zh-CN',
+      'Jiannan Wang': 'https://dbgroup.cs.tsinghua.edu.cn/jnwang/',
+      'Guoliang Li': 'https://dbgroup.cs.tsinghua.edu.cn/ligl/',
+    } as Record<string, string>,
     venue: 'VLDB 2026',
     question: 'How well can AI prepare data?',
     summary:
-      'Real-world tasks that test whether AI agents can understand a request and produce the right tables.',
+      'A benchmark for clarifying requests, preparing messy tables, and translating code into executable workflows.',
     paper: 'https://doi.org/10.14778/3828612.3828638',
     code: 'https://github.com/TsinghuaDatabaseGroup/prepbench',
     dataset:
@@ -28,10 +38,16 @@ export const projects = {
     type: 'Agent framework · Standardization',
     title: 'CleanAgent: Automating Data Standardization with LLM-based Agents',
     authors: ['Danrui Qi', 'Zhengjie Miao', 'Jiannan Wang'],
+    affiliation: 'Simon Fraser University',
+    authorLinks: {
+      'Danrui Qi': 'https://qidanrui.github.io/',
+      'Zhengjie Miao': 'https://www.miaozhengjie.com/',
+      'Jiannan Wang': 'https://dbgroup.cs.tsinghua.edu.cn/jnwang/',
+    } as Record<string, string>,
     venue: 'DataAI Workshop @ VLDB 2025',
     question: 'Make data formats consistent.',
     summary:
-      'AI agents use data-cleaning tools to turn inconsistent dates, addresses, and other values into a common format.',
+      'Type-specific Dataprep.Clean APIs simplify the code. Agents organize the calls and revise them using execution feedback.',
     paper:
       'https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/DATAI/DATAI25_8.pdf',
     code: 'https://github.com/sfu-db/CleanAgent',

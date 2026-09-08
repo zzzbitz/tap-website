@@ -7,6 +7,11 @@ import {
 } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
 import { PrepBenchResults } from '@/components/tap/paper-results';
+import {
+  PrepCapabilities,
+  EvaluationRoles,
+} from '@/components/tap/research-overview';
+import { PaperCitation } from '@/components/tap/paper-citation';
 import { GuidedConversation } from '@/components/tap/guided-conversation';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
@@ -32,15 +37,18 @@ export default function PrepBenchPage() {
     <main id="main-content" className="detail-page shell" tabIndex={-1}>
       <ProjectHero
         project={project}
-        context="PrepBench tests whether AI agents can turn your request and input tables into the right output."
+        context="PrepBench evaluates three abilities: clarifying ambiguous requests, generating code that handles messy tables, and translating that code into inspectable, executable workflows."
       />
+
+      <PrepCapabilities />
 
       <DetailSection
         id="prepbench-conversation"
-        label="Try a conversation"
-        title="See how your choice changes the data."
-        description="Choose whether to count refunded orders, then compare the monthly totals."
+        label="An evaluation example"
+        title="An agent prepares. PrepBench checks."
+        description="Explore a refund example. You provide the simulated user’s answer; the agent prepares the table for evaluation."
       >
+        <EvaluationRoles />
         <GuidedConversation project="prepbench" />
       </DetailSection>
 
@@ -92,6 +100,23 @@ export default function PrepBenchPage() {
         title="How accurate are the agents?"
         description="Compare accuracy and cost for 10 models. Switch between code and graphical workflows."
       >
+        <div
+          className="research-findings"
+          aria-label="Main findings from the PrepBench paper"
+        >
+          <p className="eyebrow">What the experiments reveal</p>
+          <p>
+            <strong>Ambiguity is a major bottleneck.</strong> GPT-5.1-Codex
+            improves from 54.9% to 85.3% prep-code accuracy when requirements
+            are disambiguated.
+          </p>
+          <p>
+            <strong>More questions do not guarantee clarity.</strong> Agents
+            often miss important ambiguities or ask ineffective questions.
+            Correct code can still become an incorrect workflow.
+          </p>
+          <span className="finding-source">Paper · Sections 5.3–5.6</span>
+        </div>
         <PrepBenchResults />
       </DetailSection>
 
@@ -151,6 +176,8 @@ export default function PrepBenchPage() {
           />
         </div>
       </DetailSection>
+
+      <PaperCitation project="prepbench" />
 
       <ComplementaryProject
         project={projects.cleanagent}
