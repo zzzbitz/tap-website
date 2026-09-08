@@ -8,7 +8,7 @@ A three-page research website for **TAP — Trust AI to Prepare Your Data**, imp
 
 ## Development
 
-Use the existing npm dependencies and lockfile. `npm run dev` starts the local server; reuse an existing server when one is running. `npm run build` creates the production build. The existing `next.config.ts` enables static export. The parent workflow owns final build verification, source registration, and hosting.
+Use the existing npm dependencies and lockfile. `npm run dev` starts the local server; reuse an existing server when one is running. `npm run build` creates the production build. The existing `next.config.ts` enables static export. `scripts/prepare-static.mjs` normalizes the export for static hosting.
 
 ## Visual system
 
@@ -36,7 +36,7 @@ The parent owns the five unmodified extracts under `public/figures/` and their e
 | `cleanagent-workflow.png`  | CleanAgent, Figure 2 |
 | `cleanagent-interface.png` | CleanAgent, Figure 3 |
 
-PrepBench figures link to [its paper](https://arxiv.org/abs/2605.08687); CleanAgent figures link to [its paper](https://arxiv.org/abs/2403.08291). The PrepBench page retains the Preppin’ Data provenance. The evaluation figure describes the paper’s experimental setup; current public execution instructions remain linked separately. The CleanAgent interface includes an execution error and a later completion message. It must not be presented as first-pass success.
+PrepBench figures link to [its published paper](https://doi.org/10.14778/3828612.3828638); CleanAgent figures link to [its published paper](https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/DATAI/DATAI25_8.pdf). The PrepBench page retains the Preppin’ Data provenance. The evaluation figure describes the paper’s experimental setup; current public execution instructions remain linked separately. The CleanAgent interface includes an execution error and a later completion message. It must not be presented as first-pass success.
 
 The semantic diagrams in `preparation-example.tsx` and `research-diagrams.tsx` are original explanatory compositions. They are separate from paper evidence. No stock artwork, generated AI art, or social preview image is used.
 
@@ -85,10 +85,33 @@ lint and diff checks passed. In the local final-static preview, the original
 video loaded and played to 33 seconds of its 4:32 duration; pause was confirmed.
 At 375px viewport width the player measured 333×200px with no document overflow;
 the demo jump link worked and the viewport override was restored. Publication
-is verified through Sites deployment status separately from local playback.
+was verified separately from local playback in the earlier hosting revision.
 
 ## Visual interaction review
 
 See `VISUAL_REVIEW.md` for the screenshot-led review of the three pages and
 corrections to action labels, duplicate status text, responsive result navigation,
 model feedback placement, and conditional figure-scroll hints.
+
+## Independent hosting
+
+GitHub Pages publishes the static `dist/client` artifact using
+`.github/workflows/pages.yml`. Configure the repository's Pages source as
+GitHub Actions. Each push to `main` builds and deploys the site automatically.
+No ChatGPT Sites plugin, Cloudflare bindings or model service is required.
+
+The workflow obtains `NEXT_PUBLIC_BASE_PATH` and `NEXT_PUBLIC_SITE_URL` from
+GitHub Pages metadata. For a custom domain, configure it in Pages settings and
+re-run the workflow; no component URLs need manual replacement.
+
+To preview a project-path build locally:
+
+```sh
+NEXT_PUBLIC_BASE_PATH=/tap-website NEXT_PUBLIC_SITE_URL=https://zzzbitz.github.io/tap-website npm run build
+```
+
+Serve the artifact at `/tap-website/`. `sitePath()` prefixes authored links and
+media, while `assetPrefix` handles compiled assets. The export normalizer creates
+real project-page directories and verifies all required HTML exists; the build
+fails if prerendering skips a page. Original paper-table transcription sources
+remain in provenance files; visitor-facing paper links use formal publications.

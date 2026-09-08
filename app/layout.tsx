@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/site-path';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { SiteFooter, SiteHeader } from '@/components/tap/site-chrome';
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   },
   description:
     'A research initiative building and evaluating AI systems for reliable data preparation. Explore PrepBench and CleanAgent.',
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: sitePath('/favicon.svg') },
   openGraph: {
     type: 'website',
     siteName: 'TAP',

@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/site-path';
 import type { Metadata } from 'next';
 import {
   ComplementaryProject,
@@ -16,11 +17,11 @@ export const metadata: Metadata = {
   title: 'CleanAgent — Automating Data Standardization',
   description:
     'CleanAgent combines LLM-based agents with Dataprep.Clean to automate data standardization. DataAI Workshop @ VLDB 2025. Paper, code, and repository demonstration.',
-  alternates: { canonical: '/cleanagent' },
+  alternates: { canonical: siteOrigin + '/cleanagent/' },
   openGraph: {
     title: project.title,
     description: project.summary,
-    url: `${siteOrigin}/cleanagent`,
+    url: `${siteOrigin}/cleanagent/`,
     type: 'article',
     siteName: 'TAP',
   },
@@ -50,7 +51,7 @@ export default function CleanAgentPage() {
         description="Annotate column types, generate concise Dataprep.Clean calls, and execute them to produce standardized output. The framework coordinates these steps through a chat manager."
       >
         <PaperFigure
-          src="/figures/cleanagent-workflow.png"
+          src={sitePath('/figures/cleanagent-workflow.png')}
           width={968}
           height={624}
           title="The CleanAgent workflow"
@@ -108,7 +109,7 @@ export default function CleanAgentPage() {
           </figcaption>
         </figure>
         <PaperFigure
-          src="/figures/cleanagent-interface.png"
+          src={sitePath('/figures/cleanagent-interface.png')}
           width={1624}
           height={860}
           title="A recorded interaction with the system"
@@ -118,8 +119,7 @@ export default function CleanAgentPage() {
           figureNumber={3}
         />
         <p className="scope-note">
-          Presented at the DataAI Workshop @ VLDB 2025. The arXiv paper was
-          first submitted in 2024.
+          Presented at the DataAI Workshop @ VLDB 2025.
         </p>
       </DetailSection>
 
@@ -132,7 +132,7 @@ export default function CleanAgentPage() {
           <ResourceLink
             href={project.paper}
             title="Read the paper"
-            description="The motivation, framework, and technical scope on arXiv."
+            description="The published workshop paper: motivation, framework, and evaluation."
           />
           <ResourceLink
             href={project.code}

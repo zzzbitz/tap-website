@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/site-path';
 /* oxlint-disable nextjs/no-html-link-for-pages -- Static export uses native navigation to avoid vinext client-router errors. */
 import type { ReactNode } from 'react';
 import type { Project } from '@/lib/tap-content';
@@ -12,7 +13,7 @@ export function ProjectHero({
 }) {
   return (
     <header className="detail-hero">
-      <a className="link-arrow back-link" href="/">
+      <a className="link-arrow back-link" href={sitePath('/')}>
         <span aria-hidden="true">←</span> Back to TAP
       </a>
       <div className="detail-heading">

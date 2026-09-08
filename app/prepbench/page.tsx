@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/site-path';
 import type { Metadata } from 'next';
 import {
   ComplementaryProject,
@@ -16,11 +17,11 @@ export const metadata: Metadata = {
   title: 'PrepBench — Evaluating AI Data Preparation',
   description:
     'PrepBench evaluates natural-language-driven data preparation with 306 cases and 829 input tables. VLDB 2026. Paper, code, dataset, and evaluation resources.',
-  alternates: { canonical: '/prepbench' },
+  alternates: { canonical: siteOrigin + '/prepbench/' },
   openGraph: {
     title: project.title,
     description: project.summary,
-    url: `${siteOrigin}/prepbench`,
+    url: `${siteOrigin}/prepbench/`,
     type: 'article',
     siteName: 'TAP',
   },
@@ -50,7 +51,7 @@ export default function PrepBenchPage() {
         description="Preparing a table can involve matching schemas, normalizing values, and resolving choices that affect the result. The paper’s registration-data example makes these decisions concrete."
       >
         <PaperFigure
-          src="/figures/prepbench-example.png"
+          src={sitePath('/figures/prepbench-example.png')}
           width={2016}
           height={984}
           title="From raw registration tables to a preparation task"
@@ -68,7 +69,7 @@ export default function PrepBenchPage() {
         description="Start with the request and source tables. The agent prepares the data, with clarification where applicable. Evaluation examines the final output tables using the benchmark’s evaluation assets."
       >
         <PaperFigure
-          src="/figures/prepbench-evaluation.png"
+          src={sitePath('/figures/prepbench-evaluation.png')}
           width={1928}
           height={1028}
           title="The paper’s experimental setup"
@@ -111,7 +112,7 @@ export default function PrepBenchPage() {
           </div>
         </dl>
         <PaperFigure
-          src="/figures/prepbench-statistics.png"
+          src={sitePath('/figures/prepbench-statistics.png')}
           width={940}
           height={396}
           title="A closer look at the tasks"

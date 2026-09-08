@@ -1,10 +1,10 @@
-export const siteOrigin =
-  'https://tap-data-preparation.beige-guppy-1416.chatgpt.site';
+export { siteOrigin } from './site-path';
+import { sitePath } from './site-path';
 
 export const projects = {
   prepbench: {
     name: 'PrepBench',
-    href: '/prepbench',
+    href: sitePath('/prepbench/'),
     type: 'Benchmark · Evaluation',
     title:
       'PrepBench: How Far Are We from Natural-Language-Driven Data Preparation?',
@@ -13,7 +13,7 @@ export const projects = {
     question: 'How well can AI prepare the data you need?',
     summary:
       'Real-world tasks that test whether AI agents can understand a request and produce the right tables.',
-    paper: 'https://arxiv.org/abs/2605.08687',
+    paper: 'https://doi.org/10.14778/3828612.3828638',
     code: 'https://github.com/TsinghuaDatabaseGroup/prepbench',
     dataset:
       'https://github.com/TsinghuaDatabaseGroup/prepbench/blob/main/docs/DATASET.md',
@@ -24,7 +24,7 @@ export const projects = {
   },
   cleanagent: {
     name: 'CleanAgent',
-    href: '/cleanagent',
+    href: sitePath('/cleanagent/'),
     type: 'Agent framework · Standardization',
     title: 'CleanAgent: Automating Data Standardization with LLM-based Agents',
     authors: ['Danrui Qi', 'Zhengjie Miao', 'Jiannan Wang'],
@@ -32,7 +32,8 @@ export const projects = {
     question: 'Standardize messy data with less manual work.',
     summary:
       'AI agents use data-cleaning tools to turn inconsistent dates, addresses, and other values into a common format.',
-    paper: 'https://arxiv.org/abs/2403.08291',
+    paper:
+      'https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/DATAI/DATAI25_8.pdf',
     code: 'https://github.com/sfu-db/CleanAgent',
     demonstration: 'https://github.com/sfu-db/CleanAgent#demonstration',
     video: 'https://www.youtube.com/watch?v=fSYXVM6qeqM',

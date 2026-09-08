@@ -2150,6 +2150,7 @@
   margin-top: 18px;
 }
 .chart-source {
+  color: var(--muted-foreground);
   border-top: 1px solid var(--border);
   margin-top: 26px;
   padding-top: 18px;

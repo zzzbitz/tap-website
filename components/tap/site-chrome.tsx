@@ -1,8 +1,9 @@
+import { sitePath } from '@/lib/site-path';
 /* oxlint-disable nextjs/no-html-link-for-pages -- Static export uses native navigation to avoid vinext client-router errors. */
 
 export function Wordmark() {
   return (
-    <a href="/" className="wordmark" aria-label="TAP home">
+    <a href={sitePath('/')} className="wordmark" aria-label="TAP home">
       <span className="table-mark" aria-hidden="true">
         {Array.from({ length: 9 }, (_, i) => (
           <span key={i} />
@@ -20,8 +21,8 @@ export function SiteHeader() {
       <div className="header-right">
         <span className="header-note">Human intent. Prepared data.</span>
         <nav className="site-nav" aria-label="Main navigation">
-          <a href="/#vision">Vision</a>
-          <a href="/#research">Research</a>
+          <a href={sitePath('/#vision')}>Vision</a>
+          <a href={sitePath('/#research')}>Research</a>
         </nav>
       </div>
     </header>

@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/site-path';
 /* oxlint-disable nextjs/no-html-link-for-pages -- Static export uses native navigation to avoid vinext client-router errors. */
 import { Arrow } from '@/components/tap/primitives';
 
@@ -11,7 +12,7 @@ export default function NotFound() {
           The page at this address could not be found. Explore TAP and its
           research projects from the homepage.
         </p>
-        <a href="/" className="button-link">
+        <a href={sitePath('/')} className="button-link">
           Return to TAP <Arrow />
         </a>
       </div>

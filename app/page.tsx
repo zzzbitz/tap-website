@@ -1,3 +1,4 @@
+import { siteOrigin } from '@/lib/site-path';
 import type { Metadata } from 'next';
 import { PreparationExample } from '@/components/tap/preparation-example';
 import {
@@ -7,7 +8,9 @@ import {
 import { ResourceLink, TextLink } from '@/components/tap/primitives';
 import { projects } from '@/lib/tap-content';
 
-export const metadata: Metadata = { alternates: { canonical: '/' } };
+export const metadata: Metadata = {
+  alternates: { canonical: siteOrigin + '/' },
+};
 
 export default function Home() {
   const { prepbench, cleanagent } = projects;

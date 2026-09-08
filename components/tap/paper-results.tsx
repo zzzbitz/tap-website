@@ -1,5 +1,7 @@
 'use client';
 
+import { sitePath } from '@/lib/site-path';
+
 /* oxlint-disable nextjs/no-html-link-for-pages -- The license is a static text asset, not a client-router page. */
 /* oxlint-disable jsx-a11y/prefer-tag-over-role -- SVG groups need explicit button/group semantics; native HTML buttons cannot be children of SVG. */
 /* Adapted from Lieflat Charts by 躺在废墟里: F5 Tick Rows, F8 Plumb Scatter,
@@ -15,13 +17,7 @@ import {
 } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { DataTable } from '@/components/tap/data-table';
-import {
-  cleanResults,
-  cleanResultsSource,
-  prepResults,
-  prepResultsSource,
-  type PrepMode,
-} from '@/lib/paper-results';
+import { cleanResults, prepResults, type PrepMode } from '@/lib/paper-results';
 
 const noise = (i: number, k: number) =>
   Math.abs(((i * 73856093) ^ (k * 19349663)) % 1000) / 1000;
@@ -32,14 +28,12 @@ const delay = (seconds: number): CSSProperties => ({
 function ChartCard({
   title,
   subtitle,
-  source,
   sourceLabel,
   tone = 'blue',
   children,
 }: {
   title: string;
   subtitle: string;
-  source: string;
   sourceLabel: string;
   tone?: 'blue' | 'green';
   children: ReactNode;
@@ -95,11 +89,9 @@ function ChartCard({
         {children}
       </div>
       <div className="chart-source">
-        <a href={source}>
-          {sourceLabel} <span aria-hidden="true">↗</span>
-        </a>
+        <span>{sourceLabel}</span>
         <a
-          href="/licenses/lieflat-charts.txt"
+          href={sitePath('/licenses/lieflat-charts.txt')}
           className="chart-credit"
           rel="license"
         >
@@ -359,8 +351,7 @@ export function PrepBenchResults() {
       <ChartCard
         title={`${models[0][mode][0].toFixed(1)}% is the best accuracy in this group.`}
         subtitle="306 preparation tasks · accuracy measures correct final outputs."
-        source={prepResultsSource}
-        sourceLabel="PrepBench · Table 6 · arXiv v1 (2026)"
+        sourceLabel="PrepBench · Table 6"
       >
         <div className="chart-family-controls">
           <ToggleGroup
@@ -402,8 +393,7 @@ export function PrepBenchResults() {
       <ChartCard
         title="Similar accuracy can come at different costs."
         subtitle="All 10 models · each point is one reported result. Select a model to inspect it."
-        source={prepResultsSource}
-        sourceLabel="PrepBench · Table 6 · arXiv v1 (2026)"
+        sourceLabel="PrepBench · Table 6"
       >
         <PrepScatter mode={mode} />
         <details className="chart-data-details">
@@ -436,8 +426,7 @@ export function CleanAgentResults() {
       tone="green"
       title="CleanAgent reaches a 42.5% matching rate."
       subtitle="Flights dataset · datetime standardization across four columns · higher is better."
-      source={cleanResultsSource}
-      sourceLabel="CleanAgent · Table 1 · arXiv v4 (2025)"
+      sourceLabel="CleanAgent · Table 1"
     >
       <div className="ballot-list">
         {cleanResults.map((model, i) => (
