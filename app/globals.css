@@ -1770,6 +1770,206 @@
     font-size: 44px;
   }
 }
+/* Interactive examples keep the original paper figures separate from live state. */
+.example-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+}
+.format-controls {
+  margin-top: 25px;
+}
+.refund-controls {
+  margin-top: 22px;
+  padding-top: 19px;
+  border-top: 1px solid #d2dff2;
+}
+.control-label {
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #405b80;
+}
+.format-controls .control-label {
+  color: #3f6656;
+}
+.example-segments {
+  align-items: stretch;
+  padding: 4px;
+  gap: 3px;
+  border: 1px solid #cfdbef;
+  border-radius: 13px;
+  background: #dce7f7;
+  max-width: 100%;
+}
+.example-segments [data-slot='toggle-group-item'] {
+  min-height: 44px;
+  height: auto;
+  padding: 8px 13px;
+  border-radius: 9px;
+  color: #435e85;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+.example-segments [aria-pressed='true'] {
+  color: #234ea3;
+  background: white;
+  box-shadow:
+    0 2px 6px #17366914,
+    0 1px 2px #1736690a;
+}
+.example-segments [data-slot='toggle-group-item']:hover {
+  background: #ffffff90;
+}
+.example-segments [aria-pressed='true']:hover {
+  background: white;
+}
+.example-segments [data-slot='toggle-group-item']:active {
+  transform: scale(0.97);
+}
+.green-segments {
+  background: #dfece5;
+  border-color: #d0e1d7;
+}
+.green-segments [data-slot='toggle-group-item'] {
+  color: #426754;
+}
+.green-segments [aria-pressed='true'] {
+  color: #205840;
+}
+.standardization-scene .date-transformation {
+  margin-top: 28px;
+}
+.example-feedback {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #27634f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.date-feedback {
+  justify-content: center;
+  margin-top: 23px;
+}
+.feedback-detail {
+  color: #536e60;
+}
+.standardization-scene .standardization-path {
+  margin-top: 22px;
+  padding-top: 19px;
+}
+.evaluation-feedback-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 15px;
+  margin-top: 18px;
+}
+.feedback-symbol {
+  display: inline-grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #dcefe5;
+}
+.mismatch-feedback {
+  color: #8a4b15;
+}
+.mismatch-feedback .feedback-symbol {
+  background: #fae6cf;
+  font-size: 19px;
+}
+.candidate-table {
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+.candidate-table.has-mismatch {
+  border-color: #c78c46;
+  box-shadow: 0 0 0 2px #c78c461a;
+}
+.green-table [data-slot='table-cell'] .mismatched-value {
+  color: #8a4b15;
+  background: #fff0dd;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px #fff0dd;
+}
+.mistake-toggle {
+  min-height: 44px;
+  height: auto;
+  padding: 8px 12px;
+  border: 1px solid #b9cde9;
+  border-radius: 10px;
+  background: #ffffff80;
+  font-size: 14px;
+  color: #355d94;
+  cursor: pointer;
+  gap: 7px;
+}
+.mistake-toggle:hover {
+  background: white;
+}
+.mistake-toggle[aria-pressed='true'] {
+  background: white;
+  border-color: #c3d4eb;
+}
+.interactive-footnote {
+  margin-top: 12px;
+  color: #52657e;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.animated-value {
+  display: inline-block;
+  animation: example-value-in 360ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes example-value-in {
+  from {
+    opacity: 0.35;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 600px) {
+  .example-controls {
+    align-items: stretch;
+    gap: 10px;
+  }
+  .control-label {
+    width: 100%;
+  }
+  .example-segments {
+    width: 100%;
+  }
+  .example-segments [data-slot='toggle-group-item'] {
+    flex: 1 1 auto;
+    padding-inline: 8px;
+    min-width: 0;
+    white-space: normal;
+  }
+  .date-feedback {
+    justify-content: flex-start;
+  }
+  .evaluation-feedback-row {
+    align-items: flex-start;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
