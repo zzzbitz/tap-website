@@ -18,8 +18,8 @@ export default function Home() {
           Trust AI to <span>Prepare Your Data</span>
         </h1>
         <p className="hero-summary">
-          We study how AI can turn a request and a set of tables into data ready
-          for analysis.
+          TAP brings together research and open-source software for data
+          preparation with AI.
         </p>
         <a href="#research" className="hero-research-link link-arrow">
           Explore the research <span aria-hidden="true">↓</span>
