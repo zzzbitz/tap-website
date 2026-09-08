@@ -50,7 +50,7 @@ Models are identified by labels/numbers, not ten categorical colors. TAP's
 existing Geist typography is retained. All chart
 labels stay as HTML or use measured SVG dimensions to avoid tiny mobile text.
 Viewport-triggered reveal follows `MONO.obsReveal`, with observer cleanup;
-explicit Replay is keyboard operable, animations have no accumulating timers,
+animations have no accumulating timers,
 and the site's reduced-motion override applies. Source values remain available
 as native tables, including without JavaScript.
 

@@ -2022,29 +2022,6 @@
   font-size: 15px;
   line-height: 1.6;
 }
-.chart-replay {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 8px 10px;
-  flex-shrink: 0;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-control);
-  font-size: 14px;
-  color: var(--chart-ink);
-  cursor: pointer;
-  background: transparent;
-}
-.chart-replay:hover {
-  background: var(--muted);
-  border-color: var(--component-accent);
-  color: var(--component-accent);
-}
-.chart-replay span {
-  font-size: 22px;
-  line-height: 1;
-}
 .chart-family-controls {
   justify-content: space-between;
   padding-bottom: 28px;
@@ -2397,9 +2374,6 @@
   .paper-chart-head {
     flex-direction: column;
     gap: 14px;
-  }
-  .chart-replay {
-    align-self: flex-start;
   }
   .scatter-layout {
     grid-template-columns: minmax(0, 1fr);

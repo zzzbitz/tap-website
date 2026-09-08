@@ -41,11 +41,10 @@ function ChartCard({
   const ref = useRef<HTMLElement>(null);
   const titleId = useId();
   const [revealed, setRevealed] = useState(false);
-  const [replay, setReplay] = useState(0);
   useEffect(() => {
     const node = ref.current;
     if (!node || !('IntersectionObserver' in window)) return;
-    // React equivalent of MONO.obsReveal: one viewport entrance, explicit replay,
+    // React equivalent of MONO.obsReveal: one viewport entrance,
     // no interval/timer accumulation, observer released on entrance or unmount.
     const io = new IntersectionObserver(
       (entries) => {
@@ -70,20 +69,8 @@ function ChartCard({
           <h3 id={titleId}>{title}</h3>
           <p>{subtitle}</p>
         </div>
-        <button
-          type="button"
-          className="chart-replay"
-          aria-label={`Replay animation: ${title}`}
-          onClick={() => {
-            setRevealed(true);
-            setReplay((n) => n + 1);
-          }}
-        >
-          <span aria-hidden="true">↻</span> Replay animation
-        </button>
       </figcaption>
       <div
-        key={replay}
         className={revealed ? 'chart-content chart-revealed' : 'chart-content'}
       >
         {children}
