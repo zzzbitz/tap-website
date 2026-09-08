@@ -37,8 +37,8 @@ export default function PrepBenchPage() {
 
       <DetailSection
         id="prepbench-conversation"
-        label="An evaluation example"
-        title="Interactive disambiguation in practice."
+        label="Interactive disambiguation"
+        title="Clarifying a refund rule"
         description="Explore a refund example. You provide the simulated user’s answer; the agent prepares the table for evaluation."
       >
         <EvaluationRoles />
@@ -48,7 +48,7 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-example"
         label="The problem"
-        title="What makes data preparation hard?"
+        title="From a request to a prepared table"
         description="User requests can be ambiguous, and input tables may contain mismatched schemas or inconsistent values. Even correct preparation code can be difficult for users to verify."
       >
         <PaperFigure
@@ -66,7 +66,7 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-evaluation"
         label="The method"
-        title="How PrepBench evaluates agents."
+        title="The evaluation setup"
         description="The agent receives a request and input tables, asks questions when needed, and prepares the data. PrepBench then checks the output tables."
       >
         <PaperFigure
@@ -89,7 +89,7 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-results"
         label="The results"
-        title="How accurate are the agents?"
+        title="Accuracy and cost"
         description="Compare accuracy and cost for 10 models. Switch between code and graphical workflows."
       >
         <div
@@ -117,7 +117,7 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-dataset"
         label="The dataset"
-        title="306 data preparation tasks."
+        title="306 tasks from Preppin’ Data"
         description="Based on the Preppin’ Data challenges, the tasks vary in table size, unclear requirements, and required operations."
       >
         <dl className="dataset-facts">
@@ -145,7 +145,7 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-resources"
         label="Work with PrepBench"
-        title="Test your agent with PrepBench."
+        title="Use PrepBench"
       >
         <div className="detail-resource-links">
           <ResourceLink

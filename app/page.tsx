@@ -1,10 +1,7 @@
-import { siteOrigin } from '@/lib/site-path';
+import { siteOrigin, sitePath } from '@/lib/site-path';
 import type { Metadata } from 'next';
 import { PreparationExample } from '@/components/tap/preparation-example';
-import {
-  PrepCapabilities,
-  CleanMethodOverview,
-} from '@/components/tap/research-overview';
+import { PaperFigure } from '@/components/tap/paper-figure';
 import { TextLink } from '@/components/tap/primitives';
 import { projects } from '@/lib/tap-content';
 
@@ -17,40 +14,19 @@ export default function Home() {
   return (
     <main id="main-content" tabIndex={-1}>
       <section className="hero shell" aria-labelledby="hero-title">
-        <p className="eyebrow">A research initiative</p>
+        <p className="eyebrow">Research on AI and data preparation</p>
         <h1 id="hero-title">
           Trust AI to <span>Prepare Your Data</span>
         </h1>
         <p className="hero-summary">
-          <strong>
-            Describe the data you need—not every step to prepare it.
-          </strong>
+          We study how AI can turn a request and a set of tables into data ready
+          for analysis.
         </p>
-        <p className="hero-research-context">
-          TAP is a research initiative toward AI that turns raw tables into
-          analysis-ready data, clarifies ambiguous requirements, and makes
-          transformations easier to check. We develop methods and benchmarks
-          toward this goal.
-        </p>
-        <a href="#research" className="button-link">
+        <a href="#research" className="hero-research-link link-arrow">
           Explore the research <span aria-hidden="true">↓</span>
         </a>
       </section>
 
-      <div className="research-goals shell" aria-label="TAP research goals">
-        <div>
-          <span>01 / Clarify intent</span>
-          <p>Ask about important requirements before choosing a rule.</p>
-        </div>
-        <div>
-          <span>02 / Inspect the process</span>
-          <p>Make the transformations easier for people to check.</p>
-        </div>
-        <div>
-          <span>03 / Evaluate the result</span>
-          <p>Test whether the prepared tables match the intended output.</p>
-        </div>
-      </div>
       <PreparationExample />
 
       <section
@@ -59,72 +35,94 @@ export default function Home() {
         aria-labelledby="research-title"
       >
         <div className="shell">
-          <div className="section-intro centered research-intro">
-            <p className="eyebrow">Our research</p>
-            <h2 id="research-title">
-              Toward data preparation
-              <br />
-              <span>you can trust.</span>
-            </h2>
+          <div className="section-intro research-intro" data-reveal>
+            <h2 id="research-title">Research</h2>
+            <p>Benchmarks and methods for data preparation.</p>
           </div>
           <article
-            className="research-feature prepbench-feature"
+            className="research-feature illustrated-feature prepbench-feature"
             aria-labelledby="prepbench-title"
           >
-            <div className="feature-copy">
-              <p className="project-name">PrepBench</p>
-              <p className="feature-meta">Benchmark · {prepbench.venue}</p>
-              <h3 id="prepbench-title">{prepbench.question}</h3>
-              <p className="feature-summary">{prepbench.summary}</p>
-              <p className="feature-facts">
-                <span>
-                  <strong>306</strong> cases
-                </span>
-                <span>
-                  <strong>829</strong> input tables
-                </span>
-              </p>
-              <TextLink href={prepbench.href} className="feature-primary">
-                Explore PrepBench
-              </TextLink>
-              <div className="feature-links">
-                <TextLink href={prepbench.paper} external>
-                  Paper
+            <div className="feature-copy" data-reveal>
+              <div className="feature-heading">
+                <p className="project-name">PrepBench</p>
+                <p className="feature-meta">Benchmark · {prepbench.venue}</p>
+                <h3 id="prepbench-title">{prepbench.question}</h3>
+              </div>
+              <div className="feature-description">
+                <p className="feature-summary">{prepbench.summary}</p>
+                <p className="feature-facts">
+                  <span>
+                    <strong>306</strong> cases
+                  </span>
+                  <span>
+                    <strong>829</strong> input tables
+                  </span>
+                </p>
+                <TextLink href={prepbench.href} className="feature-primary">
+                  Explore PrepBench
                 </TextLink>
-                <TextLink href={prepbench.code} external>
-                  Code
-                </TextLink>
+                <div className="feature-links">
+                  <TextLink href={prepbench.paper} external>
+                    Paper
+                  </TextLink>
+                  <TextLink href={prepbench.code} external>
+                    Code
+                  </TextLink>
+                </div>
               </div>
             </div>
-            <div className="feature-visual">
-              <PrepCapabilities compact />
+            <div className="feature-visual" data-reveal>
+              <PaperFigure
+                src={sitePath('/figures/prepbench-evaluation.png')}
+                width={1928}
+                height={1028}
+                title="PrepBench evaluation framework"
+                alt="PrepBench Figure 4: benchmark assets, interactive disambiguation, prep-code generation, code-to-workflow translation, and the metrics used to evaluate each capability."
+                caption="Benchmark assets, three evaluation modes, and their metrics."
+                source={prepbench.paper}
+                figureNumber={4}
+              />
             </div>
           </article>
           <article
-            className="research-feature cleanagent-feature"
+            className="research-feature illustrated-feature cleanagent-feature"
             aria-labelledby="cleanagent-title"
           >
-            <div className="feature-copy">
-              <p className="project-name">CleanAgent</p>
-              <p className="feature-meta">
-                Agent framework · {cleanagent.venue}
-              </p>
-              <h3 id="cleanagent-title">{cleanagent.question}</h3>
-              <p className="feature-summary">{cleanagent.summary}</p>
-              <TextLink href={cleanagent.href} className="feature-primary">
-                Explore CleanAgent
-              </TextLink>
-              <div className="feature-links">
-                <TextLink href={cleanagent.paper} external>
-                  Paper
+            <div className="feature-copy" data-reveal>
+              <div className="feature-heading">
+                <p className="project-name">CleanAgent</p>
+                <p className="feature-meta">
+                  Agent framework · {cleanagent.venue}
+                </p>
+                <h3 id="cleanagent-title">{cleanagent.question}</h3>
+              </div>
+              <div className="feature-description">
+                <p className="feature-summary">{cleanagent.summary}</p>
+                <TextLink href={cleanagent.href} className="feature-primary">
+                  Explore CleanAgent
                 </TextLink>
-                <TextLink href={cleanagent.code} external>
-                  Code
-                </TextLink>
+                <div className="feature-links">
+                  <TextLink href={cleanagent.paper} external>
+                    Paper
+                  </TextLink>
+                  <TextLink href={cleanagent.code} external>
+                    Code
+                  </TextLink>
+                </div>
               </div>
             </div>
-            <div className="feature-visual">
-              <CleanMethodOverview />
+            <div className="feature-visual" data-reveal>
+              <PaperFigure
+                src={sitePath('/figures/cleanagent-workflow.png')}
+                width={968}
+                height={624}
+                title="CleanAgent workflow"
+                alt="CleanAgent Figure 2: a Chat Manager coordinates the Column-type Annotator, Python Programmer using Dataprep.Clean, and Code Executor. Success or error feedback returns to the manager."
+                caption="A Chat Manager coordinates type annotation, Python generation, and execution with success or error feedback."
+                source={cleanagent.paper}
+                figureNumber={2}
+              />
             </div>
           </article>
         </div>

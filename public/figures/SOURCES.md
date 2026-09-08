@@ -17,4 +17,4 @@ The PrepBench evaluation figure represents the paper's experimental setup, not a
 
 The CleanAgent interface figure contains an execution error in the displayed conversation; describe it as the system interface/iteration, not proof of an error-free first attempt. CleanAgent Figure 1 is deliberately not included because its example date changes value between input and output.
 
-Homepage schematics and the illustrative before/after tables are newly authored explanatory diagrams. They are not experimental results or screenshots of a live TAP service.
+The homepage research entries show the original PrepBench evaluation framework (Figure 4) and CleanAgent workflow (Figure 2), with source links and enlargement controls. The monthly-sales illustration and its before/after tables are newly authored explanatory diagrams, not experimental results or screenshots of a live TAP service.

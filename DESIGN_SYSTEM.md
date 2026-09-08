@@ -13,7 +13,7 @@ use these semantic tokens rather than introduce separate theme palettes.
 | Role                 | Token / value                  | Use                                                  |
 | -------------------- | ------------------------------ | ---------------------------------------------------- |
 | Surface              | `--background` / #ffffff       | Cards, charts, tables and dialogs                    |
-| Supporting surface   | `--muted` / #f5f7fa            | Section backgrounds, input tables and control tracks |
+| Supporting surface   | `--muted` / #f5f5f7            | Section backgrounds, input tables and control tracks |
 | Primary text         | `--foreground` / #1c2128       | Headings and body text                               |
 | Supporting text      | `--muted-foreground` / #596573 | Descriptions, axes and captions                      |
 | Brand / PrepBench    | `--primary` / #245be2          | Main links, actions and PrepBench data               |
@@ -46,10 +46,23 @@ readable gray descriptions and project-colored data. Chart titles and prominent
 values use weight 650; captions do not compete with the data. Preserve the
 existing responsive heading hierarchy and readable HTML chart labels.
 
-Use the shared radius scale: 24px outer cards, 16px inner panels, 10px controls
+Use the shared radius scale: 18px outer cards, 12px inner panels, 8px controls
 and 6px small surfaces. Circular markers and the tiny table-logo cells retain
 their semantic geometry. Keep aligned card padding and the existing responsive
 spacing grid; borders carry structure, with only soft neutral shadows.
+
+The homepage has an open, paper-like research list with thin dividing rules.
+Do not wrap every project or explanatory group in a rounded card. Reserve
+surfaces for the worked table example, code, and interactive tools. The hero
+keeps its exact headline in neutral text, one research description, and a text
+link. Avoid adding another slogan or a numbered goals grid below it. Detail
+section headings are left aligned, while the paper identity remains centered.
+
+Each homepage research entry pairs a short introduction with its central paper
+figure: PrepBench's evaluation framework and CleanAgent's workflow. Place the
+figure across the entry width below the introduction, with a caption, source,
+and enlargement control. Preserve the paper's colors and aspect ratio. Stack
+the introduction on narrow screens; keep figure details accessible in the dialog.
 
 ## Copy and line breaks
 
@@ -89,6 +102,25 @@ before changing font sizes or forcing line breaks.
 - Keep touch targets at least 44px, visible keyboard focus, polite result
   announcements and reduced-motion support. Motion reinforces a changed value
   or selection and must not conceal information.
+
+## Scroll entrances
+
+`PageMotion` enhances explicit `data-reveal` blocks on all three routes. It uses
+the timing inspected in [Apple Intelligence](https://www.apple.com/apple-intelligence/)
+on 2026-09-08: a trigger near 85% of viewport height, 30px upward travel over
+700ms, opacity over 900ms, and a 150ms stagger for adjacent desktop blocks.
+The easing is a CSS approximation of Apple's easeInOutQuad. This reproduces
+the entrance behavior without importing Apple's animation framework or assets.
+
+Entrances play once. Keep the initial viewport visible and never animate the
+hero out. Static HTML and unsupported browsers remain visible; keyboard focus
+and hash navigation reveal their targets immediately. Reduced-motion and print
+styles show every block without motion. Mobile blocks have no stagger delay.
+
+This direction also follows [content-first design](https://www.smashingmagazine.com/2015/02/design-last/)
+and [NN/G's guidance on visual hierarchy](https://www.nngroup.com/articles/good-visual-design/):
+use the real research material to determine layout, use color for meaningful
+emphasis, and remove repeated copy and decoration that do not help readers.
 
 ## Coverage and evidence boundaries
 

@@ -87,12 +87,14 @@ export function DetailSection({
 }) {
   return (
     <section className="detail-section" aria-labelledby={id}>
-      <div className="detail-section-head">
+      <div className="detail-section-head" data-reveal>
         <p className="eyebrow">{label}</p>
         <h2 id={id}>{title}</h2>
         {description && <p className="section-description">{description}</p>}
       </div>
-      {children}
+      <div className="detail-section-content" data-reveal>
+        {children}
+      </div>
     </section>
   );
 }

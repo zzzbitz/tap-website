@@ -42,11 +42,6 @@ export function CleanMethodOverview() {
   return (
     <div className="research-map tone-green">
       <p className="diagram-kicker">The CleanAgent approach</p>
-      <h3>
-        Declarative APIs.
-        <br />
-        Automated standardization.
-      </h3>
       <div className="api-example">
         <span>A unified API for column types</span>
         <code>clean_type(df, column_name, target_format)</code>

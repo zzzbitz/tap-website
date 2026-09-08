@@ -24,6 +24,29 @@ charts, tables, dialogs and demos share both palettes, while paper images retain
 their original colors. Storage restrictions do not prevent switching the current
 page. This adds no dependencies and works with the existing static export.
 
+The 2026-09-08 scroll revision adds once-only section entrances using the
+timing from Apple Intelligence. It simplifies the homepage copy and project
+surfaces, uses more specific detail-page headings, and retains the existing
+paper data and interactive tools. `components/tap/page-motion.tsx` enhances
+explicit reveal markers; see `DESIGN_SYSTEM.md` for timing, fallback behavior,
+and the design references. The existing GitHub Pages hosting setup is retained.
+
+Scroll revision validation: production export (all four routes, including 404),
+TypeScript, targeted lint, formatting and diff checks passed. All three content
+routes returned HTTP 200; their source and exported HTML include reveal blocks
+without hidden state, so the content remains present without JavaScript.
+Desktop Chrome screenshots showed the homepage's intermediate fade, completed
+table scene and research entries, and research-anchor navigation. Native browser
+automation then became unavailable; narrow-screen/light-mode review and complete
+detail-page interaction regression were not completed. Device emulation was
+verified off and DevTools closed before that interruption. This revision has
+not been published.
+
+Homepage figure revision validation (2026-09-08): production export, TypeScript,
+targeted lint and formatting checks passed. Browser review covered the research
+entries at 1280px and 375px in dark mode, with no page overflow, both figure
+dialogs, dismissal and horizontal image scrolling on mobile.
+
 Dark-mode validation (2026-09-08): production export, TypeScript, targeted lint
 and diff checks passed. All three local routes returned HTTP 200. Exported HTML
 for these routes and 404 includes the shared control and executable head script.
@@ -39,7 +62,7 @@ The parent workspace’s `SPEC.md` is the product contract. Verified titles, aut
 
 Data diagrams compose the vendored shadcn Table primitives. Overflowing tables expose a labeled keyboard-scrollable region and a visible scroll hint only when needed. Internal navigation uses native links because the current vinext static export produced client-router prefetch and navigation errors during browser QA. Original paper figures use the installed Dialog primitive for enlargement, keyboard focus management, Escape dismissal, and focus restoration. Below-fold images have reserved dimensions, lazy loading, descriptive alternative text, contain sizing, source links, and captions. Small extracts are capped at their intrinsic width in the page; the dialog provides a larger scrollable view and a direct full-size image link.
 
-The homepage keeps one monthly-sales overview and introduces each project through its research contribution. PrepBench's detail example uses a fixed choice tree: the reader supplies a simulated-user answer, an illustrative agent prepares the table, and a reference check is displayed. CleanAgent's `cleanagent-method.tsx` walkthrough separates input, type identification, tool calls, execution feedback, and output preview. Date-format choices update the preview and illustrative tool call. These are fixed-data illustrations, not live model or Dataprep.Clean executions.
+The homepage keeps one monthly-sales overview and introduces each project through its research contribution. Each introduction leads into a large original paper figure: PrepBench's evaluation framework (Figure 4) and CleanAgent's workflow (Figure 2), both with enlargement and source links. PrepBench's detail example uses a fixed choice tree: the reader supplies a simulated-user answer, an illustrative agent prepares the table, and a reference check is displayed. CleanAgent's `cleanagent-method.tsx` walkthrough separates input, type identification, tool calls, execution feedback, and output preview. Date-format choices update the preview and illustrative tool call. These are fixed-data illustrations, not live model or Dataprep.Clean executions.
 
 Project entry points live in the homepage research entries, with no separate
 resource directory or paired-project cards at the end of detail pages. Paper and

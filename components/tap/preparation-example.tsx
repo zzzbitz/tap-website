@@ -8,10 +8,21 @@ export function PreparationExample() {
       className="vision-section shell"
       aria-labelledby="vision-title"
     >
-      <h2 id="vision-title" className="vision-heading">
-        You set the goal. <span>AI prepares the data.</span>
-      </h2>
-      <figure className="vision-scene" aria-describedby="vision-caption">
+      <div className="vision-intro" data-reveal>
+        <h2 id="vision-title" className="vision-heading">
+          What counts as monthly sales?
+        </h2>
+        <p>
+          “Monthly sales” sounds simple. Whether refunds count changes the
+          answer. An agent needs to resolve that choice before preparing the
+          table.
+        </p>
+      </div>
+      <figure
+        className="vision-scene"
+        aria-describedby="vision-caption"
+        data-reveal
+      >
         <figcaption className="scene-label">Illustrative example</figcaption>
         <div className="goal-statement">
           <span>Your goal</span>
@@ -98,12 +109,9 @@ export function PreparationExample() {
           <span>Sales grouped by month</span>
         </div>
       </figure>
-      <p className="scene-caption" id="vision-caption">
-        An illustration of the behavior we’re working toward.
-      </p>
-      <p className="vision-explanation">
-        You describe the data you need. AI asks about unclear requirements,
-        prepares the tables, and shows you what it changed.
+      <p className="scene-caption" id="vision-caption" data-reveal>
+        The January total is 120 after excluding the refunded order of 80. This
+        illustrates the behavior TAP’s research works toward.
       </p>
     </section>
   );

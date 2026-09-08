@@ -31,7 +31,7 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-conversation"
         label="The method in action"
-        title="Data standardization through unified APIs."
+        title="From column types to cleaning calls"
         description="Dataprep.Clean reduces standardization code to concise, type-specific function calls. Explore the workflow and choose a target format."
       >
         <CleanAgentMethod />
@@ -40,7 +40,7 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-workflow"
         label="The method"
-        title="The CleanAgent workflow."
+        title="How the agents coordinate"
         description="A Chat Manager coordinates three agents: a Column-type Annotator, a Python Programmer, and a Code Executor. Together, they standardize the input table according to the user’s requirements."
       >
         <PaperFigure
@@ -63,7 +63,7 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-results"
         label="The results"
-        title="How well does CleanAgent work?"
+        title="Standardizing datetime values"
         description="The paper compares CleanAgent, direct GPT-4o prompting, and Cocoon on irregular datetime values in the Flights dataset."
       >
         <CleanAgentResults />
@@ -72,7 +72,7 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-demonstration"
         label="The demonstration"
-        title="Watch CleanAgent in action."
+        title="CleanAgent demonstration"
         description="Watch the demo and explore the interface shown in the paper."
       >
         <figure

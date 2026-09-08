@@ -2,6 +2,7 @@ import { sitePath } from '@/lib/site-path';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { SiteFooter, SiteHeader } from '@/components/tap/site-chrome';
+import { PageMotion } from '@/components/tap/page-motion';
 import { siteOrigin } from '@/lib/tap-content';
 import { themeInitScript } from '@/lib/theme';
 import './globals.css';
@@ -55,6 +56,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <PageMotion />
       </body>
     </html>
   );

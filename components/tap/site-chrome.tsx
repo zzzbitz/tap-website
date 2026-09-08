@@ -20,7 +20,6 @@ export function SiteHeader() {
     <header id="top" className="site-header shell">
       <Wordmark />
       <div className="header-right">
-        <span className="header-note">Human intent. Prepared data.</span>
         <nav className="site-nav" aria-label="Main navigation">
           <a href={sitePath('/#vision')}>Vision</a>
           <a href={sitePath('/#research')}>Research</a>
