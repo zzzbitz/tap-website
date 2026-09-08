@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Toggle } from '@/components/ui/toggle';
+import { Button } from '@/components/ui/button';
 import { Arrow } from '@/components/tap/primitives';
 import { DataTable } from '@/components/tap/data-table';
 import { projects } from '@/lib/tap-content';
@@ -308,15 +308,14 @@ export function BenchmarkDiagram() {
             </span>
           </span>
         </output>
-        <Toggle
+        <Button
+          type="button"
+          variant="outline"
           className="mistake-toggle"
-          pressed={mistake}
-          onPressedChange={setMistake}
-          aria-label="Show a mistaken answer"
+          onClick={() => setMistake((value) => !value)}
         >
-          <span aria-hidden="true">{mistake ? '↺' : '↔'}</span>{' '}
-          {mistake ? 'Restore the match' : 'Try a mistake'}
-        </Toggle>
+          {mistake ? 'Show correct output' : 'Show incorrect output'}
+        </Button>
       </div>
       <p className="interactive-footnote">
         Explore the example; this is not a live agent run.

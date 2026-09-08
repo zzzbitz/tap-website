@@ -79,7 +79,7 @@ function ChartCard({
             setReplay((n) => n + 1);
           }}
         >
-          <span aria-hidden="true">↻</span> Replay
+          <span aria-hidden="true">↻</span> Replay animation
         </button>
       </figcaption>
       <div
@@ -301,15 +301,6 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
         <p className="chart-axis-caption scatter-x-label">
           Cost per task (USD × 10⁻³) · lower is better
         </p>
-        <div className="scatter-readout" aria-live="polite" aria-atomic="true">
-          <strong>{point.name}</strong>
-          <span>
-            <b>{point[mode][0].toFixed(1)}%</b> accuracy
-          </span>
-          <span>
-            <b>${(point[mode][1] / 1000).toFixed(5)}</b> / task
-          </span>
-        </div>
       </div>
       <fieldset className="scatter-model-list" aria-label="Select a model">
         {prepResults.map((model, i) => (
@@ -324,6 +315,15 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
           </button>
         ))}
       </fieldset>
+      <div className="scatter-readout" aria-live="polite" aria-atomic="true">
+        <strong>{point.name}</strong>
+        <span>
+          <b>{point[mode][0].toFixed(1)}%</b> accuracy
+        </span>
+        <span>
+          <b>${(point[mode][1] / 1000).toFixed(5)}</b> / task
+        </span>
+      </div>
     </div>
   );
 }

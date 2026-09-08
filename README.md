@@ -42,13 +42,15 @@ components. The later choice-only revision removes free-form messages entirely.
 `lib/guided-conversation.ts` defines each fixed request, its question, and explicit
 answer branches with prepared result leaves. `components/tap/guided-conversation.tsx`
 composes installed Message, RadioGroup, Button and Table primitives. Numbered
-option cards show one question at a time. Selecting does not submit; Continue
-commits the answer. Back restores that question and selection while clearing its
-result, and Restart restores the first option and initial conversation.
+option cards show one question at a time. Selecting does not submit; Apply choice
+commits the answer. Change refund rule / Change date format restore the question
+and selection while clearing its result; Restart restores the initial state.
+The result jump appears only in the stacked layout. Initial conversations expand
+naturally without internal scrolling.
 The transcripts are labelled scripted demos with fixed data/prepared replies;
 they never call models or execute the actual research systems. No artificial
 waiting, generated code execution, upload, or external messaging was added.
-See `CHOICE_FLOW_VALIDATION.md` for the current choice-only checks and
+See `CHOICE_FLOW_VALIDATION.md` for the original choice-only checks and
 `CONVERSATION_VALIDATION.md` for the earlier whole-site review.
 
 Project results are native SVG charts adapted from Lieflat Charts (F5, F8, L15).
@@ -78,3 +80,9 @@ video loaded and played to 33 seconds of its 4:32 duration; pause was confirmed.
 At 375px viewport width the player measured 333×200px with no document overflow;
 the demo jump link worked and the viewport override was restored. Publication
 is verified through Sites deployment status separately from local playback.
+
+## Visual interaction review
+
+See `VISUAL_REVIEW.md` for the screenshot-led review of the three pages and
+corrections to action labels, duplicate status text, responsive result navigation,
+model feedback placement, and conditional figure-scroll hints.

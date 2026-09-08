@@ -126,7 +126,7 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
           </div>
           <div
             ref={logRef}
-            className="demo-transcript"
+            className={`demo-transcript ${ready ? 'has-result' : ''}`}
             role="log"
             // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- A focusable transcript lets keyboard users scroll earlier messages.
             tabIndex={0}
@@ -155,9 +155,8 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
           <div className="demo-compose">
             <div className="demo-question-topline">
               <span>
-                {ready ? 'Decision saved' : 'Agent question · Select one'}
+                {ready ? 'Choice applied' : 'Agent question · Select one'}
               </span>
-              <span>{ready ? 'Complete' : '1 of 1'}</span>
             </div>
             <h4
               id={questionId}
@@ -165,15 +164,15 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
               tabIndex={-1}
               className="demo-question"
             >
-              {ready ? 'Your prepared table is ready.' : tree.question}
+              {ready ? branch?.label : tree.question}
             </h4>
             {ready ? (
               <div className="demo-complete demo-result-enter">
-                <p className="demo-decision">
-                  <span aria-hidden="true">✓</span>
-                  {branch?.label}
+                <p>
+                  {project === 'prepbench'
+                    ? 'Change the refund rule to compare the monthly totals.'
+                    : 'Choose another format to compare the same dates.'}
                 </p>
-                <p>Go back to compare another choice using the same sample.</p>
                 <div className="demo-choice-actions">
                   <Button
                     type="button"
@@ -181,10 +180,12 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
                     className="demo-back"
                     onClick={back}
                   >
-                    <span aria-hidden="true">←</span> Back to choices
+                    {project === 'prepbench'
+                      ? 'Change refund rule'
+                      : 'Change date format'}
                   </Button>
                   <a className="demo-result-link" href={`#${resultId}`}>
-                    View result <span aria-hidden="true">↓</span>
+                    Jump to prepared table <span aria-hidden="true">↓</span>
                   </a>
                 </div>
               </div>
@@ -241,10 +242,10 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
                 </RadioGroup>
                 <div className="demo-choice-actions">
                   <span className="demo-choice-hint">
-                    Select one, then continue.
+                    Apply your choice to update the table.
                   </span>
                   <Button type="submit" className="demo-continue">
-                    Continue <span aria-hidden="true">→</span>
+                    Apply choice
                   </Button>
                 </div>
               </form>
@@ -291,7 +292,9 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
             {!ready ? (
               <div className="demo-awaiting">
                 <span aria-hidden="true">↳</span>
-                <p>Choose an answer and continue to prepare the table.</p>
+                <p>
+                  Choose an answer, then select Apply choice to see the table.
+                </p>
               </div>
             ) : (
               <div key={confirmed} className="demo-result-enter">

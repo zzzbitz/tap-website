@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect, useId, useRef, useState } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -21,6 +22,63 @@ type PaperFigureProps = {
   source: string;
   figureNumber: number;
 };
+
+function EnlargedFigure({
+  src,
+  width,
+  height,
+  alt,
+}: Pick<PaperFigureProps, 'src' | 'width' | 'height' | 'alt'>) {
+  const mediaRef = useRef<HTMLElement>(null);
+  const hintId = useId();
+  const [overflow, setOverflow] = useState({
+    horizontal: false,
+    vertical: false,
+  });
+  useEffect(() => {
+    const region = mediaRef.current;
+    const image = region?.querySelector('img');
+    if (!region || !image) return;
+    const measure = () =>
+      setOverflow({
+        horizontal: region.scrollWidth > region.clientWidth + 1,
+        vertical: region.scrollHeight > region.clientHeight + 1,
+      });
+    const observer = new ResizeObserver(measure);
+    observer.observe(region);
+    observer.observe(image);
+    image.addEventListener('load', measure);
+    measure();
+    return () => {
+      observer.disconnect();
+      image.removeEventListener('load', measure);
+    };
+  }, []);
+  const scrollable = overflow.horizontal || overflow.vertical;
+  return (
+    <>
+      <section
+        ref={mediaRef}
+        className="figure-modal-media"
+        // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- Keyboard users need to focus and scroll an overflowing figure.
+        tabIndex={scrollable ? 0 : undefined}
+        aria-label="Enlarged paper figure"
+        aria-describedby={scrollable ? hintId : undefined}
+      >
+        <Image unoptimized src={src} width={width} height={height} alt={alt} />
+      </section>
+      {scrollable && (
+        <p id={hintId} className="figure-scroll-hint">
+          {overflow.horizontal && overflow.vertical
+            ? 'Scroll within the image to see the full figure.'
+            : overflow.horizontal
+              ? 'Scroll horizontally within the image to see the full figure.'
+              : 'Scroll down within the image to see the full figure.'}
+        </p>
+      )}
+    </>
+  );
+}
 
 export function PaperFigure({
   src,
@@ -70,20 +128,7 @@ export function PaperFigure({
               Close <span aria-hidden="true">×</span>
             </DialogClose>
           </div>
-          <section
-            className="figure-modal-media"
-            // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- Keyboard users need to focus and scroll the enlarged figure.
-            tabIndex={0}
-            aria-label="Enlarged paper figure; scroll to see all details"
-          >
-            <Image
-              unoptimized
-              src={src}
-              width={width}
-              height={height}
-              alt={alt}
-            />
-          </section>
+          <EnlargedFigure src={src} width={width} height={height} alt={alt} />
           <DialogDescription className="figure-modal-description">
             {caption}
           </DialogDescription>

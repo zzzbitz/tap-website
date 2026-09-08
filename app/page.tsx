@@ -4,7 +4,7 @@ import {
   BenchmarkDiagram,
   StandardizationDiagram,
 } from '@/components/tap/research-diagrams';
-import { Arrow, ResourceLink, TextLink } from '@/components/tap/primitives';
+import { ResourceLink, TextLink } from '@/components/tap/primitives';
 import { projects } from '@/lib/tap-content';
 
 export const metadata: Metadata = { alternates: { canonical: '/' } };
@@ -26,7 +26,7 @@ export default function Home() {
           ready for analysis.
         </p>
         <a href="#research" className="button-link">
-          Explore the research <Arrow />
+          Explore the research <span aria-hidden="true">↓</span>
         </a>
       </section>
 
