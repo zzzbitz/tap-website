@@ -73,6 +73,11 @@ words and explain what the reader can compare or do. Preserve official paper
 titles, research scope, and metric definitions. Avoid vague slogans such as
 “How far do the agents get?” when the section reports accuracy.
 
+Remove copy that only repeats a nearby heading, link label, or introduction.
+Use a section eyebrow only when it adds a specific category, such as interactive
+disambiguation. Keep metric definitions, source attribution, useful control
+instructions, and the distinction between illustrative demos and reported runs.
+
 For project introductions, prefer each paper's title, terminology and concise
 adaptations of its abstract or method description. Preserve the authors' meaning
 and technical scope. Present current projects as part of TAP's ongoing research;

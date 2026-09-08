@@ -55,16 +55,16 @@ export function ProjectHero({
       >
         <a href={`#${project.name.toLowerCase()}-conversation`}>
           {project.name === 'PrepBench'
-            ? 'Explore an evaluation example'
-            : 'Explore the method'}{' '}
+            ? 'Evaluation example'
+            : 'Method walkthrough'}{' '}
           <span aria-hidden="true">↓</span>
         </a>
         <a href={`#${project.name.toLowerCase()}-results`}>
-          Explore the results <span aria-hidden="true">↓</span>
+          Results <span aria-hidden="true">↓</span>
         </a>
         {'video' in project && (
           <a href="#cleanagent-demonstration">
-            Watch the demo <span aria-hidden="true">↓</span>
+            Demo video <span aria-hidden="true">↓</span>
           </a>
         )}
       </nav>
@@ -80,7 +80,7 @@ export function DetailSection({
   children,
 }: {
   id: string;
-  label: string;
+  label?: string;
   title: string;
   description?: string;
   children: ReactNode;
@@ -88,7 +88,7 @@ export function DetailSection({
   return (
     <section className="detail-section" aria-labelledby={id}>
       <div className="detail-section-head" data-reveal>
-        <p className="eyebrow">{label}</p>
+        {label && <p className="eyebrow">{label}</p>}
         <h2 id={id}>{title}</h2>
         {description && <p className="section-description">{description}</p>}
       </div>

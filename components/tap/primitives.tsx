@@ -53,13 +53,13 @@ export function ResourceLink({
 }: {
   href: string;
   title: string;
-  description: string;
+  description?: string;
 }) {
   return (
     <a className="resource-link" href={href}>
       <div>
         <strong>{title}</strong>
-        <p>{description}</p>
+        {description && <p>{description}</p>}
       </div>
       <Arrow external />
     </a>

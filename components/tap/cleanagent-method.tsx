@@ -22,9 +22,7 @@ export function CleanAgentMethod() {
     <div className="method-explorer tone-green">
       <div className="method-explorer-head">
         <span className="demo-label">Scripted walkthrough</span>
-        <p>
-          Follow the method from input to output. Select a step to inspect it.
-        </p>
+        <p>Select a step to inspect it.</p>
       </div>
       <div className="method-explorer-body">
         <ol className="method-step-list" aria-label="CleanAgent method steps">
@@ -97,8 +95,8 @@ export function CleanAgentMethod() {
                 <code>{`from dataprep.clean import clean_date\n\ndf = clean_date(\n    df,\n    column="Date",\n    output_format="${selectedFormat.label}"\n)`}</code>
               </pre>
               <p className="method-panel-note">
-                Illustrative call for this sample. The agent composes tool calls
-                instead of implementing each parsing step.
+                The agent composes tool calls instead of implementing each
+                parsing step.
               </p>
             </>
           )}
@@ -159,7 +157,7 @@ export function CleanAgentMethod() {
       </div>
       <p className="method-scope">
         An illustrative walkthrough with fixed sample data, not a live
-        CleanAgent or Dataprep.Clean run. The original system video is below.
+        CleanAgent or Dataprep.Clean run.
       </p>
     </div>
   );

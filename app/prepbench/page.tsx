@@ -39,7 +39,6 @@ export default function PrepBenchPage() {
         id="prepbench-conversation"
         label="Interactive disambiguation"
         title="Clarifying a refund rule"
-        description="Explore a refund example. You provide the simulated user’s answer; the agent prepares the table for evaluation."
       >
         <EvaluationRoles />
         <GuidedConversation project="prepbench" />
@@ -47,7 +46,6 @@ export default function PrepBenchPage() {
 
       <DetailSection
         id="prepbench-example"
-        label="The problem"
         title="From a request to a prepared table"
         description="User requests can be ambiguous, and input tables may contain mismatched schemas or inconsistent values. Even correct preparation code can be difficult for users to verify."
       >
@@ -65,7 +63,6 @@ export default function PrepBenchPage() {
 
       <DetailSection
         id="prepbench-evaluation"
-        label="The method"
         title="The evaluation setup"
         description="The agent receives a request and input tables, asks questions when needed, and prepares the data. PrepBench then checks the output tables."
       >
@@ -75,20 +72,18 @@ export default function PrepBenchPage() {
           height={1028}
           title="The paper’s experimental setup"
           alt="PrepBench Figure 4: source and constructed benchmark assets; interactive disambiguation, prep-code generation, and code-to-workflow translation; and the paper’s evaluation metrics."
-          caption="This original figure organizes the paper’s assets, experimental modes, and metrics. Current public execution modes and setup are described in the repository’s evaluation documentation."
+          caption="The paper’s assets, evaluation modes, and metrics. See the repository’s evaluation documentation for current execution instructions."
           source={project.paper}
           figureNumber={4}
         />
         <p className="scope-note">
-          <strong>You supply the agent.</strong> PrepBench provides evaluation
-          assets. Results describe agent performance on the benchmark’s
-          preparation tasks.
+          <strong>You supply the agent.</strong> PrepBench supplies the tasks
+          and evaluates the outputs.
         </p>
       </DetailSection>
 
       <DetailSection
         id="prepbench-results"
-        label="The results"
         title="Accuracy and cost"
         description="Compare accuracy and cost for 10 models. Switch between code and graphical workflows."
       >
@@ -96,7 +91,6 @@ export default function PrepBenchPage() {
           className="research-findings"
           aria-label="Main findings from the PrepBench paper"
         >
-          <p className="eyebrow">What the experiments reveal</p>
           <p>
             <strong>Ambiguity is a major bottleneck.</strong> GPT-5.1-Codex
             improves from 54.9% to 85.3% prep-code accuracy when requirements
@@ -116,9 +110,8 @@ export default function PrepBenchPage() {
 
       <DetailSection
         id="prepbench-dataset"
-        label="The dataset"
         title="306 tasks from Preppin’ Data"
-        description="Based on the Preppin’ Data challenges, the tasks vary in table size, unclear requirements, and required operations."
+        description="Tasks vary in table size, ambiguous requirements, and required operations."
       >
         <dl className="dataset-facts">
           <div>
@@ -134,35 +127,22 @@ export default function PrepBenchPage() {
           src={sitePath('/figures/prepbench-statistics.png')}
           width={940}
           height={396}
-          title="A closer look at the tasks"
+          title="Task statistics"
           alt="PrepBench Figure 3: six plots showing distributions of table counts, ambiguity counts, preparation steps, row counts, lines of code, and operator counts."
-          caption="The distributions show variation in data volume and task complexity across the benchmark, from the number of input tables to the operations needed to prepare them."
+          caption="Distributions of table counts, ambiguity counts, preparation steps, row counts, code length, and operator counts."
           source={project.paper}
           figureNumber={3}
         />
       </DetailSection>
 
-      <DetailSection
-        id="prepbench-resources"
-        label="Work with PrepBench"
-        title="Use PrepBench"
-      >
+      <DetailSection id="prepbench-resources" title="Use PrepBench">
         <div className="detail-resource-links">
-          <ResourceLink
-            href={project.dataset}
-            title="Dataset documentation"
-            description="Understand the cases, input tables, and dataset organization."
-          />
+          <ResourceLink href={project.dataset} title="Dataset documentation" />
           <ResourceLink
             href={project.evaluation}
             title="Evaluation documentation"
-            description="Follow the current setup and execution instructions."
           />
-          <ResourceLink
-            href={project.contribute}
-            title="Contribution guide"
-            description="Find the repository’s process for contributing to PrepBench."
-          />
+          <ResourceLink href={project.contribute} title="Contribution guide" />
         </div>
       </DetailSection>
 

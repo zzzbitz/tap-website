@@ -12,11 +12,7 @@ export function PreparationExample() {
         <h2 id="vision-title" className="vision-heading">
           What counts as monthly sales?
         </h2>
-        <p>
-          “Monthly sales” sounds simple. Whether refunds count changes the
-          answer. An agent needs to resolve that choice before preparing the
-          table.
-        </p>
+        <p>Whether refunded orders count changes the monthly sales total.</p>
       </div>
       <figure
         className="vision-scene"
@@ -63,11 +59,8 @@ export function PreparationExample() {
           </div>
           <Arrow className="scene-arrow first-arrow" />
           <div className="vision-stage meaning-stage">
-            <p className="diagram-label">Clarify what matters</p>
+            <p className="diagram-label">Clarify the refund rule</p>
             <div className="meaning-choice">
-              <span className="choice-label">
-                A choice that changes the answer
-              </span>
               <p>Should refunded orders count toward sales?</p>
               <div className="user-decision">
                 <span className="mini-check" aria-hidden="true">
@@ -110,8 +103,7 @@ export function PreparationExample() {
         </div>
       </figure>
       <p className="scene-caption" id="vision-caption" data-reveal>
-        The January total is 120 after excluding the refunded order of 80. This
-        illustrates the behavior TAP’s research works toward.
+        The January total is 120 after excluding the refunded order of 80.
       </p>
     </section>
   );

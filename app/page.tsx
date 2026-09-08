@@ -14,7 +14,6 @@ export default function Home() {
   return (
     <main id="main-content" tabIndex={-1}>
       <section className="hero shell" aria-labelledby="hero-title">
-        <p className="eyebrow">Research on AI and data preparation</p>
         <h1 id="hero-title">
           Trust AI to <span>Prepare Your Data</span>
         </h1>
@@ -37,7 +36,6 @@ export default function Home() {
         <div className="shell">
           <div className="section-intro research-intro" data-reveal>
             <h2 id="research-title">Research</h2>
-            <p>Benchmarks and methods for data preparation.</p>
           </div>
           <article
             className="research-feature illustrated-feature prepbench-feature"
