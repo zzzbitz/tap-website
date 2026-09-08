@@ -5,7 +5,7 @@ import {
   PrepCapabilities,
   CleanMethodOverview,
 } from '@/components/tap/research-overview';
-import { ResourceLink, TextLink } from '@/components/tap/primitives';
+import { TextLink } from '@/components/tap/primitives';
 import { projects } from '@/lib/tap-content';
 
 export const metadata: Metadata = {
@@ -60,11 +60,11 @@ export default function Home() {
       >
         <div className="shell">
           <div className="section-intro centered research-intro">
-            <p className="eyebrow">Two complementary directions</p>
+            <p className="eyebrow">Our research</p>
             <h2 id="research-title">
-              Build better agents.
+              Toward data preparation
               <br />
-              <span>Test their results.</span>
+              <span>you can trust.</span>
             </h2>
           </div>
           <article
@@ -127,33 +127,6 @@ export default function Home() {
               <CleanMethodOverview />
             </div>
           </article>
-        </div>
-      </section>
-
-      <section
-        className="resources-section shell"
-        aria-labelledby="resources-title"
-      >
-        <div className="section-intro centered">
-          <p className="eyebrow">Read. Use. Contribute.</p>
-          <h2 id="resources-title">Build on the research.</h2>
-        </div>
-        <div className="resource-links">
-          <ResourceLink
-            href={prepbench.evaluation}
-            title="Evaluate your agent"
-            description="Start with the PrepBench evaluation guide."
-          />
-          <ResourceLink
-            href={cleanagent.code}
-            title="Explore CleanAgent"
-            description="Read the implementation and setup instructions."
-          />
-          <ResourceLink
-            href={prepbench.contribute}
-            title="Contribute to PrepBench"
-            description="Follow the repository’s contribution guide."
-          />
         </div>
       </section>
     </main>

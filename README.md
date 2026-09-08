@@ -16,6 +16,23 @@ Use the existing npm dependencies and lockfile. `npm run dev` starts the local s
 shape scale and interaction states for every authored component. Use the tokens
 in `app/globals.css`; imported chart geometry adopts this system.
 
+The header's **Appearance** menu offers Light, Dark and System on every route.
+System is the default. Explicit choices survive refreshes and page navigation,
+and synchronize between tabs; choosing System restores automatic OS tracking.
+The theme is applied in the document head before the first paint. Site surfaces,
+charts, tables, dialogs and demos share both palettes, while paper images retain
+their original colors. Storage restrictions do not prevent switching the current
+page. This adds no dependencies and works with the existing static export.
+
+Dark-mode validation (2026-09-08): production export, TypeScript, targeted lint
+and diff checks passed. All three local routes returned HTTP 200. Exported HTML
+for these routes and 404 includes the shared control and executable head script.
+Isolated script checks covered 20 saved/system/blocked-storage combinations and
+60 explicit theme transitions. Fifteen text/accent contrast pairs per palette
+exceeded 4.5:1 (minimum 4.62:1 light, 6.69:1 dark). These are source, script and
+HTTP checks; browser visual/interaction QA and publication were not performed
+for this change.
+
 ## Content and presentation
 
 The parent workspace’s `SPEC.md` is the product contract. Verified titles, authors, venue labels, and URLs are centralized in `lib/tap-content.ts`. Route files contain the concise explanations. Shared components and responsive semantic diagrams live in `components/tap/`; global presentation lives in `app/globals.css`.
@@ -23,6 +40,12 @@ The parent workspace’s `SPEC.md` is the product contract. Verified titles, aut
 Data diagrams compose the vendored shadcn Table primitives. Overflowing tables expose a labeled keyboard-scrollable region and a visible scroll hint only when needed. Internal navigation uses native links because the current vinext static export produced client-router prefetch and navigation errors during browser QA. Original paper figures use the installed Dialog primitive for enlargement, keyboard focus management, Escape dismissal, and focus restoration. Below-fold images have reserved dimensions, lazy loading, descriptive alternative text, contain sizing, source links, and captions. Small extracts are capped at their intrinsic width in the page; the dialog provides a larger scrollable view and a direct full-size image link.
 
 The homepage keeps one monthly-sales overview and introduces each project through its research contribution. PrepBench's detail example uses a fixed choice tree: the reader supplies a simulated-user answer, an illustrative agent prepares the table, and a reference check is displayed. CleanAgent's `cleanagent-method.tsx` walkthrough separates input, type identification, tool calls, execution feedback, and output preview. Date-format choices update the preview and illustrative tool call. These are fixed-data illustrations, not live model or Dataprep.Clean executions.
+
+Project entry points live in the homepage research entries, with no separate
+resource directory or paired-project cards at the end of detail pages. Paper and
+code links stay in each project hero. PrepBench keeps its distinct dataset,
+evaluation and contribution documentation together on its detail page. This
+lets new work join the research list without adding duplicate navigation blocks.
 
 Author profiles and publication-time affiliations are in `lib/tap-content.ts`. BibTeX entries in `lib/citations.ts` match the downloadable `public/citations/*.bib` files. PrepBench uses its published PVLDB DOI; CleanAgent uses its published workshop metadata. See `RESEARCH_IDENTITY_REVIEW.md` for sources and validation.
 

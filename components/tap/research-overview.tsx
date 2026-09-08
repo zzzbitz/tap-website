@@ -1,7 +1,16 @@
 const capabilities = [
-  ['Clarify requests', 'Resolve missing rules through interaction.'],
-  ['Prepare messy tables', 'Generate code for multi-step transformations.'],
-  ['Translate to workflows', 'Make the code inspectable and executable.'],
+  [
+    'Interactive disambiguation',
+    'Ask users to clarify ambiguous preparation requests.',
+  ],
+  [
+    'Prep-code generation',
+    'Produce preparation code that handles irregularities in the data.',
+  ],
+  [
+    'Code-to-workflow translation',
+    'Convert preparation code into visual workflows for users to check.',
+  ],
 ] as const;
 
 export function PrepCapabilities({ compact = false }: { compact?: boolean }) {
@@ -32,15 +41,15 @@ export function PrepCapabilities({ compact = false }: { compact?: boolean }) {
 export function CleanMethodOverview() {
   return (
     <div className="research-map tone-green">
-      <p className="diagram-kicker">How CleanAgent helps</p>
+      <p className="diagram-kicker">The CleanAgent approach</p>
       <h3>
-        Less custom code.
+        Declarative APIs.
         <br />
-        Type-specific tools.
+        Automated standardization.
       </h3>
       <div className="api-example">
-        <span>One consistent API pattern</span>
-        <code>clean_type(df, column, format)</code>
+        <span>A unified API for column types</span>
+        <code>clean_type(df, column_name, target_format)</code>
       </div>
       <ol>
         <li>
@@ -49,7 +58,10 @@ export function CleanMethodOverview() {
           </span>
           <div>
             <strong>Dataprep.Clean</strong>
-            <p>One API pattern for dates, addresses, and other column types.</p>
+            <p>
+              Type-specific functions standardize each column in one line of
+              code.
+            </p>
           </div>
         </li>
         <li>
@@ -59,8 +71,8 @@ export function CleanMethodOverview() {
           <div>
             <strong>CleanAgent</strong>
             <p>
-              Agents choose tools, write calls, and revise code using execution
-              feedback.
+              Agents annotate column types, generate Python calls, and execute
+              the standardization code.
             </p>
           </div>
         </li>

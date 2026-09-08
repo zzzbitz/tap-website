@@ -1,15 +1,10 @@
 import { sitePath } from '@/lib/site-path';
 import type { Metadata } from 'next';
-import {
-  ComplementaryProject,
-  DetailSection,
-  ProjectHero,
-} from '@/components/tap/project-layout';
+import { DetailSection, ProjectHero } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
 import { CleanAgentResults } from '@/components/tap/paper-results';
 import { CleanAgentMethod } from '@/components/tap/cleanagent-method';
 import { PaperCitation } from '@/components/tap/paper-citation';
-import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
 
 const project = projects.cleanagent;
@@ -31,16 +26,13 @@ export const metadata: Metadata = {
 export default function CleanAgentPage() {
   return (
     <main id="main-content" className="detail-page shell" tabIndex={-1}>
-      <ProjectHero
-        project={project}
-        context="CleanAgent turns standardization requests into short Dataprep.Clean calls. Agents identify column types, generate the code, and use execution feedback to revise it."
-      />
+      <ProjectHero project={project} context={project.summary} />
 
       <DetailSection
         id="cleanagent-conversation"
         label="The method in action"
-        title="From column types to tool calls."
-        description="Unified APIs handle the details of each data type, reducing the custom code an agent needs to write. Explore the steps, then choose an output format."
+        title="Data standardization through unified APIs."
+        description="Dataprep.Clean reduces standardization code to concise, type-specific function calls. Explore the workflow and choose a target format."
       >
         <CleanAgentMethod />
       </DetailSection>
@@ -48,8 +40,8 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-workflow"
         label="The method"
-        title="How CleanAgent standardizes data."
-        description="Agents identify column types, write code using Dataprep.Clean, and run it. A chat manager coordinates the steps."
+        title="The CleanAgent workflow."
+        description="A Chat Manager coordinates three agents: a Column-type Annotator, a Python Programmer, and a Code Executor. Together, they standardize the input table according to the user’s requirements."
       >
         <PaperFigure
           src={sitePath('/figures/cleanagent-workflow.png')}
@@ -57,7 +49,7 @@ export default function CleanAgentPage() {
           height={624}
           title="The CleanAgent workflow"
           alt="CleanAgent Figure 2: a chat manager coordinates a column-type annotator, Python programmer using Dataprep, and code executor. Success or error feedback returns to the manager."
-          caption="Column-type annotation guides the programmer’s tool calls. The code executor returns success or error feedback to the chat manager, connecting execution back to the preparation process."
+          caption="Column annotations determine which Dataprep.Clean functions the programmer uses. If execution fails, the Chat Manager records the error and the agents repeat the workflow."
           source={project.paper}
           figureNumber={2}
         />
@@ -124,36 +116,7 @@ export default function CleanAgentPage() {
         </p>
       </DetailSection>
 
-      <DetailSection
-        id="cleanagent-resources"
-        label="Explore the work"
-        title="Explore the paper and code."
-      >
-        <div className="detail-resource-links">
-          <ResourceLink
-            href={project.paper}
-            title="Read the paper"
-            description="The published workshop paper: motivation, framework, and evaluation."
-          />
-          <ResourceLink
-            href={project.code}
-            title="Code repository"
-            description="Explore the implementation and local setup instructions."
-          />
-          <ResourceLink
-            href={project.demonstration}
-            title="Repository demonstration"
-            description="View the demonstration section in the project README."
-          />
-        </div>
-      </DetailSection>
-
       <PaperCitation project="cleanagent" />
-
-      <ComplementaryProject
-        project={projects.prepbench}
-        description="Test how well your agent prepares data with PrepBench."
-      />
     </main>
   );
 }

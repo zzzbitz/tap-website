@@ -99,12 +99,11 @@ export function PreparationExample() {
         </div>
       </figure>
       <p className="scene-caption" id="vision-caption">
-        A static illustration of the behavior we’re working toward.
+        An illustration of the behavior we’re working toward.
       </p>
       <p className="vision-explanation">
-        People define what matters. AI handles the preparation and asks about
-        decisions that change the meaning of the result. The output should make
-        important choices and unresolved issues visible.
+        You describe the data you need. AI asks about unclear requirements,
+        prepares the tables, and shows you what it changed.
       </p>
     </section>
   );

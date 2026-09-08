@@ -2,7 +2,7 @@ import { sitePath } from '@/lib/site-path';
 /* oxlint-disable nextjs/no-html-link-for-pages -- Static export uses native navigation to avoid vinext client-router errors. */
 import type { ReactNode } from 'react';
 import type { Project } from '@/lib/tap-content';
-import { Arrow, TextLink } from '@/components/tap/primitives';
+import { Arrow } from '@/components/tap/primitives';
 
 export function ProjectHero({
   project,
@@ -93,25 +93,6 @@ export function DetailSection({
         {description && <p className="section-description">{description}</p>}
       </div>
       {children}
-    </section>
-  );
-}
-
-export function ComplementaryProject({
-  project,
-  description,
-}: {
-  project: Project;
-  description: string;
-}) {
-  return (
-    <section className="complementary" aria-labelledby="complementary-title">
-      <div>
-        <p className="eyebrow">A complementary direction</p>
-        <h2 id="complementary-title">{project.name}</h2>
-        <p>{description}</p>
-      </div>
-      <TextLink href={project.href}>Explore {project.name}</TextLink>
     </section>
   );
 }

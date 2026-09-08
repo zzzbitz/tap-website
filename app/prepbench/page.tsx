@@ -1,10 +1,6 @@
 import { sitePath } from '@/lib/site-path';
 import type { Metadata } from 'next';
-import {
-  ComplementaryProject,
-  DetailSection,
-  ProjectHero,
-} from '@/components/tap/project-layout';
+import { DetailSection, ProjectHero } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
 import { PrepBenchResults } from '@/components/tap/paper-results';
 import {
@@ -35,17 +31,14 @@ export const metadata: Metadata = {
 export default function PrepBenchPage() {
   return (
     <main id="main-content" className="detail-page shell" tabIndex={-1}>
-      <ProjectHero
-        project={project}
-        context="PrepBench evaluates three abilities: clarifying ambiguous requests, generating code that handles messy tables, and translating that code into inspectable, executable workflows."
-      />
+      <ProjectHero project={project} context={project.summary} />
 
       <PrepCapabilities />
 
       <DetailSection
         id="prepbench-conversation"
         label="An evaluation example"
-        title="An agent prepares. PrepBench checks."
+        title="Interactive disambiguation in practice."
         description="Explore a refund example. You provide the simulated user’s answer; the agent prepares the table for evaluation."
       >
         <EvaluationRoles />
@@ -56,15 +49,15 @@ export default function PrepBenchPage() {
         id="prepbench-example"
         label="The problem"
         title="What makes data preparation hard?"
-        description="An agent must match columns, fix inconsistent values, and clarify missing rules. For example, should duplicate registrations count once or twice?"
+        description="User requests can be ambiguous, and input tables may contain mismatched schemas or inconsistent values. Even correct preparation code can be difficult for users to verify."
       >
         <PaperFigure
           src={sitePath('/figures/prepbench-example.png')}
           width={2016}
           height={984}
-          title="From raw registration tables to a preparation task"
+          title="GUI-driven and natural-language-driven data preparation"
           alt="PrepBench Figure 1: two registration tables, a prepared table, a graphical operator workflow, and a natural-language request with generated code. Duplicate attendee handling is an unresolved choice in the request."
-          caption="The example connects imperfect input tables with the operations needed to prepare them. Handling duplicate attendee records is one choice that changes the meaning of the result."
+          caption="Users can define transformations with graphical operators or describe their requirements in natural language. In the latter setting, an agent generates the preparation code."
           source={project.paper}
           figureNumber={1}
         />
@@ -89,8 +82,7 @@ export default function PrepBenchPage() {
         <p className="scope-note">
           <strong>You supply the agent.</strong> PrepBench provides evaluation
           assets. Results describe agent performance on the benchmark’s
-          preparation tasks.{' '}
-          <a href={project.evaluation}>Read the current evaluation guide.</a>
+          preparation tasks.
         </p>
       </DetailSection>
 
@@ -111,9 +103,11 @@ export default function PrepBenchPage() {
             are disambiguated.
           </p>
           <p>
-            <strong>More questions do not guarantee clarity.</strong> Agents
-            often miss important ambiguities or ask ineffective questions.
-            Correct code can still become an incorrect workflow.
+            <strong>
+              Interaction helps, but questions can be incomplete or ineffective.
+            </strong>{' '}
+            Agents also struggle to translate correct preparation code into
+            workflows that perform the intended transformations.
           </p>
           <span className="finding-source">Paper · Sections 5.3–5.6</span>
         </div>
@@ -165,11 +159,6 @@ export default function PrepBenchPage() {
             description="Follow the current setup and execution instructions."
           />
           <ResourceLink
-            href={project.code}
-            title="Code repository"
-            description="Explore the benchmark implementation and evaluation assets."
-          />
-          <ResourceLink
             href={project.contribute}
             title="Contribution guide"
             description="Find the repository’s process for contributing to PrepBench."
@@ -178,11 +167,6 @@ export default function PrepBenchPage() {
       </DetailSection>
 
       <PaperCitation project="prepbench" />
-
-      <ComplementaryProject
-        project={projects.cleanagent}
-        description="See how CleanAgent uses Dataprep.Clean to make data formats consistent."
-      />
     </main>
   );
 }

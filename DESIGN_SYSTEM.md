@@ -1,7 +1,8 @@
 # TAP visual system
 
-TAP is a light research website: white surfaces, cool-gray supporting regions,
-charcoal text, generous whitespace and restrained project accents. The homepage
+TAP supports light and dark appearances with generous whitespace and restrained
+project accents. Light mode uses white surfaces and charcoal text; dark mode uses
+deep slate surfaces, soft white text and brighter blue/green accents. The homepage
 sets the visual direction for both project pages and every interactive component.
 
 ## Shared tokens
@@ -25,6 +26,19 @@ Blue and green each have a shared tint, border and hover token. Components use
 `--component-hover`; the CleanAgent tone remaps these to green. Site navigation
 retains the blue brand accent. Success is also stated in text, never color alone.
 
+Tokens use `light-dark()` with the root `color-scheme`, including surfaces, text,
+borders, project tints, hover colors and shadows. The table above lists the light
+values; the paired dark values live alongside them in `app/globals.css`.
+Use `--primary-foreground` for text on solid accent actions. Paper images retain
+a white `--paper-surface`; the video retains a dark `--video-surface`.
+
+The header's Appearance menu offers Light, Dark and System. System is the default
+and follows OS changes immediately. Explicit choices persist in `tap-theme` in
+local storage; System removes the override. A head script restores the preference
+before first paint, and the shared menu synchronizes open tabs. CSS follows the
+system even without JavaScript; blocked storage still allows switching the current
+page. The root `.dark` class also keeps vendored UI dark variants aligned.
+
 ## Typography and shape
 
 Keep Geist throughout, including imported chart layouts. Use charcoal headings,
@@ -44,15 +58,31 @@ words and explain what the reader can compare or do. Preserve official paper
 titles, research scope, and metric definitions. Avoid vague slogans such as
 “How far do the agents get?” when the section reports accuracy.
 
+For project introductions, prefer each paper's title, terminology and concise
+adaptations of its abstract or method description. Preserve the authors' meaning
+and technical scope. Present current projects as part of TAP's ongoing research;
+do not frame PrepBench and CleanAgent as a complete pair of research directions.
+Explain the homepage example through the user's request, the AI's clarification
+and the resulting tables. “Illustrative example” is sufficient; do not emphasize
+the rendering as static.
+
+Keep project navigation in each homepage research entry. Adding a project should
+not require duplicating its links in a homepage resource directory or every other
+project page. Detail pages retain their paper/code actions and any distinct project
+documentation, without a second paper/code panel or a paired-project promotion.
+Keep section jumps, citation controls and figure source links for their specific
+reading tasks.
+
 Headings use balanced wrapping; paragraphs use pretty wrapping. Check actual
 desktop and mobile screenshots for isolated final words. Shorten awkward copy
 before changing font sizes or forcing line breaks.
 
 ## Interaction states
 
-- Primary actions use a solid accent and white text, with a darker hover state.
-- Secondary actions use a white surface, a visible border and a concise label.
-- Segmented controls share a cool-gray track; the selected option is white with
+- Primary actions use a solid accent and contrasting text: white in light mode,
+  dark ink in dark mode. Hover colors darken in light mode and brighten in dark mode.
+- Secondary actions use the theme surface, a visible border and a concise label.
+- Segmented controls share a muted track; the selected option uses the main surface with
   accent text and an accent border. Use the same control shape across projects.
 - Choice cards use the project tint and accent border for selection. Selecting
   and applying remain separate actions. Explain completed choices in text.

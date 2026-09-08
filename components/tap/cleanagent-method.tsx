@@ -113,10 +113,10 @@ export function CleanAgentMethod() {
                 </div>
                 <span aria-hidden="true">↓</span>
                 <div>
-                  <strong>Chat manager → programmer</strong>
+                  <strong>Chat manager → agents</strong>
                   <p>
-                    Passes execution errors back so the code can be revised and
-                    run again.
+                    Records the error and restarts the standardization workflow
+                    with the updated history.
                   </p>
                 </div>
               </div>

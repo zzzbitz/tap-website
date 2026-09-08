@@ -20,9 +20,9 @@ export const projects = {
       'Guoliang Li': 'https://dbgroup.cs.tsinghua.edu.cn/ligl/',
     } as Record<string, string>,
     venue: 'VLDB 2026',
-    question: 'How well can AI prepare data?',
+    question: 'How far are we from natural-language-driven data preparation?',
     summary:
-      'A benchmark for clarifying requests, preparing messy tables, and translating code into executable workflows.',
+      'PrepBench evaluates how well LLM-based agents resolve ambiguous requests, generate data preparation code, and convert that code into graphical workflows.',
     paper: 'https://doi.org/10.14778/3828612.3828638',
     code: 'https://github.com/TsinghuaDatabaseGroup/prepbench',
     dataset:
@@ -45,9 +45,9 @@ export const projects = {
       'Jiannan Wang': 'https://dbgroup.cs.tsinghua.edu.cn/jnwang/',
     } as Record<string, string>,
     venue: 'DataAI Workshop @ VLDB 2025',
-    question: 'Make data formats consistent.',
+    question: 'Automating data standardization with LLM-based agents.',
     summary:
-      'Type-specific Dataprep.Clean APIs simplify the code. Agents organize the calls and revise them using execution feedback.',
+      'CleanAgent brings together Dataprep.Clean and LLM-based agents to standardize tables from a user’s requirements.',
     paper:
       'https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/DATAI/DATAI25_8.pdf',
     code: 'https://github.com/sfu-db/CleanAgent',

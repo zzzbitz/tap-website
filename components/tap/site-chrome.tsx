@@ -1,4 +1,5 @@
 import { sitePath } from '@/lib/site-path';
+import { ThemeMenu } from '@/components/tap/theme-menu';
 /* oxlint-disable nextjs/no-html-link-for-pages -- Static export uses native navigation to avoid vinext client-router errors. */
 
 export function Wordmark() {
@@ -24,6 +25,7 @@ export function SiteHeader() {
           <a href={sitePath('/#vision')}>Vision</a>
           <a href={sitePath('/#research')}>Research</a>
         </nav>
+        <ThemeMenu />
       </div>
     </header>
   );
