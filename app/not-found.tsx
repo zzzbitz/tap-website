@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Arrow } from '@/components/tap/primitives';
 
 export default function NotFound() {
@@ -10,9 +11,9 @@ export default function NotFound() {
           The page at this address could not be found. Explore TAP and its
           research projects from the homepage.
         </p>
-        <a href="/" className="button-link">
+        <Link href="/" className="button-link">
           Return to TAP <Arrow />
-        </a>
+        </Link>
       </div>
     </main>
   );

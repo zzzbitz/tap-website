@@ -1,18 +1,11 @@
 import type { Metadata } from 'next';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import {
   ComplementaryProject,
   DetailSection,
-  ProcessDiagram,
   ProjectHero,
 } from '@/components/tap/project-layout';
+import { PaperFigure } from '@/components/tap/paper-figure';
+import { StandardizationDiagram } from '@/components/tap/research-diagrams';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
 
@@ -34,108 +27,76 @@ export const metadata: Metadata = {
 
 export default function CleanAgentPage() {
   return (
-    <main id="main-content" className="shell" tabIndex={-1}>
+    <main id="main-content" className="detail-page shell" tabIndex={-1}>
       <ProjectHero
         project={project}
-        direction="Building the capability"
-        context="An agent framework that reduces the manual coding involved in data standardization."
+        context="CleanAgent develops one capability within TAP’s vision: reducing the manual work of standardizing data. Language models work with Dataprep.Clean to express preparation through concise library calls."
       />
 
       <DetailSection
-        id="cleanagent-overview"
-        number="01 / The research question"
-        title="Less repetitive standardization work."
+        id="cleanagent-example"
+        label="The problem"
+        title="Same information. Different formats."
+        description="Even a single date column can arrive in several representations. Standardization brings these values into a common format while preserving what they mean."
       >
-        <p className="intro-paragraph">
-          Heterogeneous column formats turn routine preparation into repeated
-          coding. CleanAgent connects language models with Dataprep.Clean so an
-          agent can express standardization through concise library calls.
-        </p>
-        <p>
-          This is one concrete contribution toward TAP’s vision: helping AI
-          carry out the mechanical work of preparing data. The research focuses
-          on standardizing column formats, with a framework that annotates
-          types, generates calls, and executes them.
-        </p>
-        <div className="scope-note">
-          <strong>Research scope: data standardization.</strong>CleanAgent
-          explores a specific preparation capability. It studies how agents
-          standardize heterogeneous column formats using Dataprep.Clean.
-        </div>
+        <StandardizationDiagram withCaption />
       </DetailSection>
 
       <DetailSection
-        id="cleanagent-method"
-        number="02 / How it works"
-        title="From column types to concise calls."
+        id="cleanagent-workflow"
+        label="The method"
+        title="Let agents work with the right tools."
+        description="Annotate column types, generate concise Dataprep.Clean calls, and execute them to produce standardized output. The framework coordinates these steps through a chat manager."
       >
-        <p>
-          Column-type annotation guides which standardization operations to use.
-          The language model generates concise calls to Dataprep.Clean, which
-          are executed to produce standardized output.
-        </p>
-        <ProcessDiagram
-          label="CleanAgent standardization process"
-          steps={[
-            {
-              title: 'Annotate column types',
-              description:
-                'Identify the types that guide standardization of each column.',
-            },
-            {
-              title: 'Generate library calls',
-              description:
-                'Express the required operations with concise Dataprep.Clean calls.',
-            },
-            {
-              title: 'Execute + standardize',
-              description:
-                'Run the generated calls and return the standardized table.',
-            },
-          ]}
+        <PaperFigure
+          src="/figures/cleanagent-workflow.png"
+          width={968}
+          height={624}
+          title="The CleanAgent workflow"
+          alt="CleanAgent Figure 2: a chat manager coordinates a column-type annotator, Python programmer using Dataprep, and code executor. Success or error feedback returns to the manager."
+          caption="Column-type annotation guides the programmer’s tool calls. The code executor returns success or error feedback to the chat manager, connecting execution back to the preparation process."
+          source={project.paper}
+          figureNumber={2}
         />
-        <div className="definition-table">
-          <Table className="tap-table" aria-label="Roles in CleanAgent">
-            <TableHeader>
-              <TableRow>
-                <TableHead scope="col">Component</TableHead>
-                <TableHead scope="col">Role in standardization</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>Language models</TableCell>
-                <TableCell>
-                  Annotate column types and generate concise standardization
-                  calls.
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Dataprep.Clean</TableCell>
-                <TableCell>
-                  Provide the library operations used to standardize column
-                  formats.
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
+        <p className="scope-note">
+          <strong>Research scope: data standardization.</strong> CleanAgent
+          studies how agents standardize heterogeneous column formats using
+          Dataprep.Clean.
+        </p>
+      </DetailSection>
+
+      <DetailSection
+        id="cleanagent-demonstration"
+        label="The demonstration"
+        title="See the interaction behind the output."
+        description="The original system interface records the agents’ work as it unfolds, including generated code and execution feedback."
+      >
+        <PaperFigure
+          src="/figures/cleanagent-interface.png"
+          width={1624}
+          height={860}
+          title="A recorded interaction with the system"
+          alt="CleanAgent Figure 3: the system interface shows a table upload, user requirements, column-type annotations, generated Python, an execution error, and a later completion message."
+          caption="The conversation shows type annotation, generated code, an execution error, and a later completion message."
+          source={project.paper}
+          figureNumber={3}
+        />
+        <p className="scope-note">
+          Presented at the DataAI Workshop @ VLDB 2025. The arXiv paper was
+          first submitted in 2024.
+        </p>
       </DetailSection>
 
       <DetailSection
         id="cleanagent-resources"
-        number="03 / Explore the work"
-        title="Paper. Implementation. Demonstration."
+        label="Explore the work"
+        title="From the paper to the implementation."
       >
-        <p>
-          Presented at the DataAI Workshop @ VLDB 2025. The arXiv paper was
-          first submitted in 2024.
-        </p>
-        <div className="resource-list detail-resources">
+        <div className="detail-resource-links">
           <ResourceLink
             href={project.paper}
             title="Read the paper"
-            description="The framework, motivation, and technical scope on arXiv."
+            description="The motivation, framework, and technical scope on arXiv."
           />
           <ResourceLink
             href={project.code}
@@ -152,7 +113,7 @@ export default function CleanAgentPage() {
 
       <ComplementaryProject
         project={projects.prepbench}
-        description="PrepBench addresses the measurement question: how well can agents turn requests and input tables into correct prepared data? It provides evaluation assets for researchers to use with their own agents."
+        description="Explore the measurement question: how well can agents turn requests and input tables into correct prepared data?"
       />
     </main>
   );

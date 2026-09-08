@@ -1,25 +1,39 @@
 # TAP research website
 
-A three-page research publication for **TAP — Trust AI to Prepare Your Data**:
+A three-page research website for **TAP — Trust AI to Prepare Your Data**, implemented with the existing vinext, React, and shadcn starter.
 
-- `/`: shared vision, an explicitly illustrative preparation example, research, and resources.
-- `/prepbench`: benchmark overview, verified paper information, and evaluation resources.
-- `/cleanagent`: standardization framework, verified paper information, and implementation resources.
+- `/`: centered vision, an illustrative monthly-sales transformation, and distinct visual introductions to both projects.
+- `/prepbench`: the task example, experimental setup, and dataset statistics from the paper, with links to evaluation resources.
+- `/cleanagent`: an original date-standardization example, the paper’s workflow, and the original system interface.
 
-## Local development
+## Development
 
-Use the starter's existing npm dependencies and lockfile. Run `npm run dev` to start vinext locally, or use the already running development server. `npm run build` runs the production build. `next.config.ts` enables `output: 'export'`, supported by the installed vinext version. Build output and hosting integration are verified by the parent workflow.
+Use the existing npm dependencies and lockfile. `npm run dev` starts the local server; reuse an existing server when one is running. `npm run build` creates the production build. The existing `next.config.ts` enables static export. The parent workflow owns final build verification, source registration, and hosting.
 
-## Content and design
+## Content and presentation
 
-The parent workspace's `SPEC.md` is the product contract. Public project facts, paper titles, authors, venues, and resource URLs are centralized in `lib/tap-content.ts`; page-specific explanations are in the three route files. Update these only against the primary sources registered in the spec.
+The parent workspace’s `SPEC.md` is the product contract. Verified titles, authors, venue labels, and URLs are centralized in `lib/tap-content.ts`. Route files contain the concise explanations. Shared components and responsive semantic diagrams live in `components/tap/`; global presentation lives in `app/globals.css`.
 
-Shared presentation lives in `components/tap/`; the global white, ink, cobalt, and restrained green theme is in `app/globals.css`. Data tables compose the vendored `components/ui/table.tsx` primitives without modifying them. The typography uses the starter's Geist fonts and a local serif fallback for the editorial headline. There are no generated images, remote art, or social preview images.
+Data diagrams compose the vendored shadcn Table primitives. Original paper figures use the installed Dialog primitive for enlargement, keyboard focus management, Escape dismissal, and focus restoration. Below-fold images have reserved dimensions, lazy loading, descriptive alternative text, contain sizing, source links, and captions. Small extracts are capped at their intrinsic width in the page; the dialog provides a larger scrollable view and a direct full-size image link.
 
-The preparation example is static and aspirational. Keep its rows, clarification, decision, and output internally consistent. PrepBench and CleanAgent are complementary projects, not an integrated processing service. Avoid adding unverified performance claims, affiliations, team membership, or contact information.
+The original homepage diagrams explain concepts, not recorded executions. Keep the monthly-sales output consistent with the input year and refund decision. Date standardization must preserve each date’s meaning. PrepBench provides evaluation assets and the reader supplies an agent. The two projects are complementary research contributions.
 
-Every action is a native link. The layouts stack on small screens, tables retain their semantics, the page has a skip link and visible keyboard focus, and reduced-motion preferences are respected. Canonical and Open Graph metadata use the configured TAP origin; no `og:image` is provided.
+## Asset provenance
+
+The parent owns the five unmodified extracts under `public/figures/` and their extraction record, `public/figures/SOURCES.md`:
+
+| Asset                      | Source               |
+| -------------------------- | -------------------- |
+| `prepbench-example.png`    | PrepBench, Figure 1  |
+| `prepbench-evaluation.png` | PrepBench, Figure 4  |
+| `prepbench-statistics.png` | PrepBench, Figure 3  |
+| `cleanagent-workflow.png`  | CleanAgent, Figure 2 |
+| `cleanagent-interface.png` | CleanAgent, Figure 3 |
+
+PrepBench figures link to [its paper](https://arxiv.org/abs/2605.08687); CleanAgent figures link to [its paper](https://arxiv.org/abs/2403.08291). The PrepBench page retains the Preppin’ Data provenance. The evaluation figure describes the paper’s experimental setup; current public execution instructions remain linked separately. The CleanAgent interface includes an execution error and a later completion message. It must not be presented as first-pass success.
+
+The semantic diagrams in `preparation-example.tsx` and `research-diagrams.tsx` are original explanatory compositions. They are separate from paper evidence. No stock artwork, generated AI art, or social preview image is used.
 
 ## Review boundary
 
-Implementation does not publish or change hosting configuration. The parent owns source registration, the production build, browser and accessibility checks, and deployment; record completed checks in the parent's validation record. Source-level responsive styling is not a claim of completed visual QA.
+The parent owns production builds, browser/route/link acceptance, and publishing. Implementation includes responsive styles, a skip link, visible focus, and reduced-motion handling; source review and type checking are not browser accessibility or visual QA.

@@ -1,127 +1,110 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { DataTable } from '@/components/tap/data-table';
+import { Arrow } from '@/components/tap/primitives';
 
 export function PreparationExample() {
   return (
     <section
       id="vision"
-      className="hero-example"
-      aria-labelledby="example-title"
+      className="vision-section shell"
+      aria-labelledby="vision-title"
     >
-      <h2 id="example-title" className="example-heading">
+      <h2 id="vision-title" className="vision-heading">
         You set the goal. <span>AI prepares the data.</span>
       </h2>
-      <figure className="data-sheet" aria-describedby="example-note">
-        <figcaption className="sheet-caption">
-          <span>Illustrative example</span>
-          <span className="mono">Intent → Data</span>
-        </figcaption>
-        <div className="user-goal">
+      <figure className="vision-scene" aria-describedby="vision-caption">
+        <figcaption className="scene-label">Illustrative example</figcaption>
+        <div className="goal-statement">
           <span>Your goal</span>
           <p>Show monthly sales.</p>
         </div>
-        <div className="source-wrap">
-          <p className="stage-label" id="source-label">
-            <span className="stage-number">01</span> Source table
-          </p>
-          <Table
-            className="tap-table source-table"
-            aria-labelledby="source-label"
-          >
-            <TableHeader>
-              <TableRow>
-                <TableHead scope="col">Date</TableHead>
-                <TableHead scope="col">Order</TableHead>
-                <TableHead scope="col" className="numeric">
-                  Sales
-                </TableHead>
-                <TableHead scope="col">Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>2026-01-03</TableCell>
-                <TableCell>A101</TableCell>
-                <TableCell className="numeric">120</TableCell>
-                <TableCell>Paid</TableCell>
-              </TableRow>
-              <TableRow className="excluded-row">
-                <TableCell>Jan 4, 2026</TableCell>
-                <TableCell>A102</TableCell>
-                <TableCell className="numeric">80</TableCell>
-                <TableCell className="excluded-status">Refunded</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>2026/02/01</TableCell>
-                <TableCell>A103</TableCell>
-                <TableCell className="numeric">150</TableCell>
-                <TableCell>Paid</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-        <div className="clarification">
-          <p className="stage-label">
-            <span className="stage-number">02</span> A choice that changes the
-            answer
-          </p>
-          <p>Should refunded orders count toward sales?</p>
-          <div className="decision">
-            <svg
-              viewBox="0 0 20 20"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              aria-hidden="true"
-            >
-              <path d="m4 10 4 4 8-8" />
-            </svg>
-            <p>
-              <span>Your decision: </span>Exclude refunded orders.
-            </p>
+        <div className="vision-flow">
+          <div className="vision-stage source-stage">
+            <p className="diagram-label">Start with your data</p>
+            <div className="floating-table">
+              <DataTable
+                label="Source orders in the monthly-sales illustration"
+                headers={['Date', 'Order', 'Sales', 'Status']}
+                numericColumns={[2]}
+                rows={[
+                  ['2026-01-03', 'A101', '120', 'Paid'],
+                  [
+                    <span className="mixed-value" key="date">
+                      Jan 4, 2026
+                    </span>,
+                    'A102',
+                    '80',
+                    <span className="refunded-value" key="refund">
+                      Refunded
+                    </span>,
+                  ],
+                  [
+                    <span className="mixed-value" key="date">
+                      2026/02/01
+                    </span>,
+                    'A103',
+                    '150',
+                    'Paid',
+                  ],
+                ]}
+                className="blue-table source-table"
+              />
+            </div>
+          </div>
+          <Arrow className="scene-arrow first-arrow" />
+          <div className="vision-stage meaning-stage">
+            <p className="diagram-label">Clarify what matters</p>
+            <div className="meaning-choice">
+              <span className="choice-label">
+                A choice that changes the answer
+              </span>
+              <p>Should refunded orders count toward sales?</p>
+              <div className="user-decision">
+                <span className="mini-check" aria-hidden="true">
+                  ✓
+                </span>
+                <div>
+                  <span>Your decision</span>
+                  <strong>Exclude refunded orders.</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Arrow className="scene-arrow second-arrow" />
+          <div className="vision-stage result-stage">
+            <p className="diagram-label">Ready for analysis</p>
+            <div className="floating-table prepared-table">
+              <DataTable
+                label="Prepared monthly sales after excluding refunded orders"
+                headers={['Month', 'Sales']}
+                numericColumns={[1]}
+                rows={[
+                  ['2026-01', '120'],
+                  ['2026-02', '150'],
+                ]}
+                className="green-table"
+              />
+              <div className="output-signoff">
+                <span className="mini-check" aria-hidden="true">
+                  ✓
+                </span>{' '}
+                Monthly sales
+              </div>
+            </div>
           </div>
         </div>
-        <div className="output-wrap">
-          <p className="stage-label" id="output-label">
-            <span className="stage-number">03</span> Prepared output
-          </p>
-          <Table
-            className="tap-table output-table"
-            aria-labelledby="output-label"
-          >
-            <TableHeader>
-              <TableRow>
-                <TableHead scope="col">Month</TableHead>
-                <TableHead scope="col" className="numeric">
-                  Sales
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>2026-01</TableCell>
-                <TableCell className="numeric">120</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>2026-02</TableCell>
-                <TableCell className="numeric">150</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-          <p className="example-trace">
-            Dates standardized · Refunded orders excluded · Sales grouped by
-            month
-          </p>
+        <div className="treatment-trace" aria-label="Preparation decisions">
+          <span>Dates standardized</span>
+          <span>Refunded orders excluded</span>
+          <span>Sales grouped by month</span>
         </div>
       </figure>
-      <p className="example-trace" id="example-note">
-        A static illustration of the behavior we are working toward.
+      <p className="scene-caption" id="vision-caption">
+        A static illustration of the behavior we’re working toward.
+      </p>
+      <p className="vision-explanation">
+        People define what matters. AI handles the preparation and asks about
+        decisions that change the meaning of the result. The output should make
+        important choices and unresolved issues visible.
       </p>
     </section>
   );

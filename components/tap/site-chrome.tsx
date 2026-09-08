@@ -1,13 +1,15 @@
+import Link from 'next/link';
+
 export function Wordmark() {
   return (
-    <a href="/" className="wordmark" aria-label="TAP home">
+    <Link href="/" className="wordmark" aria-label="TAP home">
       <span className="table-mark" aria-hidden="true">
         {Array.from({ length: 9 }, (_, i) => (
           <span key={i} />
         ))}
       </span>
       TAP
-    </a>
+    </Link>
   );
 }
 
@@ -18,8 +20,8 @@ export function SiteHeader() {
       <div className="header-right">
         <span className="header-note">Human intent. Prepared data.</span>
         <nav className="site-nav" aria-label="Main navigation">
-          <a href="/#vision">Vision</a>
-          <a href="/#research">Research</a>
+          <Link href="/#vision">Vision</Link>
+          <Link href="/#research">Research</Link>
         </nav>
       </div>
     </header>

@@ -1,18 +1,10 @@
 import type { Metadata } from 'next';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import {
   ComplementaryProject,
   DetailSection,
-  ProcessDiagram,
   ProjectHero,
 } from '@/components/tap/project-layout';
+import { PaperFigure } from '@/components/tap/paper-figure';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
 
@@ -21,7 +13,7 @@ const project = projects.prepbench;
 export const metadata: Metadata = {
   title: 'PrepBench — Evaluating AI Data Preparation',
   description:
-    'PrepBench evaluates natural-language-driven data preparation with 306 cases and 829 input tables. VLDB 2026 (PVLDB Volume 19). Paper, code, dataset, and evaluation resources.',
+    'PrepBench evaluates natural-language-driven data preparation with 306 cases and 829 input tables. VLDB 2026. Paper, code, dataset, and evaluation resources.',
   alternates: { canonical: '/prepbench' },
   openGraph: {
     title: project.title,
@@ -34,99 +26,88 @@ export const metadata: Metadata = {
 
 export default function PrepBenchPage() {
   return (
-    <main id="main-content" className="shell" tabIndex={-1}>
+    <main id="main-content" className="detail-page shell" tabIndex={-1}>
       <ProjectHero
         project={project}
-        direction="Measuring the progress"
-        context="A benchmark for asking whether an agent actually prepares the right data."
+        context="Within TAP, PrepBench measures progress toward AI that prepares the right data. It evaluates how agents turn natural-language requests and input tables into prepared output."
       />
 
       <DetailSection
-        id="prepbench-overview"
-        number="01 / The research question"
-        title="From a request to the right result."
+        id="prepbench-example"
+        label="The problem"
+        title="A request is only the beginning."
+        description="Preparing a table can involve matching schemas, normalizing values, and resolving choices that affect the result. The paper’s registration-data example makes these decisions concrete."
       >
-        <p className="intro-paragraph">
-          An agent can produce a plausible answer and still prepare the wrong
-          data. PrepBench asks how well agents turn a natural-language request
-          and input tables into correct output tables.
-        </p>
-        <p>
-          Within TAP’s broader research vision, PrepBench supplies a way to
-          evaluate progress. It brings the intended result into focus: what data
-          an agent produces, including when it needs clarification to understand
-          the request.
-        </p>
-        <p>The benchmark builds on the Preppin’ Data challenges.</p>
-        <div className="stats-table">
-          <Table className="tap-table" aria-label="PrepBench dataset scale">
-            <TableHeader>
-              <TableRow>
-                <TableHead scope="col">Cases</TableHead>
-                <TableHead scope="col">Input tables</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <span className="stat-value">306</span>
-                </TableCell>
-                <TableCell>
-                  <span className="stat-value">829</span>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
+        <PaperFigure
+          src="/figures/prepbench-example.png"
+          width={2016}
+          height={984}
+          title="From raw registration tables to a preparation task"
+          alt="PrepBench Figure 1: two registration tables, a prepared table, a graphical operator workflow, and a natural-language request with generated code. Duplicate attendee handling is an unresolved choice in the request."
+          caption="The example connects imperfect input tables with the operations needed to prepare them. Handling duplicate attendee records is one choice that changes the meaning of the result."
+          source={project.paper}
+          figureNumber={1}
+        />
       </DetailSection>
 
       <DetailSection
-        id="prepbench-method"
-        number="02 / What the benchmark does"
-        title="Evaluate the prepared data."
+        id="prepbench-evaluation"
+        label="The method"
+        title="Follow the preparation. Evaluate the result."
+        description="Start with the request and source tables. The agent prepares the data, with clarification where applicable. Evaluation examines the final output tables using the benchmark’s evaluation assets."
       >
-        <p>
-          Each case starts with a preparation request and input tables. The
-          agent performs the preparation, with clarification where applicable.
-          Evaluation then examines the final output tables.
-        </p>
-        <ProcessDiagram
-          label="PrepBench evaluation process"
-          steps={[
-            {
-              title: 'Request + tables',
-              description:
-                'Start from the natural-language preparation task and its source data.',
-            },
-            {
-              title: 'Your agent prepares',
-              description:
-                'Resolve the request, clarify when applicable, and transform the data.',
-            },
-            {
-              title: 'Evaluate the output',
-              description:
-                'Assess the final tables using the benchmark’s evaluation assets.',
-            },
-          ]}
+        <PaperFigure
+          src="/figures/prepbench-evaluation.png"
+          width={1928}
+          height={1028}
+          title="The paper’s experimental setup"
+          alt="PrepBench Figure 4: source and constructed benchmark assets; interactive disambiguation, prep-code generation, and code-to-workflow translation; and the paper’s evaluation metrics."
+          caption="This original figure organizes the paper’s assets, experimental modes, and metrics. Current public execution modes and setup are described in the repository’s evaluation documentation."
+          source={project.paper}
+          figureNumber={4}
         />
-        <p className="diagram-caption">
-          Conceptual evaluation flow. Refer to the evaluation documentation for
-          current execution modes and setup.
-        </p>
-        <div className="scope-note">
-          <strong>You supply the agent.</strong>PrepBench provides evaluation
+        <p className="scope-note">
+          <strong>You supply the agent.</strong> PrepBench provides evaluation
           assets. Results describe agent performance on the benchmark’s
-          preparation tasks.
-        </div>
+          preparation tasks.{' '}
+          <a href={project.evaluation}>Read the current evaluation guide.</a>
+        </p>
+      </DetailSection>
+
+      <DetailSection
+        id="prepbench-dataset"
+        label="The dataset"
+        title="Preparation tasks with real variation."
+        description="Built on the Preppin’ Data challenges, PrepBench brings together tasks with varied input sizes, ambiguities, and preparation steps."
+      >
+        <dl className="dataset-facts">
+          <div>
+            <dt>cases</dt>
+            <dd>306</dd>
+          </div>
+          <div>
+            <dt>input tables</dt>
+            <dd>829</dd>
+          </div>
+        </dl>
+        <PaperFigure
+          src="/figures/prepbench-statistics.png"
+          width={940}
+          height={396}
+          title="A closer look at the tasks"
+          alt="PrepBench Figure 3: six plots showing distributions of table counts, ambiguity counts, preparation steps, row counts, lines of code, and operator counts."
+          caption="The distributions show variation in data volume and task complexity across the benchmark, from the number of input tables to the operations needed to prepare them."
+          source={project.paper}
+          figureNumber={3}
+        />
       </DetailSection>
 
       <DetailSection
         id="prepbench-resources"
-        number="03 / Work with PrepBench"
+        label="Work with PrepBench"
         title="Bring your agent. Start here."
       >
-        <div className="resource-list detail-resources">
+        <div className="detail-resource-links">
           <ResourceLink
             href={project.dataset}
             title="Dataset documentation"
@@ -135,12 +116,12 @@ export default function PrepBenchPage() {
           <ResourceLink
             href={project.evaluation}
             title="Evaluation documentation"
-            description="Follow the current evaluation setup and execution instructions."
+            description="Follow the current setup and execution instructions."
           />
           <ResourceLink
             href={project.code}
             title="Code repository"
-            description="Explore the public benchmark implementation and assets."
+            description="Explore the benchmark implementation and evaluation assets."
           />
           <ResourceLink
             href={project.contribute}
@@ -152,7 +133,7 @@ export default function PrepBenchPage() {
 
       <ComplementaryProject
         project={projects.cleanagent}
-        description="CleanAgent explores the capability side: using language models and Dataprep.Clean to automate column-format standardization. The two projects address complementary questions within TAP."
+        description="Explore the capability side: agents that use Dataprep.Clean to standardize heterogeneous column formats."
       />
     </main>
   );

@@ -9,10 +9,10 @@ export const projects = {
     title:
       'PrepBench: How Far Are We from Natural-Language-Driven Data Preparation?',
     authors: ['Jingzhe Xu', 'Rui Wang', 'Jiannan Wang', 'Guoliang Li'],
-    venue: 'VLDB 2026 (PVLDB Volume 19)',
-    question: 'How far are we from natural-language-driven data preparation?',
+    venue: 'VLDB 2026',
+    question: 'How well can AI prepare the data you need?',
     summary:
-      'A benchmark for evaluating whether AI agents can turn natural-language requests and input tables into correct prepared data.',
+      'Real-world tasks that test whether AI agents can understand a request and produce the right tables.',
     paper: 'https://arxiv.org/abs/2605.08687',
     code: 'https://github.com/TsinghuaDatabaseGroup/prepbench',
     dataset:
@@ -29,9 +29,9 @@ export const projects = {
     title: 'CleanAgent: Automating Data Standardization with LLM-based Agents',
     authors: ['Danrui Qi', 'Zhengjie Miao', 'Jiannan Wang'],
     venue: 'DataAI Workshop @ VLDB 2025',
-    question: 'How can AI take over repetitive data standardization?',
+    question: 'Standardize messy data with less manual work.',
     summary:
-      'An agent framework that combines language models with Dataprep.Clean to standardize heterogeneous column formats with less manual coding.',
+      'AI agents use data-cleaning tools to turn inconsistent dates, addresses, and other values into a common format.',
     paper: 'https://arxiv.org/abs/2403.08291',
     code: 'https://github.com/sfu-db/CleanAgent',
     demonstration: 'https://github.com/sfu-db/CleanAgent#demonstration',

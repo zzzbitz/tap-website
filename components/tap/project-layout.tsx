@@ -1,33 +1,26 @@
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import type { Project } from '@/lib/tap-content';
 import { Arrow, TextLink } from '@/components/tap/primitives';
 
 export function ProjectHero({
   project,
-  direction,
   context,
 }: {
   project: Project;
-  direction: string;
   context: string;
 }) {
   return (
     <header className="detail-hero">
-      <a className="link-arrow back-link" href="/">
+      <Link className="link-arrow back-link" href="/">
         <span aria-hidden="true">←</span> Back to TAP
-      </a>
+      </Link>
       <div className="detail-heading">
-        <div>
-          <p className="eyebrow blue">{project.type}</p>
-          <h1>{project.name}</h1>
-          <p className="paper-title">{project.title}</p>
-          <p className="paper-authors">{project.authors.join(' · ')}</p>
-          <p className="detail-venue">{project.venue}</p>
-        </div>
-        <aside className="detail-aside" aria-label="Role in TAP">
-          <span className="eyebrow blue">{direction}</span>
-          <p>{context}</p>
-        </aside>
+        <p className="eyebrow">{project.type}</p>
+        <h1>{project.name}</h1>
+        <p className="paper-title">{project.title}</p>
+        <p className="paper-authors">{project.authors.join(' · ')}</p>
+        <p className="detail-venue">{project.venue}</p>
       </div>
       <div className="detail-actions">
         <a href={project.paper} className="button-link">
@@ -37,52 +30,33 @@ export function ProjectHero({
           View repository <Arrow external />
         </a>
       </div>
+      <p className="project-context">{context}</p>
     </header>
   );
 }
 
 export function DetailSection({
   id,
-  number,
+  label,
   title,
+  description,
   children,
 }: {
   id: string;
-  number: string;
+  label: string;
   title: string;
+  description?: string;
   children: ReactNode;
 }) {
   return (
     <section className="detail-section" aria-labelledby={id}>
-      <div>
-        <p className="eyebrow blue">{number}</p>
+      <div className="detail-section-head">
+        <p className="eyebrow">{label}</p>
         <h2 id={id}>{title}</h2>
+        {description && <p className="section-description">{description}</p>}
       </div>
-      <div className="detail-content">{children}</div>
+      {children}
     </section>
-  );
-}
-
-export function ProcessDiagram({
-  label,
-  steps,
-}: {
-  label: string;
-  steps: { title: string; description: string }[];
-}) {
-  return (
-    <ol className="process-diagram" aria-label={label}>
-      {steps.map((step, index) => (
-        <li key={step.title}>
-          <span className="stage-number" aria-hidden="true">
-            0{index + 1}
-          </span>
-          <h3>{step.title}</h3>
-          <p>{step.description}</p>
-          <Arrow className="step-arrow" />
-        </li>
-      ))}
-    </ol>
   );
 }
 
@@ -95,12 +69,12 @@ export function ComplementaryProject({
 }) {
   return (
     <section className="complementary" aria-labelledby="complementary-title">
-      <p className="eyebrow blue">A complementary direction</p>
       <div>
+        <p className="eyebrow">A complementary direction</p>
         <h2 id="complementary-title">{project.name}</h2>
         <p>{description}</p>
-        <TextLink href={project.href}>Explore {project.name}</TextLink>
       </div>
+      <TextLink href={project.href}>Explore {project.name}</TextLink>
     </section>
   );
 }

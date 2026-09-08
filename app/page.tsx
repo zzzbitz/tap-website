@@ -1,164 +1,127 @@
 import type { Metadata } from 'next';
 import { PreparationExample } from '@/components/tap/preparation-example';
+import {
+  BenchmarkDiagram,
+  StandardizationDiagram,
+} from '@/components/tap/research-diagrams';
 import { Arrow, ResourceLink, TextLink } from '@/components/tap/primitives';
 import { projects } from '@/lib/tap-content';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/' },
-};
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 export default function Home() {
   const { prepbench, cleanagent } = projects;
   return (
-    <main id="main-content" className="shell" tabIndex={-1}>
-      <div className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow blue">
-            A research initiative for AI + data preparation
-          </p>
-          <h1>
-            <span>Trust AI to</span> <span>Prepare</span>{' '}
-            <span className="editorial">Your Data</span>
-          </h1>
-          <p className="hero-lead">
-            We build and evaluate AI systems that turn raw data and human intent
-            into reliable, analysis-ready data.
-          </p>
-          <p className="hero-aspiration">
-            Our goal is to let people focus on the questions they want to
-            answer, with confidence in the data behind them.
-          </p>
-          <div className="hero-action">
-            <a href="#research" className="button-link">
-              Explore the research <Arrow />
-            </a>
-          </div>
-        </div>
-        <PreparationExample />
-      </div>
-
-      <section className="vision-note" aria-labelledby="vision-note-title">
-        <h2 id="vision-note-title" className="eyebrow blue">
-          The research objective
-        </h2>
-        <p>
-          People define what matters. AI handles the preparation and asks about
-          decisions that change the meaning of the result. The output should
-          make important choices and unresolved issues visible.
+    <main id="main-content" tabIndex={-1}>
+      <section className="hero shell" aria-labelledby="hero-title">
+        <p className="eyebrow">A research initiative</p>
+        <h1 id="hero-title">
+          Trust AI to <span>Prepare Your Data</span>
+        </h1>
+        <p className="hero-summary">
+          <strong>
+            We’re working toward AI that prepares data you can trust.
+          </strong>{' '}
+          Describe what you need, clarify the choices that matter, and get data
+          ready for analysis.
         </p>
+        <a href="#research" className="button-link">
+          Explore the research <Arrow />
+        </a>
       </section>
 
-      <section id="research" aria-labelledby="research-title">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow blue">
-              Research / Two complementary directions
-            </p>
+      <PreparationExample />
+
+      <section
+        id="research"
+        className="research-section"
+        aria-labelledby="research-title"
+      >
+        <div className="shell">
+          <div className="section-intro centered research-intro">
+            <p className="eyebrow">Two complementary directions</p>
             <h2 id="research-title">
-              Building the capability. <span>Measuring the progress.</span>
+              Building the capability.
+              <br />
+              <span>Measuring the progress.</span>
             </h2>
           </div>
-          <p>
-            Different research questions.
-            <br />A shared direction for data preparation.
-          </p>
-        </div>
-        <article className="research-entry" aria-labelledby="prepbench-title">
-          <span className="entry-number" aria-hidden="true">
-            01 /
-          </span>
-          <div className="entry-title">
-            <h3 id="prepbench-title">
-              <a href={prepbench.href}>{prepbench.name}</a>
-            </h3>
-            <p className="entry-type">{prepbench.type}</p>
-            <p className="entry-venue">{prepbench.venue}</p>
-          </div>
-          <div className="entry-body">
-            <p className="entry-question">{prepbench.question}</p>
-            <p className="entry-summary">{prepbench.summary}</p>
-            <p className="entry-facts">
-              <span>
-                <strong>306</strong> cases
-              </span>
-              <span>
-                <strong>829</strong> input tables
-              </span>
-            </p>
-            <div className="entry-links">
-              <TextLink href={prepbench.href} className="entry-primary">
+          <article
+            className="research-feature prepbench-feature"
+            aria-labelledby="prepbench-title"
+          >
+            <div className="feature-copy">
+              <p className="project-name">PrepBench</p>
+              <p className="feature-meta">Benchmark · {prepbench.venue}</p>
+              <h3 id="prepbench-title">{prepbench.question}</h3>
+              <p className="feature-summary">{prepbench.summary}</p>
+              <p className="feature-facts">
+                <span>
+                  <strong>306</strong> cases
+                </span>
+                <span>
+                  <strong>829</strong> input tables
+                </span>
+              </p>
+              <TextLink href={prepbench.href} className="feature-primary">
                 Explore PrepBench
               </TextLink>
-              <TextLink href={prepbench.paper} external>
-                Paper
-              </TextLink>
-              <TextLink href={prepbench.code} external>
-                Code
-              </TextLink>
+              <div className="feature-links">
+                <TextLink href={prepbench.paper} external>
+                  Paper
+                </TextLink>
+                <TextLink href={prepbench.code} external>
+                  Code
+                </TextLink>
+              </div>
             </div>
-          </div>
-        </article>
-        <article
-          className="research-entry cleanagent-entry"
-          aria-labelledby="cleanagent-title"
-        >
-          <span className="entry-number" aria-hidden="true">
-            02 /
-          </span>
-          <div className="entry-title">
-            <h3 id="cleanagent-title">
-              <a href={cleanagent.href}>{cleanagent.name}</a>
-            </h3>
-            <p className="entry-type">{cleanagent.type}</p>
-            <p className="entry-venue">{cleanagent.venue}</p>
-          </div>
-          <div className="entry-body">
-            <p className="entry-question">{cleanagent.question}</p>
-            <p className="entry-summary">{cleanagent.summary}</p>
-            <p className="mini-process">
-              <span>Column types</span>
-              <span className="flow-arrow" aria-hidden="true">
-                →
-              </span>
-              <span>Dataprep.Clean calls</span>
-              <span className="flow-arrow" aria-hidden="true">
-                →
-              </span>
-              <span>Standardized output</span>
-            </p>
-            <div className="entry-links">
-              <TextLink href={cleanagent.href} className="entry-primary">
+            <div className="feature-visual">
+              <BenchmarkDiagram />
+            </div>
+          </article>
+          <article
+            className="research-feature cleanagent-feature"
+            aria-labelledby="cleanagent-title"
+          >
+            <div className="feature-copy">
+              <p className="project-name">CleanAgent</p>
+              <p className="feature-meta">
+                Agent framework · {cleanagent.venue}
+              </p>
+              <h3 id="cleanagent-title">{cleanagent.question}</h3>
+              <p className="feature-summary">{cleanagent.summary}</p>
+              <TextLink href={cleanagent.href} className="feature-primary">
                 Explore CleanAgent
               </TextLink>
-              <TextLink href={cleanagent.paper} external>
-                Paper
-              </TextLink>
-              <TextLink href={cleanagent.code} external>
-                Code
-              </TextLink>
+              <div className="feature-links">
+                <TextLink href={cleanagent.paper} external>
+                  Paper
+                </TextLink>
+                <TextLink href={cleanagent.code} external>
+                  Code
+                </TextLink>
+              </div>
             </div>
-          </div>
-        </article>
+            <div className="feature-visual">
+              <StandardizationDiagram />
+            </div>
+          </article>
+        </div>
       </section>
 
-      <section className="resources-section" aria-labelledby="resources-title">
-        <div className="resources-intro">
-          <p className="eyebrow blue">Read. Use. Contribute.</p>
-          <h2 id="resources-title">
-            Take the next
-            <br />
-            research step.
-          </h2>
-          <p>
-            Evaluate your agent, explore an implementation, or contribute to the
-            benchmark.
-          </p>
+      <section
+        className="resources-section shell"
+        aria-labelledby="resources-title"
+      >
+        <div className="section-intro centered">
+          <p className="eyebrow">Read. Use. Contribute.</p>
+          <h2 id="resources-title">Build on the research.</h2>
         </div>
-        <div className="resource-list">
+        <div className="resource-links">
           <ResourceLink
             href={prepbench.evaluation}
-            title="Evaluate with PrepBench"
-            description="Bring your agent. Start with the evaluation guide."
+            title="Evaluate your agent"
+            description="Start with the PrepBench evaluation guide."
           />
           <ResourceLink
             href={cleanagent.code}
