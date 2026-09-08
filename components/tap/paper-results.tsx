@@ -16,6 +16,7 @@ import {
   type ReactNode,
 } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { paretoIndices } from '@/lib/pareto';
 import { DataTable } from '@/components/tap/data-table';
 import { cleanResults, prepResults, type PrepMode } from '@/lib/paper-results';
 
@@ -187,16 +188,51 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
   const x = (cost: number) => left + (cost / maxCost) * (right - left);
   const y = (accuracy: number) => base - (accuracy / 60) * (base - top);
   const point = prepResults[selected];
+  const frontier = paretoIndices(prepResults.map((model) => model[mode]));
+  const frontierSet = new Set(frontier);
+  const frontierPoints = frontier
+    .map((i) => `${x(prepResults[i][mode][1])},${y(prepResults[i][mode][0])}`)
+    .join(' ');
+  const gradientId = useId();
   return (
     <div className="scatter-layout">
       <div className="scatter-main" ref={ref}>
+        <div className="frontier-legend">
+          <span>
+            <i className="frontier-line-key" aria-hidden="true" />
+            Pareto frontier <b>{frontier.length} models</b>
+          </span>
+          <span>
+            <i className="frontier-other-key" aria-hidden="true" />
+            Other models
+          </span>
+        </div>
         <p className="chart-axis-caption">Accuracy (%) · higher is better</p>
         <svg
           className="plumb-scatter"
           viewBox={`0 0 ${width} 322`}
           role="group"
-          aria-label="Model accuracy versus average cost. Select a numbered point or use the model list."
+          aria-label="Cost–accuracy Pareto frontier. Lower cost and higher accuracy are better. Select a numbered point or use the model list."
         >
+          <defs>
+            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="0%"
+                stopColor="var(--chart-data)"
+                stopOpacity="0.09"
+              />
+              <stop
+                offset="100%"
+                stopColor="var(--chart-data)"
+                stopOpacity="0"
+              />
+            </linearGradient>
+          </defs>
+          <polygon
+            points={`${x(prepResults[frontier[0]][mode][1])},${base} ${frontierPoints} ${x(prepResults[frontier[frontier.length - 1]][mode][1])},${base}`}
+            fill={`url(#${gradientId})`}
+            aria-hidden="true"
+          />
           {[0, 20, 40, 60].map((v) => (
             <g key={v}>
               <line
@@ -211,21 +247,16 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
               </text>
             </g>
           ))}
-          {Array.from({ length: 31 }, (_, i) => (
-            <line
-              key={i}
-              x1={left + (i / 30) * (right - left)}
-              x2={left + (i / 30) * (right - left)}
-              y1={base}
-              y2={base - (i % 10 === 0 ? 8 : 4)}
-              className="chart-gridline"
-            />
-          ))}
           {[0, maxCost / 3, (maxCost * 2) / 3, maxCost].map((v) => (
             <text key={v} x={x(v)} y={base + 25} textAnchor="middle">
               {v}
             </text>
           ))}
+          <polyline
+            points={frontierPoints}
+            className="pareto-frontier-line"
+            aria-hidden="true"
+          />
           {/* Paint the selected point last so a nearby model cannot hide it. */}
           {prepResults
             .map((model, i) => ({ model, i }))
@@ -235,21 +266,27 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
               return (
                 <g
                   key={model.name}
-                  className={`scatter-point chart-unit ${i === selected ? 'is-selected' : ''}`}
-                  style={delay(0.2 + i * 0.05)}
+                  className={`scatter-point ${frontierSet.has(i) ? 'on-frontier' : ''} ${i === selected ? 'is-selected' : ''}`}
                 >
-                  <line
-                    x1={x(cost)}
-                    x2={x(cost)}
-                    y1={base}
-                    y2={y(accuracy)}
-                    className="plumb-line"
-                  />
+                  {i === selected && (
+                    <>
+                      <path
+                        d={`M ${left} ${y(accuracy)} H ${x(cost)} V ${base}`}
+                        className="scatter-selection-guide"
+                      />
+                      <circle
+                        cx={x(cost)}
+                        cy={y(accuracy)}
+                        r="18"
+                        className="scatter-selection-halo"
+                      />
+                    </>
+                  )}
                   <g
                     role="button"
                     tabIndex={0}
                     aria-pressed={i === selected}
-                    aria-label={`${model.name}: ${accuracy.toFixed(1)} percent accuracy, ${cost.toFixed(2)} millidollars per task`}
+                    aria-label={`${model.name}: ${accuracy.toFixed(1)} percent accuracy, ${cost.toFixed(2)} millidollars per task${frontierSet.has(i) ? ', on Pareto frontier' : ''}`}
                     onClick={() => setSelected(i)}
                     onKeyDown={(event) => {
                       if (event.key === 'Enter' || event.key === ' ') {
@@ -261,7 +298,7 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
                     <circle
                       cx={x(cost)}
                       cy={y(accuracy)}
-                      r="17"
+                      r="22"
                       className="scatter-hit-area"
                     />
                     <circle
@@ -286,13 +323,19 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
         <p className="chart-axis-caption scatter-x-label">
           Cost per task (USD × 10⁻³) · lower is better
         </p>
+        <p className="frontier-note">
+          Frontier models improve cost or accuracy only with a trade-off. The
+          line connects observed results.
+        </p>
       </div>
       <fieldset className="scatter-model-list" aria-label="Select a model">
+        <legend>Select a model</legend>
         {prepResults.map((model, i) => (
           <button
             key={model.name}
             type="button"
             aria-pressed={selected === i}
+            className={frontierSet.has(i) ? 'frontier-model' : ''}
             onClick={() => setSelected(i)}
           >
             <span className="model-number">{i + 1}</span>
@@ -301,12 +344,25 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
         ))}
       </fieldset>
       <div className="scatter-readout" aria-live="polite" aria-atomic="true">
-        <strong>{point.name}</strong>
+        <div className="scatter-readout-heading">
+          <strong>{point.name}</strong>
+          <span
+            className={
+              frontierSet.has(selected)
+                ? 'frontier-status is-frontier'
+                : 'frontier-status'
+            }
+          >
+            {frontierSet.has(selected) ? 'On frontier' : 'Off frontier'}
+          </span>
+        </div>
         <span>
-          <b>{point[mode][0].toFixed(1)}%</b> accuracy
+          <span className="scatter-metric-label">Accuracy</span>
+          <b>{point[mode][0].toFixed(1)}%</b>
         </span>
         <span>
-          <b>${(point[mode][1] / 1000).toFixed(5)}</b> / task
+          <span className="scatter-metric-label">Cost per task</span>
+          <b>${(point[mode][1] / 1000).toFixed(5)}</b>
         </span>
       </div>
     </div>
@@ -378,8 +434,8 @@ export function PrepBenchResults() {
         </p>
       </ChartCard>
       <ChartCard
-        title="Similar accuracy can come at different costs."
-        subtitle="All 10 models · each point is one reported result. Select a model to inspect it."
+        title="Find the best cost–accuracy trade-offs."
+        subtitle="Blue highlights the Pareto frontier. Select any model to explore its cost and accuracy."
         sourceLabel="PrepBench · Table 6"
       >
         <PrepScatter mode={mode} />

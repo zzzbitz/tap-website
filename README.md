@@ -62,7 +62,8 @@ See `CHOICE_FLOW_VALIDATION.md` for the original choice-only checks and
 Project results are native SVG charts adapted from Lieflat Charts (F5, F8, L15).
 `lib/paper-results.ts` preserves the paper-table values; `public/charts/SOURCES.md`
 records versioned sources, template choices, units and license. PrepBench has
-linked code/workflow controls, model groups, and selectable cost/accuracy points.
+linked code/workflow controls, model groups, and selectable cost/accuracy points
+with a computed Pareto frontier. See `PARETO_VALIDATION.md` for frontier checks.
 CleanAgent presents cell-level matching rates with latency alongside them.
 Charts have exact-value tables, keyboard controls, viewport reveal and
 reduced-motion support. See `RESULTS_VALIDATION.md` for the results-chart checks.

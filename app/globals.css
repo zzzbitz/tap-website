@@ -2207,35 +2207,83 @@
 .scatter-x-label {
   text-align: center;
 }
-.plumb-line {
-  stroke: var(--text-subtle);
-  stroke-width: 1;
-  opacity: 0.45;
-  transition: opacity 200ms;
-}
-.scatter-point.is-selected .plumb-line {
-  opacity: 1;
+.pareto-frontier-line {
+  fill: none;
   stroke: var(--chart-data);
-  stroke-width: 1.5;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.scatter-selection-guide {
+  fill: none;
+  stroke: var(--chart-data);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  opacity: 0.28;
+}
+.scatter-selection-halo {
+  fill: var(--component-tint);
+  stroke: var(--component-border);
+  stroke-width: 1;
+}
+.frontier-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-bottom: 24px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.frontier-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.frontier-legend b {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-subtle);
+}
+.frontier-line-key {
+  width: 22px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--chart-data);
+}
+.frontier-other-key {
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 50%;
+}
+.frontier-note {
+  max-width: 580px;
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
 }
 .scatter-hit-area {
   fill: transparent;
 }
 .scatter-dot {
   fill: var(--background);
-  stroke: var(--chart-data);
+  stroke: var(--border-strong);
   stroke-width: 1.5;
   transition: fill 180ms;
 }
 .plumb-scatter .scatter-number {
   font-size: 13px;
-  fill: var(--chart-data);
+  fill: var(--muted-foreground);
   pointer-events: none;
 }
+.scatter-point.on-frontier .scatter-dot,
 .scatter-point.is-selected .scatter-dot {
   fill: var(--chart-data);
   stroke: var(--chart-data);
 }
+.scatter-point.on-frontier .scatter-number,
 .scatter-point.is-selected .scatter-number {
   fill: var(--background);
 }
@@ -2254,7 +2302,17 @@
 .scatter-model-list {
   display: grid;
   gap: 2px;
-  padding-top: 2px;
+  padding: 0;
+}
+.scatter-model-list legend {
+  padding: 0 8px 14px;
+  color: var(--text-subtle);
+  font-size: 12px;
+}
+.scatter-model-list .frontier-model .model-number {
+  background: var(--component-tint);
+  border-color: var(--component-border);
+  color: var(--chart-data);
 }
 .scatter-model-list button {
   display: flex;
@@ -2296,22 +2354,47 @@
 .scatter-readout {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px 22px;
-  border-top: 1px solid var(--border);
-  padding-top: 16px;
-  margin-top: 20px;
-  min-height: 80px;
+  gap: 16px 36px;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-panel);
+  background: var(--muted);
   font-size: 14px;
   font-variant-numeric: tabular-nums;
 }
-.scatter-readout > strong {
+.scatter-readout-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
   width: 100%;
+}
+.scatter-readout-heading strong {
   font-size: 16px;
+}
+.frontier-status {
+  padding: 3px 9px;
+  border-radius: var(--radius-small);
+  background: var(--background);
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.frontier-status.is-frontier {
+  background: var(--component-tint);
+  color: var(--chart-data);
+}
+.scatter-metric-label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted-foreground);
+  font-size: 12px;
 }
 .scatter-readout b {
   color: var(--chart-data);
-  font-size: 19px;
-  letter-spacing: -0.02em;
+  font-size: 23px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
 }
 .chart-data-details {
   margin-top: 24px;
