@@ -31,16 +31,15 @@ paper data and interactive tools. `components/tap/page-motion.tsx` enhances
 explicit reveal markers; see `DESIGN_SYSTEM.md` for timing, fallback behavior,
 and the design references. The existing GitHub Pages hosting setup is retained.
 
-Scroll revision validation: production export (all four routes, including 404),
-TypeScript, targeted lint, formatting and diff checks passed. All three content
-routes returned HTTP 200; their source and exported HTML include reveal blocks
-without hidden state, so the content remains present without JavaScript.
-Desktop Chrome screenshots showed the homepage's intermediate fade, completed
-table scene and research entries, and research-anchor navigation. Native browser
-automation then became unavailable; narrow-screen/light-mode review and complete
-detail-page interaction regression were not completed. Device emulation was
-verified off and DevTools closed before that interruption. This revision has
-not been published.
+Scroll entrance regression (2026-09-08): section anchors now leave off-screen
+descendants pending, and homepage text and figures use independent reveal blocks.
+Browser checks covered Research clicks, direct `#research` loads, PrepBench
+results jumps and CleanAgent method jumps. A screenshot captured CleanAgent's
+intermediate fade. Layout checks at 375px and 1280px found no page overflow;
+figure stagger is 0ms on mobile and 150ms on desktop. Production export,
+TypeScript, targeted lint, formatting and diff checks passed. All three exported
+content routes contain reveal markers without hidden state, retaining readable
+content without JavaScript.
 
 Homepage figure revision validation (2026-09-08): production export, TypeScript,
 targeted lint and formatting checks passed. Browser review covered the research

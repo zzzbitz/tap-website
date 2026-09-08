@@ -13,27 +13,32 @@ export function PageMotion() {
 
     let observer: IntersectionObserver | undefined;
     let resizeFrame = 0;
+    let prepareFrame = 0;
+    let startFrame = 0;
 
     const reveal = (element: HTMLElement, immediate = false) => {
+      if (!immediate && element.dataset.revealState !== 'pending') return;
       element.dataset.revealState = immediate ? 'done' : 'visible';
       observer?.unobserve(element);
     };
 
-    const showHashTarget = () => {
-      if (!window.location.hash) return;
-      let target: HTMLElement | null;
+    const getHashTarget = () => {
+      if (!window.location.hash) return null;
       try {
-        target = document.getElementById(
+        return document.getElementById(
           decodeURIComponent(window.location.hash.slice(1)),
         );
       } catch {
-        return;
+        return null;
       }
+    };
+
+    const showHashTarget = () => {
+      const target = getHashTarget();
       if (!target) return;
       elements.forEach((element) => {
-        if (element.contains(target) || target.contains(element)) {
-          reveal(element, true);
-        }
+        // Reveal a heading's own block, never every child of a section anchor.
+        if (element.contains(target)) reveal(element, preference.matches);
       });
     };
 
@@ -60,20 +65,28 @@ export function PageMotion() {
       });
     };
 
-    // Never hide the initial viewport, restored scroll positions, or focused UI.
+    // Ordinary first-fold content stays visible. Deep links still get entrances.
+    const startsAtAnchor = !!getHashTarget();
     elements.forEach((element) => {
+      const bounds = element.getBoundingClientRect();
       const initiallyVisible =
-        element.getBoundingClientRect().top < window.innerHeight ||
+        (!startsAtAnchor && bounds.top < window.innerHeight) ||
+        bounds.bottom <= 0 ||
         element.contains(document.activeElement);
       element.dataset.revealState =
         preference.matches || initiallyVisible ? 'done' : 'pending';
     });
-    try {
-      observe();
-    } catch {
-      elements.forEach((element) => reveal(element, true));
-    }
-    showHashTarget();
+    // Paint the initial opacity before revealing an already-visible deep link.
+    prepareFrame = requestAnimationFrame(() => {
+      startFrame = requestAnimationFrame(() => {
+        try {
+          observe();
+          showHashTarget();
+        } catch {
+          elements.forEach((element) => reveal(element, true));
+        }
+      });
+    });
 
     const onFocus = (event: FocusEvent) => {
       if (!(event.target instanceof Node)) return;
@@ -104,6 +117,8 @@ export function PageMotion() {
     return () => {
       observer?.disconnect();
       cancelAnimationFrame(resizeFrame);
+      cancelAnimationFrame(prepareFrame);
+      cancelAnimationFrame(startFrame);
       document.removeEventListener('focusin', onFocus);
       document.removeEventListener('transitionend', onTransitionEnd);
       window.removeEventListener('hashchange', showHashTarget);

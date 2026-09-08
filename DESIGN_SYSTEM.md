@@ -114,10 +114,13 @@ on 2026-09-08: a trigger near 85% of viewport height, 30px upward travel over
 The easing is a CSS approximation of Apple's easeInOutQuad. This reproduces
 the entrance behavior without importing Apple's animation framework or assets.
 
-Entrances play once. Keep the initial viewport visible and never animate the
-hero out. Static HTML and unsupported browsers remain visible; keyboard focus
-and hash navigation reveal their targets immediately. Reduced-motion and print
-styles show every block without motion. Mobile blocks have no stagger delay.
+Entrances play once. Keep an ordinary page load's initial viewport visible and
+never animate the hero out. On deep links, visible content enters with the same
+timing. Section jumps must leave off-screen descendants pending; only the target's
+own reveal block can enter directly. Animate independent blocks, never a reveal
+inside another reveal. Static HTML and unsupported browsers remain visible;
+keyboard focus exposes its containing block immediately. Reduced-motion and
+print styles show every block without motion. Mobile blocks have no stagger delay.
 
 This direction also follows [content-first design](https://www.smashingmagazine.com/2015/02/design-last/)
 and [NN/G's guidance on visual hierarchy](https://www.nngroup.com/articles/good-visual-design/):

@@ -43,11 +43,17 @@ export default function Home() {
             className="research-feature illustrated-feature prepbench-feature"
             aria-labelledby="prepbench-title"
           >
-            <div className="feature-copy" data-reveal>
+            <div className="feature-copy">
               <div className="feature-heading">
-                <p className="project-name">PrepBench</p>
-                <p className="feature-meta">Benchmark · {prepbench.venue}</p>
-                <div className="feature-visual" data-reveal>
+                <div data-reveal>
+                  <p className="project-name">PrepBench</p>
+                  <p className="feature-meta">Benchmark · {prepbench.venue}</p>
+                </div>
+                <div
+                  className="feature-visual"
+                  data-reveal
+                  data-reveal-delay="1"
+                >
                   <PaperFigure
                     src={sitePath('/figures/prepbench-evaluation.png')}
                     width={1928}
@@ -59,9 +65,11 @@ export default function Home() {
                     figureNumber={4}
                   />
                 </div>
-                <h3 id="prepbench-title">{prepbench.question}</h3>
+                <h3 id="prepbench-title" data-reveal>
+                  {prepbench.question}
+                </h3>
               </div>
-              <div className="feature-description">
+              <div className="feature-description" data-reveal>
                 <p className="feature-summary">{prepbench.summary}</p>
                 <p className="feature-facts">
                   <span>
@@ -89,13 +97,19 @@ export default function Home() {
             className="research-feature illustrated-feature cleanagent-feature"
             aria-labelledby="cleanagent-title"
           >
-            <div className="feature-copy" data-reveal>
+            <div className="feature-copy">
               <div className="feature-heading">
-                <p className="project-name">CleanAgent</p>
-                <p className="feature-meta">
-                  Agent framework · {cleanagent.venue}
-                </p>
-                <div className="feature-visual" data-reveal>
+                <div data-reveal>
+                  <p className="project-name">CleanAgent</p>
+                  <p className="feature-meta">
+                    Agent framework · {cleanagent.venue}
+                  </p>
+                </div>
+                <div
+                  className="feature-visual"
+                  data-reveal
+                  data-reveal-delay="1"
+                >
                   <PaperFigure
                     src={sitePath('/figures/cleanagent-workflow.png')}
                     width={968}
@@ -107,9 +121,11 @@ export default function Home() {
                     figureNumber={2}
                   />
                 </div>
-                <h3 id="cleanagent-title">{cleanagent.question}</h3>
+                <h3 id="cleanagent-title" data-reveal>
+                  {cleanagent.question}
+                </h3>
               </div>
-              <div className="feature-description">
+              <div className="feature-description" data-reveal>
                 <p className="feature-summary">{cleanagent.summary}</p>
                 <TextLink href={cleanagent.href} className="feature-primary">
                   Explore CleanAgent
