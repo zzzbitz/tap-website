@@ -32,14 +32,14 @@ export default function CleanAgentPage() {
     <main id="main-content" className="detail-page shell" tabIndex={-1}>
       <ProjectHero
         project={project}
-        context="CleanAgent develops one capability within TAP’s vision: reducing the manual work of standardizing data. Language models work with Dataprep.Clean to express preparation through concise library calls."
+        context="CleanAgent uses AI agents and Dataprep.Clean to turn inconsistent values into a common format."
       />
 
       <DetailSection
         id="cleanagent-conversation"
         label="Try a conversation"
-        title="Choose a consistent date format."
-        description="Answer the agent’s format question, inspect the standardized values, and go back to compare another choice."
+        title="Choose a date format."
+        description="Choose a format and see the dates update. Try another choice to compare."
       >
         <GuidedConversation project="cleanagent" />
       </DetailSection>
@@ -47,8 +47,8 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-workflow"
         label="The method"
-        title="Let agents work with the right tools."
-        description="Annotate column types, generate concise Dataprep.Clean calls, and execute them to produce standardized output. The framework coordinates these steps through a chat manager."
+        title="How CleanAgent standardizes data."
+        description="Agents identify column types, write code using Dataprep.Clean, and run it. A chat manager coordinates the steps."
       >
         <PaperFigure
           src={sitePath('/figures/cleanagent-workflow.png')}
@@ -70,7 +70,7 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-results"
         label="The results"
-        title="Measure the standardized output."
+        title="How well does CleanAgent work?"
         description="The paper compares CleanAgent, direct GPT-4o prompting, and Cocoon on irregular datetime values in the Flights dataset."
       >
         <CleanAgentResults />
@@ -79,8 +79,8 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-demonstration"
         label="The demonstration"
-        title="See the interaction behind the output."
-        description="Watch the original CleanAgent demo, then take a closer look at the interface from the paper."
+        title="Watch CleanAgent in action."
+        description="Watch the demo and explore the interface shown in the paper."
       >
         <figure
           className="project-video"
@@ -126,7 +126,7 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-resources"
         label="Explore the work"
-        title="From the paper to the implementation."
+        title="Explore the paper and code."
       >
         <div className="detail-resource-links">
           <ResourceLink
@@ -149,7 +149,7 @@ export default function CleanAgentPage() {
 
       <ComplementaryProject
         project={projects.prepbench}
-        description="Explore the measurement question: how well can agents turn requests and input tables into correct prepared data?"
+        description="Test how well your agent prepares data with PrepBench."
       />
     </main>
   );

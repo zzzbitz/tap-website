@@ -32,14 +32,14 @@ export default function PrepBenchPage() {
     <main id="main-content" className="detail-page shell" tabIndex={-1}>
       <ProjectHero
         project={project}
-        context="Within TAP, PrepBench measures progress toward AI that prepares the right data. It evaluates how agents turn natural-language requests and input tables into prepared output."
+        context="PrepBench tests whether AI agents can turn your request and input tables into the right output."
       />
 
       <DetailSection
         id="prepbench-conversation"
         label="Try a conversation"
-        title="Make the choice that changes the table."
-        description="Choose how refunds should count toward monthly sales, then compare the prepared table with another choice."
+        title="See how your choice changes the data."
+        description="Choose whether to count refunded orders, then compare the monthly totals."
       >
         <GuidedConversation project="prepbench" />
       </DetailSection>
@@ -47,8 +47,8 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-example"
         label="The problem"
-        title="A request is only the beginning."
-        description="Preparing a table can involve matching schemas, normalizing values, and resolving choices that affect the result. The paper’s registration-data example makes these decisions concrete."
+        title="What makes data preparation hard?"
+        description="An agent must match columns, fix inconsistent values, and clarify missing rules. For example, should duplicate registrations count once or twice?"
       >
         <PaperFigure
           src={sitePath('/figures/prepbench-example.png')}
@@ -65,8 +65,8 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-evaluation"
         label="The method"
-        title="Follow the preparation. Evaluate the result."
-        description="Start with the request and source tables. The agent prepares the data, with clarification where applicable. Evaluation examines the final output tables using the benchmark’s evaluation assets."
+        title="How PrepBench evaluates agents."
+        description="The agent receives a request and input tables, asks questions when needed, and prepares the data. PrepBench then checks the output tables."
       >
         <PaperFigure
           src={sitePath('/figures/prepbench-evaluation.png')}
@@ -89,8 +89,8 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-results"
         label="The results"
-        title="How far do the evaluated agents get?"
-        description="Explore the paper’s end-to-end results. Switch the output target to compare preparation code with graphical workflows."
+        title="How accurate are the agents?"
+        description="Compare accuracy and cost for 10 models. Switch between code and graphical workflows."
       >
         <PrepBenchResults />
       </DetailSection>
@@ -98,8 +98,8 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-dataset"
         label="The dataset"
-        title="Preparation tasks with real variation."
-        description="Built on the Preppin’ Data challenges, PrepBench brings together tasks with varied input sizes, ambiguities, and preparation steps."
+        title="306 data preparation tasks."
+        description="Based on the Preppin’ Data challenges, the tasks vary in table size, unclear requirements, and required operations."
       >
         <dl className="dataset-facts">
           <div>
@@ -126,7 +126,7 @@ export default function PrepBenchPage() {
       <DetailSection
         id="prepbench-resources"
         label="Work with PrepBench"
-        title="Bring your agent. Start here."
+        title="Test your agent with PrepBench."
       >
         <div className="detail-resource-links">
           <ResourceLink
@@ -154,7 +154,7 @@ export default function PrepBenchPage() {
 
       <ComplementaryProject
         project={projects.cleanagent}
-        description="Explore the capability side: agents that use Dataprep.Clean to standardize heterogeneous column formats."
+        description="See how CleanAgent uses Dataprep.Clean to make data formats consistent."
       />
     </main>
   );

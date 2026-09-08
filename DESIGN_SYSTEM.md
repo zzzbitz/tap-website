@@ -37,6 +37,17 @@ and 6px small surfaces. Circular markers and the tiny table-logo cells retain
 their semantic geometry. Keep aligned card padding and the existing responsive
 spacing grid; borders carry structure, with only soft neutral shadows.
 
+## Copy and line breaks
+
+Use short, concrete headings that state the section’s subject. Prefer familiar
+words and explain what the reader can compare or do. Preserve official paper
+titles, research scope, and metric definitions. Avoid vague slogans such as
+“How far do the agents get?” when the section reports accuracy.
+
+Headings use balanced wrapping; paragraphs use pretty wrapping. Check actual
+desktop and mobile screenshots for isolated final words. Shorten awkward copy
+before changing font sizes or forcing line breaks.
+
 ## Interaction states
 
 - Primary actions use a solid accent and white text, with a darker hover state.

@@ -324,8 +324,8 @@ function PrepScatter({ mode }: { mode: PrepMode }) {
           Cost per task (USD × 10⁻³) · lower is better
         </p>
         <p className="frontier-note">
-          Frontier models improve cost or accuracy only with a trade-off. The
-          line connects observed results.
+          On the blue line, higher accuracy comes at a higher cost. It connects
+          the paper’s reported results.
         </p>
       </div>
       <fieldset className="scatter-model-list" aria-label="Select a model">
@@ -392,7 +392,7 @@ export function PrepBenchResults() {
         </ToggleGroup>
       </div>
       <ChartCard
-        title={`${models[0][mode][0].toFixed(1)}% is the best accuracy in this group.`}
+        title={`${models[0][mode][0].toFixed(1)}% is the highest accuracy in this group.`}
         subtitle="306 preparation tasks · accuracy measures correct final outputs."
         sourceLabel="PrepBench · Table 6"
       >
@@ -434,8 +434,8 @@ export function PrepBenchResults() {
         </p>
       </ChartCard>
       <ChartCard
-        title="Find the best cost–accuracy trade-offs."
-        subtitle="Blue highlights the Pareto frontier. Select any model to explore its cost and accuracy."
+        title="Compare accuracy and cost."
+        subtitle="Select a model to see its accuracy and cost. Blue marks the Pareto frontier."
         sourceLabel="PrepBench · Table 6"
       >
         <PrepScatter mode={mode} />

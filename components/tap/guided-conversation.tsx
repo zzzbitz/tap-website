@@ -79,12 +79,12 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
           <span className="demo-label">Scripted demo</span>
           <h3>
             {project === 'prepbench'
-              ? 'One question changes the answer.'
-              : 'A conversation about the right format.'}
+              ? 'Should refunds count as sales?'
+              : 'How should the dates look?'}
           </h3>
           <p>
-            A prepared conversation with fixed sample data. Choose an answer and
-            see how it shapes the result.
+            Choose an answer to update the sample table. This is a scripted
+            demo.
           </p>
         </div>
         <Button

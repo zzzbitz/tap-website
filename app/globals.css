@@ -97,6 +97,10 @@
   h3,
   h4 {
     font-weight: 600;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
   }
   a {
     color: inherit;

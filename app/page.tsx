@@ -44,9 +44,9 @@ export default function Home() {
           <div className="section-intro centered research-intro">
             <p className="eyebrow">Two complementary directions</p>
             <h2 id="research-title">
-              Building the capability.
+              Build better agents.
               <br />
-              <span>Measuring the progress.</span>
+              <span>Test their results.</span>
             </h2>
           </div>
           <article
