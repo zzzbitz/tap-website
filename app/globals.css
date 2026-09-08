@@ -3634,7 +3634,7 @@
   }
 }
 
-/* Homepage research: give the original framework figures room to be read. */
+/* Compact paper previews; readers can enlarge them for the details. */
 .research-feature.illustrated-feature {
   display: block;
 }
@@ -3650,18 +3650,17 @@
   max-width: 520px;
 }
 .illustrated-feature .feature-visual {
-  margin-top: 48px;
+  margin-top: 36px;
 }
 .illustrated-feature .paper-figure {
-  max-width: none;
-  margin: 0;
+  max-width: 680px;
+  margin: 0 auto;
 }
 .illustrated-feature .paper-figure-trigger {
-  padding: 24px 24px 54px;
+  padding: 16px 16px 44px;
 }
 .cleanagent-feature.illustrated-feature .paper-figure {
-  max-width: 1040px;
-  margin-inline: auto;
+  max-width: 560px;
 }
 .illustrated-feature .visual-caption {
   font-size: 14px;
