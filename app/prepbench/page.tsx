@@ -5,6 +5,7 @@ import {
   ProjectHero,
 } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
+import { PrepBenchResults } from '@/components/tap/paper-results';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
 
@@ -72,6 +73,15 @@ export default function PrepBenchPage() {
           preparation tasks.{' '}
           <a href={project.evaluation}>Read the current evaluation guide.</a>
         </p>
+      </DetailSection>
+
+      <DetailSection
+        id="prepbench-results"
+        label="The results"
+        title="How far do the evaluated agents get?"
+        description="Explore the paper’s end-to-end results. Switch the output target to compare preparation code with graphical workflows."
+      >
+        <PrepBenchResults />
       </DetailSection>
 
       <DetailSection

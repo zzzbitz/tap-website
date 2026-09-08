@@ -5,6 +5,7 @@ import {
   ProjectHero,
 } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
+import { CleanAgentResults } from '@/components/tap/paper-results';
 import { StandardizationDiagram } from '@/components/tap/research-diagrams';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
@@ -63,6 +64,15 @@ export default function CleanAgentPage() {
           studies how agents standardize heterogeneous column formats using
           Dataprep.Clean.
         </p>
+      </DetailSection>
+
+      <DetailSection
+        id="cleanagent-results"
+        label="The results"
+        title="Measure the standardized output."
+        description="The paper compares CleanAgent, direct GPT-4o prompting, and Cocoon on irregular datetime values in the Flights dataset."
+      >
+        <CleanAgentResults />
       </DetailSection>
 
       <DetailSection

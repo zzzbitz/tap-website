@@ -36,4 +36,12 @@ The semantic diagrams in `preparation-example.tsx` and `research-diagrams.tsx` a
 
 ## Review boundary
 
+Project results are native SVG charts adapted from Lieflat Charts (F5, F8, L15).
+`lib/paper-results.ts` preserves the paper-table values; `public/charts/SOURCES.md`
+records versioned sources, template choices, units and license. PrepBench has
+linked code/workflow controls, model groups, and selectable cost/accuracy points.
+CleanAgent presents cell-level matching rates with latency alongside them.
+Charts have exact-value tables, keyboard controls, viewport reveal/replay and
+reduced-motion support. See `RESULTS_VALIDATION.md` for the results-chart checks.
+
 Browser QA covers desktop and mobile layouts, all five figure dialogs, keyboard opening, Escape and button dismissal, focus restoration, modal focus containment, table scrolling, main navigation, skip navigation, full-size image access, and 404 recovery. See the parent workspace’s VALIDATION.md for the tested revision, exact coverage, and remaining limits.
