@@ -6,6 +6,7 @@ import {
 } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
 import { PrepBenchResults } from '@/components/tap/paper-results';
+import { GuidedConversation } from '@/components/tap/guided-conversation';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
 
@@ -32,6 +33,15 @@ export default function PrepBenchPage() {
         project={project}
         context="Within TAP, PrepBench measures progress toward AI that prepares the right data. It evaluates how agents turn natural-language requests and input tables into prepared output."
       />
+
+      <DetailSection
+        id="prepbench-conversation"
+        label="Try a conversation"
+        title="Make the choice that changes the table."
+        description="Ask for monthly sales, clarify how refunds should count, and change your decision to see the output update."
+      >
+        <GuidedConversation project="prepbench" />
+      </DetailSection>
 
       <DetailSection
         id="prepbench-example"

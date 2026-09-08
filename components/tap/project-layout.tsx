@@ -31,6 +31,17 @@ export function ProjectHero({
         </a>
       </div>
       <p className="project-context">{context}</p>
+      <nav
+        className="project-jump-links"
+        aria-label={`${project.name} page sections`}
+      >
+        <a href={`#${project.name.toLowerCase()}-conversation`}>
+          Try the conversation <span aria-hidden="true">↓</span>
+        </a>
+        <a href={`#${project.name.toLowerCase()}-results`}>
+          Explore the results <span aria-hidden="true">↓</span>
+        </a>
+      </nav>
     </header>
   );
 }

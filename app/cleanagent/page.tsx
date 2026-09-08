@@ -6,7 +6,7 @@ import {
 } from '@/components/tap/project-layout';
 import { PaperFigure } from '@/components/tap/paper-figure';
 import { CleanAgentResults } from '@/components/tap/paper-results';
-import { StandardizationDiagram } from '@/components/tap/research-diagrams';
+import { GuidedConversation } from '@/components/tap/guided-conversation';
 import { ResourceLink } from '@/components/tap/primitives';
 import { projects, siteOrigin } from '@/lib/tap-content';
 
@@ -35,12 +35,12 @@ export default function CleanAgentPage() {
       />
 
       <DetailSection
-        id="cleanagent-example"
-        label="The problem"
-        title="Same information. Different formats."
-        description="Even a single date column can arrive in several representations. Standardization brings these values into a common format while preserving what they mean."
+        id="cleanagent-conversation"
+        label="Try a conversation"
+        title="Ask for a consistent date column."
+        description="Choose the format you need, inspect the standardized values, and refine your request through a guided exchange."
       >
-        <StandardizationDiagram withCaption />
+        <GuidedConversation project="cleanagent" />
       </DetailSection>
 
       <DetailSection

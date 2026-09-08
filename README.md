@@ -3,8 +3,8 @@
 A three-page research website for **TAP — Trust AI to Prepare Your Data**, implemented with the existing vinext, React, and shadcn starter.
 
 - `/`: centered vision, an illustrative monthly-sales transformation, and distinct visual introductions to both projects.
-- `/prepbench`: the task example, experimental setup, and dataset statistics from the paper, with links to evaluation resources.
-- `/cleanagent`: an original date-standardization example, the paper’s workflow, and the original system interface.
+- `/prepbench`: a guided clarification conversation, the paper's task example, experimental setup, interactive results and dataset statistics, with evaluation resources.
+- `/cleanagent`: a guided date-standardization conversation, the paper’s workflow, reported results and original system interface.
 
 ## Development
 
@@ -35,6 +35,18 @@ PrepBench figures link to [its paper](https://arxiv.org/abs/2605.08687); CleanAg
 The semantic diagrams in `preparation-example.tsx` and `research-diagrams.tsx` are original explanatory compositions. They are separate from paper evidence. No stock artwork, generated AI art, or social preview image is used.
 
 ## Review boundary
+
+The user authorized scripted, interactive conversations on both project pages on
+2026-09-08, superseding the original static-only example restriction for these
+components. `lib/guided-conversation.ts` defines finite supported commands and
+state transitions. `components/tap/guided-conversation.tsx` composes installed
+Message, Button, Textarea and Table primitives. Both demos accept suggested
+messages and supported English/Chinese phrases, let readers revise choices,
+retain the preview on unsupported input, and reset without persisting data.
+The transcripts are labelled scripted demos with fixed data/prepared replies;
+they never call models or execute the actual research systems. No artificial
+waiting, generated code execution, upload, or external messaging was added.
+See `CONVERSATION_VALIDATION.md` for the new whole-site review.
 
 Project results are native SVG charts adapted from Lieflat Charts (F5, F8, L15).
 `lib/paper-results.ts` preserves the paper-table values; `public/charts/SOURCES.md`
