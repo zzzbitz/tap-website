@@ -1,5 +1,5 @@
+/* oxlint-disable nextjs/no-html-link-for-pages -- Static export uses native navigation to avoid vinext client-router errors. */
 import type { ReactNode } from 'react';
-import Link from 'next/link';
 import type { Project } from '@/lib/tap-content';
 import { Arrow, TextLink } from '@/components/tap/primitives';
 
@@ -12,9 +12,9 @@ export function ProjectHero({
 }) {
   return (
     <header className="detail-hero">
-      <Link className="link-arrow back-link" href="/">
+      <a className="link-arrow back-link" href="/">
         <span aria-hidden="true">←</span> Back to TAP
-      </Link>
+      </a>
       <div className="detail-heading">
         <p className="eyebrow">{project.type}</p>
         <h1>{project.name}</h1>

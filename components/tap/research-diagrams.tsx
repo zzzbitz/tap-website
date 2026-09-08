@@ -112,7 +112,7 @@ export function BenchmarkDiagram() {
   return (
     <figure
       className="benchmark-scene"
-      aria-label="Illustrative benchmark flow: a request and input table go to an AI agent, which can clarify and prepares output for comparison with expected tables."
+      aria-label="Illustrative benchmark flow: a request and input table go to an AI agent, which can ask for clarification and prepare output for comparison with expected tables."
     >
       <figcaption className="diagram-kicker">
         Illustrative evaluation flow <span>PrepBench</span>

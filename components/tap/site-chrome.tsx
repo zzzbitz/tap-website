@@ -1,15 +1,15 @@
-import Link from 'next/link';
+/* oxlint-disable nextjs/no-html-link-for-pages -- Static export uses native navigation to avoid vinext client-router errors. */
 
 export function Wordmark() {
   return (
-    <Link href="/" className="wordmark" aria-label="TAP home">
+    <a href="/" className="wordmark" aria-label="TAP home">
       <span className="table-mark" aria-hidden="true">
         {Array.from({ length: 9 }, (_, i) => (
           <span key={i} />
         ))}
       </span>
       TAP
-    </Link>
+    </a>
   );
 }
 
@@ -20,8 +20,8 @@ export function SiteHeader() {
       <div className="header-right">
         <span className="header-note">Human intent. Prepared data.</span>
         <nav className="site-nav" aria-label="Main navigation">
-          <Link href="/#vision">Vision</Link>
-          <Link href="/#research">Research</Link>
+          <a href="/#vision">Vision</a>
+          <a href="/#research">Research</a>
         </nav>
       </div>
     </header>
