@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useId, useRef, useState, type SubmitEvent } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Message,
   MessageContent,
@@ -11,68 +11,67 @@ import {
 } from '@/components/ui/message';
 import { DataTable } from '@/components/tap/data-table';
 import {
-  advanceDemo,
   demoDateFormats,
   demoDates,
-  demoGreetings,
-  demoPrompts,
-  initialDemoState,
+  demoTrees,
+  getDemoBranch,
   type DemoProject,
-  type DemoState,
+  type DemoChoice,
 } from '@/lib/guided-conversation';
 
 type Turn = { id: number; role: 'user' | 'agent'; text: string };
 
 export function GuidedConversation({ project }: { project: DemoProject }) {
   const name = project === 'prepbench' ? 'PrepBench' : 'CleanAgent';
-  const [state, setState] = useState<DemoState>(initialDemoState);
-  const [turns, setTurns] = useState<Turn[]>([
-    { id: 0, role: 'agent', text: demoGreetings[project] },
-  ]);
-  const [draft, setDraft] = useState('');
+  const tree = demoTrees[project];
+  const [selected, setSelected] = useState<DemoChoice>(tree.branches[0].id);
+  const [confirmed, setConfirmed] = useState<DemoChoice | null>(null);
   const logRef = useRef<HTMLDivElement>(null);
-  const inputId = useId();
-  const hintId = useId();
+  const stepRef = useRef<HTMLHeadingElement>(null);
+  const shouldFocusStep = useRef(false);
+  const questionId = useId();
   const resultId = `${project}-demo-output`;
-  const nextId = useRef(1);
+  const branch = confirmed ? getDemoBranch(project, confirmed) : null;
+  const ready = Boolean(branch);
+  const turns: Turn[] = [
+    { id: 0, role: 'user', text: tree.request },
+    { id: 1, role: 'agent', text: tree.context },
+    ...(branch
+      ? [
+          { id: 2, role: 'user' as const, text: branch.answer },
+          { id: 3, role: 'agent' as const, text: branch.reply },
+        ]
+      : []),
+  ];
   useEffect(() => {
-    // Move only the transcript, never the document or the user's keyboard focus.
+    // Scroll only the history. Focus follows an explicit Continue / Back action.
     const log = logRef.current;
-    if (log) log.scrollTop = log.scrollHeight;
-  }, [turns]);
+    if (log) log.scrollTop = confirmed ? log.scrollHeight : 0;
+    if (shouldFocusStep.current) {
+      stepRef.current?.focus({ preventScroll: true });
+      shouldFocusStep.current = false;
+    }
+  }, [confirmed]);
 
-  function send(text: string) {
-    const input = text.trim();
-    if (!input) return;
-    const next = advanceDemo(project, state, input);
-    const id = nextId.current;
-    nextId.current += 2;
-    setTurns((history) => [
-      ...history,
-      { id, role: 'user', text: input },
-      { id: id + 1, role: 'agent', text: next.reply },
-    ]);
-    setState(next.state);
-    setDraft('');
-  }
-  function submit(event: SubmitEvent<HTMLFormElement>) {
-    event.preventDefault();
-    send(draft);
-  }
   function reset() {
-    setState(initialDemoState);
-    setTurns([
-      { id: nextId.current++, role: 'agent', text: demoGreetings[project] },
-    ]);
-    setDraft('');
+    setSelected(tree.branches[0].id);
+    setConfirmed(null);
   }
-  const phase =
-    state.stage === 'request' ? 0 : state.stage === 'clarify' ? 1 : 2;
+  function confirm() {
+    if (!getDemoBranch(project, selected)) return;
+    shouldFocusStep.current = true;
+    setConfirmed(selected);
+  }
+  function back() {
+    shouldFocusStep.current = true;
+    setConfirmed(null);
+  }
+  const phase = ready ? 2 : 1;
   const dateFormat =
-    state.choice && state.choice in demoDateFormats
-      ? demoDateFormats[state.choice as keyof typeof demoDateFormats]
+    confirmed && confirmed in demoDateFormats
+      ? demoDateFormats[confirmed as keyof typeof demoDateFormats]
       : null;
-  const january = state.choice === 'include' ? 200 : 120;
+  const january = confirmed === 'include' ? 200 : 120;
   return (
     <div className={`guided-demo ${project}-demo`}>
       <header className="demo-heading">
@@ -84,8 +83,8 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
               : 'A conversation about the right format.'}
           </h3>
           <p>
-            Fixed sample data and prepared replies. Choose a suggestion or type
-            one below.
+            A prepared conversation with fixed sample data. Choose an answer and
+            see how it shapes the result.
           </p>
         </div>
         <Button
@@ -99,7 +98,7 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
         </Button>
       </header>
       <ol className="demo-steps" aria-label="Conversation progress">
-        {['Describe', 'Clarify', 'Preview'].map((label, i) => (
+        {['Request', 'Choose', 'Preview'].map((label, i) => (
           <li
             key={label}
             aria-current={phase === i ? 'step' : undefined}
@@ -154,65 +153,101 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
             </MessageGroup>
           </div>
           <div className="demo-compose">
-            <div className="demo-suggestions" aria-label="Suggested messages">
-              {demoPrompts[project].map((prompt) => (
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="demo-suggestion"
-                  key={prompt}
-                  onClick={() => send(prompt)}
-                >
-                  {prompt}
-                </Button>
-              ))}
+            <div className="demo-question-topline">
+              <span>
+                {ready ? 'Decision saved' : 'Agent question · Select one'}
+              </span>
+              <span>{ready ? 'Complete' : '1 of 1'}</span>
             </div>
-            <form onSubmit={submit}>
-              <label className="sr-only" htmlFor={inputId}>
-                Message for the {name} example agent
-              </label>
-              <div className="demo-input-row">
-                <Textarea
-                  id={inputId}
-                  value={draft}
-                  onChange={(event) => setDraft(event.target.value)}
-                  onKeyDown={(event) => {
-                    if (
-                      event.key === 'Enter' &&
-                      !event.shiftKey &&
-                      !event.nativeEvent.isComposing
-                    ) {
-                      event.preventDefault();
-                      send(draft);
-                    }
-                  }}
-                  maxLength={240}
-                  rows={2}
-                  aria-describedby={hintId}
-                  placeholder={
-                    project === 'prepbench'
-                      ? 'Try “Exclude refunded orders”'
-                      : 'Try “Use DD/MM/YYYY”'
-                  }
-                />
-                <Button
-                  type="submit"
-                  className="demo-send"
-                  disabled={!draft.trim()}
-                  aria-label={`Send ${name} message`}
-                >
-                  <span aria-hidden="true">↑</span>
-                </Button>
+            <h4
+              id={questionId}
+              ref={stepRef}
+              tabIndex={-1}
+              className="demo-question"
+            >
+              {ready ? 'Your prepared table is ready.' : tree.question}
+            </h4>
+            {ready ? (
+              <div className="demo-complete demo-result-enter">
+                <p className="demo-decision">
+                  <span aria-hidden="true">✓</span>
+                  {branch?.label}
+                </p>
+                <p>Go back to compare another choice using the same sample.</p>
+                <div className="demo-choice-actions">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="demo-back"
+                    onClick={back}
+                  >
+                    <span aria-hidden="true">←</span> Back to choices
+                  </Button>
+                  <a className="demo-result-link" href={`#${resultId}`}>
+                    View result <span aria-hidden="true">↓</span>
+                  </a>
+                </div>
               </div>
-              <p id={hintId} className="demo-input-hint">
-                Guided replies only · Enter to send · Shift + Enter for a new
-                line
-              </p>
-            </form>
-            {state.stage === 'result' && (
-              <a className="demo-result-link" href={`#${resultId}`}>
-                View the prepared table <span aria-hidden="true">↓</span>
-              </a>
+            ) : (
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  confirm();
+                }}
+              >
+                <RadioGroup
+                  value={selected}
+                  onValueChange={(value) => {
+                    const next = getDemoBranch(project, String(value));
+                    if (next) setSelected(next.id);
+                  }}
+                  aria-labelledby={questionId}
+                  className="demo-choice-list"
+                >
+                  {tree.branches.map((option, index) => {
+                    const optionId = `${questionId}-${option.id}`;
+                    return (
+                      <label
+                        key={option.id}
+                        htmlFor={optionId}
+                        className={`demo-choice-card ${selected === option.id ? 'is-selected' : ''}`}
+                      >
+                        <span className="demo-choice-number" aria-hidden="true">
+                          {index + 1}
+                        </span>
+                        <span className="demo-choice-copy">
+                          <span
+                            id={`${optionId}-label`}
+                            className="demo-choice-title"
+                          >
+                            {option.label}
+                          </span>
+                          <span
+                            id={`${optionId}-description`}
+                            className="demo-choice-description"
+                          >
+                            {option.description}
+                          </span>
+                        </span>
+                        <RadioGroupItem
+                          id={optionId}
+                          value={option.id}
+                          aria-labelledby={`${optionId}-label`}
+                          aria-describedby={`${optionId}-description`}
+                        />
+                      </label>
+                    );
+                  })}
+                </RadioGroup>
+                <div className="demo-choice-actions">
+                  <span className="demo-choice-hint">
+                    Select one, then continue.
+                  </span>
+                  <Button type="submit" className="demo-continue">
+                    Continue <span aria-hidden="true">→</span>
+                  </Button>
+                </div>
+              </form>
             )}
           </div>
         </div>
@@ -247,35 +282,24 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
           <div
             id={resultId}
             tabIndex={-1}
-            className={`demo-output ${state.stage === 'result' ? 'is-ready' : ''}`}
+            className={`demo-output ${ready ? 'is-ready' : ''}`}
           >
             <div className="demo-panel-heading">
               <span>02 / Prepared table</span>
-              <span>
-                {state.stage === 'result'
-                  ? 'Preview ready'
-                  : 'Awaiting your choice'}
-              </span>
+              <span>{ready ? 'Preview ready' : 'Awaiting your choice'}</span>
             </div>
-            {state.stage !== 'result' ? (
+            {!ready ? (
               <div className="demo-awaiting">
                 <span aria-hidden="true">↳</span>
-                <p>
-                  {state.stage === 'clarify'
-                    ? 'Your answer will determine the output.'
-                    : 'Start a conversation to prepare the sample.'}
-                </p>
+                <p>Choose an answer and continue to prepare the table.</p>
               </div>
             ) : (
-              <div
-                key={`${state.choice}-${turns.length}`}
-                className="demo-result-enter"
-              >
+              <div key={confirmed} className="demo-result-enter">
                 {project === 'prepbench' ? (
                   <>
                     <p className="demo-applied-rule">
                       Refunds{' '}
-                      {state.choice === 'exclude' ? 'excluded' : 'included'}
+                      {confirmed === 'exclude' ? 'excluded' : 'included'}
                     </p>
                     <DataTable
                       label="Conversation monthly sales output"
@@ -288,7 +312,7 @@ export function GuidedConversation({ project }: { project: DemoProject }) {
                     />
                     <p className="demo-result-note">
                       January:{' '}
-                      {state.choice === 'exclude'
+                      {confirmed === 'exclude'
                         ? '120 (paid order only)'
                         : '120 + 80 = 200'}
                       . February: 150.

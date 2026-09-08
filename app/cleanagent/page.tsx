@@ -37,8 +37,8 @@ export default function CleanAgentPage() {
       <DetailSection
         id="cleanagent-conversation"
         label="Try a conversation"
-        title="Ask for a consistent date column."
-        description="Choose the format you need, inspect the standardized values, and refine your request through a guided exchange."
+        title="Choose a consistent date format."
+        description="Answer the agent’s format question, inspect the standardized values, and go back to compare another choice."
       >
         <GuidedConversation project="cleanagent" />
       </DetailSection>

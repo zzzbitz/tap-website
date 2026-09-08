@@ -38,15 +38,18 @@ The semantic diagrams in `preparation-example.tsx` and `research-diagrams.tsx` a
 
 The user authorized scripted, interactive conversations on both project pages on
 2026-09-08, superseding the original static-only example restriction for these
-components. `lib/guided-conversation.ts` defines finite supported commands and
-state transitions. `components/tap/guided-conversation.tsx` composes installed
-Message, Button, Textarea and Table primitives. Both demos accept suggested
-messages and supported English/Chinese phrases, let readers revise choices,
-retain the preview on unsupported input, and reset without persisting data.
+components. The later choice-only revision removes free-form messages entirely.
+`lib/guided-conversation.ts` defines each fixed request, its question, and explicit
+answer branches with prepared result leaves. `components/tap/guided-conversation.tsx`
+composes installed Message, RadioGroup, Button and Table primitives. Numbered
+option cards show one question at a time. Selecting does not submit; Continue
+commits the answer. Back restores that question and selection while clearing its
+result, and Restart restores the first option and initial conversation.
 The transcripts are labelled scripted demos with fixed data/prepared replies;
 they never call models or execute the actual research systems. No artificial
 waiting, generated code execution, upload, or external messaging was added.
-See `CONVERSATION_VALIDATION.md` for the new whole-site review.
+See `CHOICE_FLOW_VALIDATION.md` for the current choice-only checks and
+`CONVERSATION_VALIDATION.md` for the earlier whole-site review.
 
 Project results are native SVG charts adapted from Lieflat Charts (F5, F8, L15).
 `lib/paper-results.ts` preserves the paper-table values; `public/charts/SOURCES.md`

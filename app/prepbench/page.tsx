@@ -38,7 +38,7 @@ export default function PrepBenchPage() {
         id="prepbench-conversation"
         label="Try a conversation"
         title="Make the choice that changes the table."
-        description="Ask for monthly sales, clarify how refunds should count, and change your decision to see the output update."
+        description="Choose how refunds should count toward monthly sales, then compare the prepared table with another choice."
       >
         <GuidedConversation project="prepbench" />
       </DetailSection>

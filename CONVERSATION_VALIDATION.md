@@ -1,5 +1,8 @@
 # Guided conversations and whole-site review — 2026-09-08
 
+> Historical review of v6. The typed-input behavior below was replaced by the
+> choice-only flow documented in `CHOICE_FLOW_VALIDATION.md`.
+
 ## Delivered behavior
 
 - PrepBench: request monthly sales, clarify the refund rule, inspect the output,

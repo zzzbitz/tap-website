@@ -5,9 +5,20 @@ export type DemoChoice =
   | 'iso'
   | 'day-first'
   | 'month-name';
-export type DemoStage = 'request' | 'clarify' | 'result';
-export type DemoState = { stage: DemoStage; choice: DemoChoice | null };
-export const initialDemoState: DemoState = { stage: 'request', choice: null };
+
+type DemoBranch = {
+  id: DemoChoice;
+  label: string;
+  description: string;
+  answer: string;
+  reply: string;
+};
+type DemoTree = {
+  request: string;
+  context: string;
+  question: string;
+  branches: readonly DemoBranch[];
+};
 
 export const demoDates = ['2026-01-03', 'Jan 4, 2026', '2026/02/01'];
 export const demoDateFormats = {
@@ -25,144 +36,68 @@ export const demoDateFormats = {
   },
 } as const;
 
-export const demoPrompts = {
-  prepbench: [
-    'Show monthly sales.',
-    'Exclude refunded orders.',
-    'Include refunded orders.',
-    'Why ask?',
-  ],
-  cleanagent: [
-    'Standardize these dates.',
-    'Use YYYY-MM-DD.',
-    'Use DD/MM/YYYY.',
-    'Use month names.',
-  ],
-} as const;
-
-export const demoGreetings = {
-  prepbench:
-    'Let’s prepare monthly sales from these three orders. Send a request, and we’ll resolve a choice that changes the answer.',
-  cleanagent:
-    'These three dates use different formats. Tell me how you want the date column standardized.',
+// One fixed request leads to a question, then one of its scripted result leaves.
+// Branch IDs are the only accepted actions; no text interpretation or model calls.
+export const demoTrees: Record<DemoProject, DemoTree> = {
+  prepbench: {
+    request: 'Show monthly sales from these orders.',
+    context:
+      'January includes a refunded order for 80. I need one rule before preparing the table.',
+    question: 'Should refunded orders count toward sales?',
+    branches: [
+      {
+        id: 'exclude',
+        label: 'Exclude refunded orders',
+        description: 'Count paid orders only. January will total 120.',
+        answer: 'Exclude refunded orders from the totals.',
+        reply:
+          'Refunded orders are excluded. January totals 120; February totals 150. The prepared table follows your rule.',
+      },
+      {
+        id: 'include',
+        label: 'Include refunded orders',
+        description: 'Count all orders in the sample. January will total 200.',
+        answer: 'Include refunded orders in the totals.',
+        reply:
+          'Refunded orders are included. January totals 200; February totals 150. The prepared table follows your rule.',
+      },
+    ],
+  },
+  cleanagent: {
+    request: 'Standardize the dates in this column.',
+    context:
+      'These three dates use different formats. I’ll keep their calendar meanings and use the format you choose.',
+    question: 'Which date format should I use?',
+    branches: [
+      {
+        id: 'iso',
+        label: 'YYYY-MM-DD',
+        description: 'Year first, with hyphens. For example, 2026-01-04.',
+        answer: 'Use YYYY-MM-DD for every date.',
+        reply:
+          'All three dates now use YYYY-MM-DD. January 4 remains January 4, and February 1 remains February 1.',
+      },
+      {
+        id: 'day-first',
+        label: 'DD/MM/YYYY',
+        description: 'Day first, with slashes. For example, 04/01/2026.',
+        answer: 'Use DD/MM/YYYY for every date.',
+        reply:
+          'All three dates now use DD/MM/YYYY. January 4 becomes 04/01/2026, and February 1 becomes 01/02/2026.',
+      },
+      {
+        id: 'month-name',
+        label: 'MMM D, YYYY',
+        description:
+          'Spell out the month abbreviation. For example, Jan 4, 2026.',
+        answer: 'Use month names for every date.',
+        reply:
+          'All three dates now use month names. The representation changes; each date keeps its calendar meaning.',
+      },
+    ],
+  },
 };
 
-// This is a finite, explicitly scripted demo. Only supported phrases are handled;
-// unknown or conflicting instructions never silently change the output.
-function normalize(input: string) {
-  return input
-    .trim()
-    .toLowerCase()
-    .replace(/[.!。！]+$/u, '')
-    .replace(/\s+/g, ' ')
-    .replace(/^please /, '')
-    .replace(/ please$/, '')
-    .replace(/ instead$/, '');
-}
-
-export function advanceDemo(
-  project: DemoProject,
-  state: DemoState,
-  input: string,
-): { state: DemoState; reply: string } {
-  const text = normalize(input);
-  if (project === 'prepbench') {
-    if (
-      [
-        'show monthly sales',
-        'show monthly revenue',
-        'monthly sales',
-        '按月汇总销售额',
-        '看看每月销售额',
-      ].includes(text)
-    ) {
-      return {
-        state: { stage: 'clarify', choice: null },
-        reply:
-          'Should refunded orders count toward sales? January includes a refunded order for 80. Including it gives 200; excluding it gives 120.',
-      };
-    }
-    if (['why ask', 'why', '为什么', '为什么要问'].includes(text)) {
-      return {
-        state,
-        reply:
-          '“Sales” does not say whether refunds should count. Both totals can be computed, but only your intended rule tells us which output is right. PrepBench evaluates the final prepared tables.',
-      };
-    }
-    const exclude = [
-      'exclude refunds',
-      'exclude refunded orders',
-      '排除退款订单',
-      '排除退款',
-      '不要计入退款',
-    ].includes(text);
-    const include = [
-      'include refunds',
-      'include refunded orders',
-      '计入退款订单',
-      '计入退款',
-      '包含退款',
-    ].includes(text);
-    if (exclude || include) {
-      const choice = exclude ? 'exclude' : 'include';
-      const changed = state.choice !== null && state.choice !== choice;
-      return {
-        state: { stage: 'result', choice },
-        reply: `${changed ? 'Updated the example. ' : ''}${exclude ? 'Refunded orders are excluded' : 'Refunded orders are included'}. January totals ${exclude ? 120 : 200}; February totals 150. The preview follows this rule. You can change your decision and compare the result.`,
-      };
-    }
-    return {
-      state,
-      reply:
-        'This guided example supports monthly sales and the refund rule. Try “Show monthly sales”, “Exclude refunded orders”, or “Include refunded orders”. Other requests leave the preview unchanged.',
-    };
-  }
-  if (
-    [
-      'standardize these dates',
-      'standardize dates',
-      'clean these dates',
-      '统一日期格式',
-      '标准化日期',
-    ].includes(text)
-  ) {
-    return {
-      state: { stage: 'clarify', choice: null },
-      reply:
-        'The column contains dates written in three ways. Which output format would you like: YYYY-MM-DD, DD/MM/YYYY, or month names such as Jan 3, 2026?',
-    };
-  }
-  const format = text
-    .replace(/^(use|switch to|change to) /, '')
-    .replace(/^(使用|改成|改为)/, '')
-    .trim();
-  let choice: DemoChoice | null = null;
-  if (
-    ['iso', 'yyyy-mm-dd', 'iso format', 'iso格式', '年-月-日'].includes(format)
-  )
-    choice = 'iso';
-  if (['dd/mm/yyyy', 'day first', 'day-first', '日/月/年'].includes(format))
-    choice = 'day-first';
-  if (
-    [
-      'month names',
-      'month name',
-      'mmm d, yyyy',
-      '月份名称',
-      '英文月份',
-    ].includes(format)
-  )
-    choice = 'month-name';
-  if (choice && choice in demoDateFormats) {
-    const selected = demoDateFormats[choice as keyof typeof demoDateFormats];
-    return {
-      state: { stage: 'result', choice },
-      reply: `${state.choice !== null && state.choice !== choice ? 'Updated the format. ' : ''}All three example values now use ${selected.label}. Jan 4 is still January 4, and February 1 stays February 1. The representation changes; the dates keep their meaning. Try another format to compare.`,
-    };
-  }
-  return {
-    state,
-    reply:
-      'This guided example supports three date formats. Try “Use YYYY-MM-DD”, “Use DD/MM/YYYY”, or “Use month names”. Other instructions leave the preview unchanged.',
-  };
+export function getDemoBranch(project: DemoProject, choice: string) {
+  return demoTrees[project].branches.find((branch) => branch.id === choice);
 }
