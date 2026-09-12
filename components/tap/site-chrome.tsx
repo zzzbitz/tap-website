@@ -21,8 +21,8 @@ export function SiteHeader() {
       <Wordmark />
       <div className="header-right">
         <nav className="site-nav" aria-label="Main navigation">
-          <a href={sitePath('/#vision')}>Vision</a>
-          <a href={sitePath('/#research')}>Research</a>
+          <a href={sitePath('/#thesis')}>Thesis</a>
+          <a href={sitePath('/#evidence')}>Evidence</a>
         </nav>
         <ThemeMenu />
       </div>
@@ -35,7 +35,7 @@ export function SiteFooter() {
     <footer className="site-footer shell">
       <div className="footer-brand">
         <Wordmark />
-        <p>Trust AI to Prepare Your Data</p>
+        <p>Trust AI to prepare your data.</p>
       </div>
       <a href="#top">
         Back to top <span aria-hidden="true">↑</span>

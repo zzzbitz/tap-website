@@ -9,10 +9,11 @@ export function PreparationExample() {
       aria-labelledby="vision-title"
     >
       <div className="vision-intro" data-reveal>
+        <p className="vision-kicker">A small example of the trust boundary</p>
         <h2 id="vision-title" className="vision-heading">
-          What counts as monthly sales?
+          From a question to a table you can defend.
         </h2>
-        <p>Whether refunded orders count changes the monthly sales total.</p>
+        <p>AI handles the preparation. People decide what the result means.</p>
       </div>
       <figure
         className="vision-scene"
