@@ -21,8 +21,8 @@ export function SiteHeader() {
       <Wordmark />
       <div className="header-right">
         <nav className="site-nav" aria-label="Main navigation">
-          <a href={sitePath('/#thesis')}>Thesis</a>
-          <a href={sitePath('/#evidence')}>Evidence</a>
+          <a href={sitePath('/#thesis')}>Vision</a>
+          <a href={sitePath('/#evidence')}>Research</a>
         </nav>
         <ThemeMenu />
       </div>
